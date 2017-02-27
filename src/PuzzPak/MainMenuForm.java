@@ -161,10 +161,9 @@ public class MainMenuForm extends javax.swing.JFrame {
               + "is it running?", 
                 "Database Error", 
                 WIDTH);
-        }
-        //test method
-        //database.addScore();
-        leaderboards.populate("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
+        } 
+        else leaderboards.populate("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
+        
     }//GEN-LAST:event_leaderboardsButtonActionPerformed
 
 

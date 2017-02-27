@@ -20,6 +20,7 @@ public class LeaderboardForm extends javax.swing.JFrame {
         initComponents();
     }
     
+    //populates leaderboardform's jTables with results from the database.  Will populate every time the form is called.
     public void populate(String userID, String password, String host){
         try {
             Connection con = DriverManager.getConnection(host, userID, password);
@@ -54,15 +55,13 @@ public class LeaderboardForm extends javax.swing.JFrame {
                 System.out.println("Already empty");     
             }
             
-            //H A N G M A N   S H O W I N G ~ ~ ~ ~
-            // TableModel definition
+            //U P D A T E   H A N G M A N   A L L T I M E   J T A B L E 
             String[] tableColumnsName = {"Username","Score","Date","Game"}; 
             model = (DefaultTableModel) hangmanAlltimeTable.getModel();
             model.setColumnIdentifiers(tableColumnsName);
 
             rs = stmt.executeQuery("SELECT * FROM HANGMANALLTIME ORDER BY SCORE DESC");
 
-            // Loop through the ResultSet and transfer in the Model
             java.sql.ResultSetMetaData rsmd = rs.getMetaData();
             colNo = rsmd.getColumnCount();
             while(rs.next()){
@@ -100,10 +99,13 @@ public class LeaderboardForm extends javax.swing.JFrame {
         MT4x4Top10Table = new javax.swing.JTable();
         jScrollPane8 = new javax.swing.JScrollPane();
         MT6x6Top10Table = new javax.swing.JTable();
-        leaderboardBanner = new java.awt.Label();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        usersTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("<><>Leaderboards<><>");
+        setBackground(new java.awt.Color(0, 162, 232));
 
         hangmanAlltimeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -156,16 +158,7 @@ public class LeaderboardForm extends javax.swing.JFrame {
 
         hangmanTop10Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Username", "Score", "Date", "Game"
@@ -177,19 +170,10 @@ public class LeaderboardForm extends javax.swing.JFrame {
 
         tiktakTop10Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Score", "Date", "Game"
+                "Username", "Score", "Date", "Game"
             }
         ));
         jScrollPane6.setViewportView(tiktakTop10Table);
@@ -198,19 +182,10 @@ public class LeaderboardForm extends javax.swing.JFrame {
 
         MT4x4Top10Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Username", "Score", "Date", "Game"
             }
         ));
         jScrollPane7.setViewportView(MT4x4Top10Table);
@@ -219,16 +194,7 @@ public class LeaderboardForm extends javax.swing.JFrame {
 
         MT6x6Top10Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -238,28 +204,42 @@ public class LeaderboardForm extends javax.swing.JFrame {
 
         leaderboardTabbedPane.addTab("MemoryTIles 6x6 (Top-10)", jScrollPane8);
 
-        leaderboardBanner.setPreferredSize(new java.awt.Dimension(40, 20));
-        leaderboardBanner.setText("label1");
+        usersTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Username", "Hangman", "Tik-Tak", "MemoryTiles 4x4", "MemotyTiles 6x6"
+            }
+        ));
+        jScrollPane9.setViewportView(usersTable);
+
+        leaderboardTabbedPane.addTab("Players", jScrollPane9);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/main-menu/leaderboardBanner.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(leaderboardTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
-                    .addComponent(leaderboardBanner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(leaderboardTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(leaderboardBanner, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(leaderboardTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(leaderboardTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                .addGap(6, 6, 6))
         );
 
         pack();
@@ -272,6 +252,7 @@ public class LeaderboardForm extends javax.swing.JFrame {
     private javax.swing.JTable MT6x6Top10Table;
     private javax.swing.JTable hangmanAlltimeTable;
     private javax.swing.JTable hangmanTop10Table;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -280,17 +261,18 @@ public class LeaderboardForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private java.awt.Label leaderboardBanner;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane leaderboardTabbedPane;
     private javax.swing.JTable tiktakAlltimeTable;
     private javax.swing.JTable tiktakTop10Table;
+    private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
 
     databaseConnect database = new databaseConnect("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
     boolean connSuccess;
-    String host = "jdbc:derby://localhost:1527/dbname"; 
-    String userID = "user";
-    String password = "pass";
+    String host = "jdbc:derby://localhost:1527/PPleaderboard"; 
+    String userID = "operator";
+    String password = "westfield";
     
     ResultSetMetaData rsmd;
     int columnsNumber;

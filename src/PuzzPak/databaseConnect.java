@@ -34,16 +34,14 @@ public class databaseConnect {
     }
     
     //A game calls this to add user's name to the leaderboard database
-    public void addScore(){
-        //String game, String user, double score
+    public void addScore(String game, String user, double score){
+
         //TEST POST:
         try {
             Connection con = DriverManager.getConnection(host, userID, password );
             Statement stmt = con.createStatement();
             //stmt.executeUpdate("INSERT INTO HANGMANALLTIME VALUES ('Reprise', 90.0, '2016-03-09')");
             //stmt.executeUpdate("DELETE FROM HANGMANALLTIME WHERE USERNAME = 'Reprise'");
-            ResultSet rs = stmt.executeQuery( "SELECT * FROM HANGMANALLTIME ORDER BY SCORE" );
-            System.out.println(rs);
         }
         catch (SQLException err) {
             System.out.println( err.getMessage());
