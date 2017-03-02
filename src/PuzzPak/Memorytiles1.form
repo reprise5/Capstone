@@ -410,7 +410,11 @@
           <Color blue="0" green="99" red="0" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="POST"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="postScoreButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

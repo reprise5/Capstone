@@ -12,7 +12,6 @@ public class Memorytiles2 extends javax.swing.JFrame {
     //Constructor!!
     public Memorytiles2() {
         initComponents();
-        //and other stuffs.
     }
 
     @SuppressWarnings("unchecked")
@@ -60,7 +59,7 @@ public class Memorytiles2 extends javax.swing.JFrame {
         Tile61 = new javax.swing.JButton();
         QuitButton = new javax.swing.JButton();
         DebugCheck = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        postScoreButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         QuitMenuItem = new javax.swing.JMenuItem();
@@ -504,9 +503,15 @@ public class Memorytiles2 extends javax.swing.JFrame {
         DebugCheck.setToolTipText("");
         DebugCheck.setEnabled(false);
 
-        jButton1.setBackground(new java.awt.Color(102, 0, 255));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setLabel("POST");
+        postScoreButton.setBackground(new java.awt.Color(102, 0, 255));
+        postScoreButton.setForeground(new java.awt.Color(255, 255, 255));
+        postScoreButton.setEnabled(false);
+        postScoreButton.setLabel("POST");
+        postScoreButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postScoreButtonActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -564,12 +569,11 @@ public class Memorytiles2 extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(startGameButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1)
+                                .addComponent(postScoreButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(DebugCheck))
                             .addGroup(layout.createSequentialGroup()
@@ -659,7 +663,7 @@ public class Memorytiles2 extends javax.swing.JFrame {
                                 .addComponent(startGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(DebugCheck)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(postScoreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(Tile12, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -769,7 +773,6 @@ public class Memorytiles2 extends javax.swing.JFrame {
         Tile64.setEnabled(true);
         Tile65.setEnabled(true);
         Tile66.setEnabled(true);
-        
 
         //Set the icons to be Blank.
         wipeBoard();
@@ -1277,6 +1280,7 @@ public class Memorytiles2 extends javax.swing.JFrame {
         buttonEnabledSwitch(false, 33);
         buttonEnabledSwitch(false, 34);
         buttonEnabledSwitch(false, 35);
+        postScoreButton.setEnabled(false);
         
         DebugCheck.setEnabled(false);
     }//GEN-LAST:event_resetBoardMenuItemActionPerformed
@@ -1289,6 +1293,24 @@ public class Memorytiles2 extends javax.swing.JFrame {
         resetBoardMenuItemActionPerformed(evt);
         this.dispose();
     }//GEN-LAST:event_QuitMenuItemActionPerformed
+
+    //Add score to MEMORYT6x6ALLTIME table.
+    private void postScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postScoreButtonActionPerformed
+        if (username.equals("")) username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
+        username = username.toLowerCase();
+        database.addScore(username, score, "mg4x4");   
+        
+        postScoreButton.setEnabled(false);
+    }//GEN-LAST:event_postScoreButtonActionPerformed
+    
+    //Update Global username Score recieved from continue-as...
+    public boolean setUsername(String username){
+        if(!username.equals("")){
+            this.username = username;
+            return true;
+        }
+        else return false;
+    }
     
     //====================================OTHER DEFINED SUBROUTINES==================================
     
@@ -1499,12 +1521,14 @@ public class Memorytiles2 extends javax.swing.JFrame {
                 + "Score: " + score);
             
             if (score > 0){
+                postScoreButton.setEnabled(true);
                 JOptionPane.showMessageDialog(rootPane,
                 "                        Congratulations!        \n"
                 + "You finished the game successfully with " + accuracy  + "% accuracy, \n"
                 + "And a final score of " + score + "!\n", 
                 "You Win!", 
                 WIDTH, WIN);
+                
             }
             else{
                 JOptionPane.showMessageDialog(rootPane,
@@ -1859,10 +1883,10 @@ public class Memorytiles2 extends javax.swing.JFrame {
     private javax.swing.JButton Tile65;
     private javax.swing.JButton Tile66;
     private javax.swing.JMenuItem enableDebug;
-    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JButton postScoreButton;
     private javax.swing.JMenuItem resetBoardMenuItem;
     private javax.swing.JButton startGameButton;
     // End of variables declaration//GEN-END:variables
@@ -1892,6 +1916,8 @@ public class Memorytiles2 extends javax.swing.JFrame {
     ImageIcon WIN       = new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/memorytiles/WIN.png"));
     ImageIcon LOSS      = new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/memorytiles/LOSS.png"));
     
+    DatabaseControl database = new DatabaseControl("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
+    String username = "";                       //Username of the person playing for posting to the leaderboard.
     int count = 0;                              //1 for first tile flipped, 2 for second.  if 2, check match.
     int ID_Guess1 = 100, ID_Guess2 = 100;       //the locations of the 2 tiles the user guessed.  if !match, remove icons at these 2 locations.
     int type_Guess1, type_Guess2;               //the ShapeCodes for the 2 guesses.  used for testing a match. 

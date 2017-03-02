@@ -218,6 +218,12 @@ public class Memorytiles1 extends javax.swing.JFrame {
 
         postScoreButton.setBackground(new java.awt.Color(0, 153, 0));
         postScoreButton.setText("POST");
+        postScoreButton.setEnabled(false);
+        postScoreButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postScoreButtonActionPerformed(evt);
+            }
+        });
 
         FileMenu.setText("File");
 
@@ -617,6 +623,7 @@ public class Memorytiles1 extends javax.swing.JFrame {
         buttonEnabledSwitch(false, 13);
         buttonEnabledSwitch(false, 14);
         buttonEnabledSwitch(false, 15);
+         postScoreButton.setEnabled(false);
         
         DebugCheck.setEnabled(false);
     }//GEN-LAST:event_resetBoardMenuItemActionPerformed
@@ -636,6 +643,23 @@ public class Memorytiles1 extends javax.swing.JFrame {
         //even though "enter passphrase" is text that is already in the input box.
     }//GEN-LAST:event_enableDebugActionPerformed
 
+    //Post score to MEMORYT4X4ALLTIME table
+    private void postScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postScoreButtonActionPerformed
+        if (username.equals("")) username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
+        username = username.toLowerCase();
+        database.addScore(username, score, "mg4x4");   
+        
+        postScoreButton.setEnabled(false);
+    }//GEN-LAST:event_postScoreButtonActionPerformed
+
+    //Update Global username Score recieved from continue-as...
+    public boolean setUsername(String username){
+        if(!username.equals("")){
+            this.username = username;
+            return true;
+        }
+        else return false;
+    }
     //===================================OTHER DEFINED SUBROUTINES==================================
     
     // will display an icon on the button based on the shape_code that the button asks for prior to calling this sub.
@@ -859,6 +883,7 @@ public class Memorytiles1 extends javax.swing.JFrame {
                         + "Score: " + score);
             
             if (score > 0){
+                postScoreButton.setEnabled(true);
                 JOptionPane.showMessageDialog(rootPane,
                 "                        Congratulations!        \n"
                 + "You finished the game successfully with " + accuracy  + "% accuracy, \n"
@@ -994,6 +1019,8 @@ public class Memorytiles1 extends javax.swing.JFrame {
     ImageIcon WIN       = new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/memorytiles/WIN.png"));
     ImageIcon LOSS      = new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/memorytiles/LOSS.png"));
     
+    DatabaseControl database = new DatabaseControl("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
+    String username = "";                       //used to post a score to the leaderboards Database.
     int count = 0;                              //1 for first tile flipped, 2 for second.  if 2, check match.
     int ID_Guess1 = 100, ID_Guess2 = 100;       //the locations of the 2 tiles the user guessed.  if !match, remove icons at these 2 locations.
     int type_Guess1, type_Guess2;               //the ShapeCodes for the 2 guesses.  used for testing a match. 

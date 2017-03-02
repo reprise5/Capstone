@@ -26,10 +26,11 @@ public class LeaderboardForm extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection(host, userID, password);
             System.out.println("Connection is OK!");
             Statement stmt = con.createStatement();
-            //stmt.executeUpdate("INSERT INTO HANGMANALLTIME VALUES ('Reprise', 90.0, '2017-02-24', 'hangman')");
-            //stmt.executeUpdate("INSERT INTO HANGMANALLTIME VALUES ('Tetra', 53.0, '2017-02-25', 'hangman')");
-            //stmt.executeUpdate("DELETE FROM HANGMANALLTIME WHERE USERNAME = 'Reprise'");
-            //stmt.executeUpdate("DELETE FROM HANGMANALLTIME WHERE USERNAME = 'Tetra'");
+            
+//            stmt.executeUpdate("INSERT INTO HANGMANALLTIME VALUES ('Reprise', 90.0, '2017-02-24', 'hangman')");
+//            stmt.executeUpdate("INSERT INTO HANGMANALLTIME VALUES ('Tetra', 53.0, '2017-02-25', 'hangman')");
+//            stmt.executeUpdate("DELETE FROM HANGMANALLTIME WHERE USERNAME = 'Reprise'");
+//            stmt.executeUpdate("DELETE FROM HANGMANALLTIME WHERE USERNAME = 'Tetra'");
             
             //PRINT OUT HANGMANALLTIME RESULTSET TO CONSOLE.
 //            ResultSet rs = stmt.executeQuery("SELECT * FROM HANGMANALLTIME");
@@ -43,11 +44,28 @@ public class LeaderboardForm extends javax.swing.JFrame {
 //                }
 //                System.out.println("");
 //            }
+
+            //Clear ALL tables before refreshing.
             try{
-                rowNo = model.getRowCount();
+                //hangman all-time
+                rowNo = hangmanModel.getRowCount();
                 if (rowNo > 0){
                     for (int i = rowNo - 1; i >= 0; i--) {
-                        model.removeRow(i);
+                        hangmanModel.removeRow(i);
+                    }
+                }
+                //tiktak all-time
+                rowNo = tiktakModel.getRowCount();
+                if (rowNo > 0){
+                    for (int i = rowNo - 1; i >= 0; i--) {
+                        tiktakModel.removeRow(i);
+                    }
+                }
+                //memorytiles 4x4 all-time
+                rowNo = mt4x4Model.getRowCount();
+                if (rowNo > 0){
+                    for (int i = rowNo - 1; i >= 0; i--) {
+                        mt4x4Model.removeRow(i);
                     }
                 }
             }
@@ -57,21 +75,55 @@ public class LeaderboardForm extends javax.swing.JFrame {
             
             //U P D A T E   H A N G M A N   A L L T I M E   J T A B L E 
             String[] tableColumnsName = {"Username","Score","Date","Game"}; 
-            model = (DefaultTableModel) hangmanAlltimeTable.getModel();
-            model.setColumnIdentifiers(tableColumnsName);
+            hangmanModel = (DefaultTableModel) hangmanAlltimeTable.getModel();
+            hangmanModel.setColumnIdentifiers(tableColumnsName);
 
             rs = stmt.executeQuery("SELECT * FROM HANGMANALLTIME ORDER BY SCORE DESC");
 
-            java.sql.ResultSetMetaData rsmd = rs.getMetaData();
+            rsmd = rs.getMetaData();
             colNo = rsmd.getColumnCount();
             while(rs.next()){
                 Object[] records = new Object[colNo];
                 for(int i = 0; i < colNo; i++){
                     records[i] = rs.getString(i + 1);
                 }
-                model.addRow(records);
+                hangmanModel.addRow(records);
             }
-            hangmanAlltimeTable.setModel(model);
+            hangmanAlltimeTable.setModel(hangmanModel);
+            
+            //U P D A T E   T I K - T A K   A L L T I M E   J T A B L E
+            tiktakModel = (DefaultTableModel) tiktakAlltimeTable.getModel();
+            tiktakModel.setColumnIdentifiers(tableColumnsName);
+
+            rs = stmt.executeQuery("SELECT * FROM TIKTAKALLTIME ORDER BY SCORE DESC");
+
+            rsmd = rs.getMetaData();
+            colNo = rsmd.getColumnCount();
+            while(rs.next()){
+                Object[] records = new Object[colNo];
+                for(int i = 0; i < colNo; i++){
+                    records[i] = rs.getString(i + 1);
+                }
+                tiktakModel.addRow(records);
+            }
+            tiktakAlltimeTable.setModel(tiktakModel);
+            
+            //U P D A T E   M E M O R Y 4   A L L T I M E   J T A B L E
+            mt4x4Model = (DefaultTableModel) MT4x4AlltimeTable.getModel();
+            mt4x4Model.setColumnIdentifiers(tableColumnsName);
+
+            rs = stmt.executeQuery("SELECT * FROM MEMORYT4X4ALLTIME ORDER BY SCORE DESC");
+
+            rsmd = rs.getMetaData();
+            colNo = rsmd.getColumnCount();
+            while(rs.next()){
+                Object[] records = new Object[colNo];
+                for(int i = 0; i < colNo; i++){
+                    records[i] = rs.getString(i + 1);
+                }
+                mt4x4Model.addRow(records);
+            }
+            MT4x4AlltimeTable.setModel(mt4x4Model);
         }
         catch (SQLException err) {
             System.out.println( err.getMessage());
@@ -137,7 +189,7 @@ public class LeaderboardForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Username", "Score", "Date", "Game"
             }
         ));
         jScrollPane3.setViewportView(MT4x4AlltimeTable);
@@ -268,18 +320,22 @@ public class LeaderboardForm extends javax.swing.JFrame {
     private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
 
-    databaseConnect database = new databaseConnect("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
+    DatabaseControl database = new DatabaseControl("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
     boolean connSuccess;
     String host = "jdbc:derby://localhost:1527/PPleaderboard"; 
     String userID = "operator";
     String password = "westfield";
     
     ResultSetMetaData rsmd;
+    ResultSet rs;
     int columnsNumber;
     int colNo, rowNo;
-    DefaultTableModel model;
-    ResultSet rs;
+    DefaultTableModel hangmanModel;
+    DefaultTableModel tiktakModel;
+    DefaultTableModel mt4x4Model;
+    DefaultTableModel mt6x6Model;
     
+
 //    DefaultTableModel hangmanAlltimeModel   = (DefaultTableModel) hangmanAlltimeTable.getModel();
 //    DefaultTableModel hangmanTop10Model     = (DefaultTableModel) hangmanTop10Table.getModel();
 

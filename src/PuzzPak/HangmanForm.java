@@ -825,7 +825,7 @@ public class HangmanForm extends javax.swing.JFrame {
         //set the wins and losses screens with the variable stored
         sWinsCounter = Integer.toString(winsCounter);
         WinsScreen.setText(sWinsCounter);
-        sLoseCounter = Integer.toString(LoseCounter);
+        sLoseCounter = Integer.toString(loseCounter);
         LossesScreen.setText(sLoseCounter);
 
         //re-enable all of the buttons, they are disabled until a new game is started.
@@ -1947,8 +1947,8 @@ public class HangmanForm extends javax.swing.JFrame {
         if (n == 0){
 //            JOptionPane.showMessageDialog(rootPane, "RIOT.", "Hype? or riot?", WIDTH);
                     
-            LoseCounter = 0;
-            sLoseCounter = Integer.toString(LoseCounter);
+            loseCounter = 0;
+            sLoseCounter = Integer.toString(loseCounter);
             LossesScreen.setText(sLoseCounter);
 
             winsCounter = 0;
@@ -1968,10 +1968,31 @@ public class HangmanForm extends javax.swing.JFrame {
                 "**About HANGMAN**", WIDTH, null);
     }//GEN-LAST:event_AboutMenuOptionActionPerformed
 
+    //Post score to HANGMANALLTIMETABLE.
     private void postScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postScoreButtonActionPerformed
-        // TODO add your handling code here:
+        if (username.equals("")) username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
+        username = username.toLowerCase();
+        
+        if(winsCounter == 0 && loseCounter == 0){
+            score = 0;
+            System.out.println("ERROR");
+        }
+        else {
+            score = ( (double)winsCounter / ((double)winsCounter + (double)loseCounter) * 100);
+        }
+        System.out.println(score);
+        database.addScore(username, score, "hangman");
     }//GEN-LAST:event_postScoreButtonActionPerformed
 
+    //Update Global username Score recieved from continue-as...
+    public boolean setUsername(String username){
+        if(!username.equals("")){
+            this.username = username;
+            return true;
+        }
+        else return false;
+    }
+    
     //based on how many tries left, will update the hangman image.
     private void changeHangmanIcon(){
         switch (chancesLeftCounter){
@@ -2002,8 +2023,8 @@ public class HangmanForm extends javax.swing.JFrame {
                 displayRightAnswer.setText("Correct Word: " + wordToGuess);
 
                 //update the losses counter and screen
-                LoseCounter++;
-                sLoseCounter = Integer.toString(LoseCounter);
+                loseCounter++;
+                sLoseCounter = Integer.toString(loseCounter);
                 LossesScreen.setText(sLoseCounter);
                 break;
         }
@@ -2453,6 +2474,9 @@ public class HangmanForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //GLOBAL VARIABLES:
+    DatabaseControl database = new DatabaseControl("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
+    String username = "";           //Username of the person playing for posting to the leaderboard.
+    double score = 0.0;             //The average wins vs losses to be sent to the database
     WordShuffle game = new WordShuffle();
     boolean correctResponse = false;//used to collect the returned value of testLetterResponse(String letter); checks if the char is in the word.
     boolean win = false;            //used to collect the returned value of testTileWin(int wordToGuessLength); did user fill all tiles?
@@ -2465,7 +2489,7 @@ public class HangmanForm extends javax.swing.JFrame {
     int chancesLeftCounter = 6;     //how many tries are left.  decrements with wrong attempts.
     String sChancesLeft;            //the string version of chancesLeftCounter, to be sent to be displayed.
     int winsCounter = 0;            //tracks/tallies wins
-    int LoseCounter = 0;            //tracks/tallies losses
+    int loseCounter = 0;            //tracks/tallies losses
     String sWinsCounter;            //the string version that goes to the label.
     String sLoseCounter;            //the string version that goes to the label.
     
