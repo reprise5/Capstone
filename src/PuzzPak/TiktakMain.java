@@ -2,6 +2,8 @@ package PuzzPak;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author reprise
@@ -9,36 +11,44 @@ import java.awt.event.WindowEvent;
 public class TiktakMain {
     boolean tie = false;
     boolean win = false;
-    //Main constructor
-    public TiktakMain(){
-       
-    }
-    
+
     public void run() throws InterruptedException{
-        /* create a new form and open it. */
-        TikTakForm game = new TikTakForm();
-        game.addWindowListener(new WindowAdapter(){
-            @Override
-            public void windowClosing(WindowEvent e) {
-                int num = windowClosingSwitch(1);
-                System.out.println("    <><> Form closing <><> (^_^)/");
-            }
-        });
-        game.setVisible(true);
         
-        /* keep track of the game */
-        do{
-            if (game.getPlayer() == 1){
-                Thread.sleep(1100);
+        /* Create new thread to prevent hangup */
+        Thread thread = new Thread() {
+            public void run() {
+                /* create a new form and open it. */
+                TikTakForm game = new TikTakForm();
+                game.addWindowListener(new WindowAdapter(){
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        int num = windowClosingSwitch(1);
+                        System.out.println("    <><> Form closing <><> (^_^)/");
+                    }
+                });
+                game.setVisible(true);
                 
-                win = game.checkWin2();
-                tie = game.checkTie();
-                
-                if (!tie && !win){
-                    game.playComputer();
-                }
+                /* keep track of the game */
+                do{
+                    if (game.getPlayer() == 1){
+                        try {
+                            Thread.sleep(1100);
+                        } 
+                        catch (InterruptedException ex) {
+                            Logger.getLogger(TiktakMain.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                        win = game.checkWin2();
+                        tie = game.checkTie();
+
+                        if (!tie && !win){
+                            game.playComputer();
+                        }
+                    }
+                } while(windowClosingSwitch(0) == 0);
             }
-        } while(windowClosingSwitch(0) == 0);
+        };
+        thread.start();
     } 
     
     //WindowClosing will pass a 1 to signify it's closing, to end do-while loop.
