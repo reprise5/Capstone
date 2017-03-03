@@ -81,6 +81,7 @@ public class LeaderboardForm extends javax.swing.JFrame {
             rs = stmt.executeQuery("SELECT * FROM HANGMANALLTIME ORDER BY SCORE DESC");
 
             rsmd = rs.getMetaData();
+            
             colNo = rsmd.getColumnCount();
             while(rs.next()){
                 Object[] records = new Object[colNo];

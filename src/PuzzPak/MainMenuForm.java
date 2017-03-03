@@ -1,6 +1,9 @@
 package PuzzPak;
 
 import static java.awt.image.ImageObserver.WIDTH;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -206,7 +209,12 @@ public class MainMenuForm extends javax.swing.JFrame {
 
     //Launch Tik-Tak (ticTacToe Game) from the Main Menu
     private void tikTakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tikTakButtonActionPerformed
-
+        try {
+            tiktak.run();
+        } 
+        catch (InterruptedException ex) {
+            Logger.getLogger(MainMenuForm.class.getName()).log(Level.SEVERE, null, ex);
+        }     
     }//GEN-LAST:event_tikTakButtonActionPerformed
 
     //Launch Memory Tiles 4x4 from the main menu
@@ -240,6 +248,7 @@ public class MainMenuForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             try{
+                JOptionPane.showInputDialog(rootPane, "Enter your username", "Who are you?", HEIGHT, who, null, DISPOSE_ON_CLOSE);
                 username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
                 hangman.setUsername(username);
                 smallMT.setUsername(username);
@@ -287,6 +296,9 @@ public class MainMenuForm extends javax.swing.JFrame {
 
     //GLOBALS
     String username = "";
+    boolean win;
+    boolean tie;
+    ImageIcon who = new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/main-menu/loginIcon.png"));
     
     /* Games */
     LeaderboardForm leaderboards = new LeaderboardForm("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
@@ -294,7 +306,7 @@ public class MainMenuForm extends javax.swing.JFrame {
     HangmanForm     hangman      = new HangmanForm();
     Memorytiles1    smallMT      = new Memorytiles1();
     Memorytiles2    largMT       = new Memorytiles2();
-    //TikTak        tiktak       = new TikTak();
+    TiktakMain      tiktak       = new TiktakMain();
     
     /* other forms */
     AdminForm       admin        = new AdminForm();

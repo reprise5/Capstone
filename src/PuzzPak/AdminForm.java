@@ -399,7 +399,7 @@ public class AdminForm extends javax.swing.JFrame {
                 System.out.println("Already empty");     
             }
             
-            //U P D A T E   H A N G M A N   A L L T I M E   J T A B L E 
+            //U P D A T E   H A N G M A N   A L L T I M E   
             String[] tableColumnsName = {"Username","Score","Date","Game"}; 
             hangmanModel = (DefaultTableModel) databaseTable.getModel();
             hangmanModel.setColumnIdentifiers(tableColumnsName);
@@ -417,7 +417,7 @@ public class AdminForm extends javax.swing.JFrame {
             }
             databaseTable.setModel(hangmanModel);
                         
-            //U P D A T E   T I K - T A K   A L L T I M E   J T A B L E
+            //U P D A T E   T I K - T A K   A L L T I M E
             tiktakModel = (DefaultTableModel) databaseTable.getModel();
             tiktakModel.setColumnIdentifiers(tableColumnsName);
 
@@ -434,7 +434,7 @@ public class AdminForm extends javax.swing.JFrame {
             }
             databaseTable.setModel(tiktakModel);
             
-            //U P D A T E   M E M O R Y 4   A L L T I M E   J T A B L E
+            //U P D A T E   M E M O R Y 4   A L L T I M E
             mt4x4Model = (DefaultTableModel) databaseTable.getModel();
             mt4x4Model.setColumnIdentifiers(tableColumnsName);
 
