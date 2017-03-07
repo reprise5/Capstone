@@ -68,6 +68,13 @@ public class LeaderboardForm extends javax.swing.JFrame {
                         mt4x4Model.removeRow(i);
                     }
                 }
+                //memorytiles 6x6 all-time
+                rowNo = mt4x4Model.getRowCount();
+                if (rowNo > 0){
+                    for (int i = rowNo - 1; i >= 0; i--) {
+                        mt4x4Model.removeRow(i);
+                    }
+                }
             }
             catch (Exception e){
                 System.out.println("Already empty");     
@@ -125,6 +132,23 @@ public class LeaderboardForm extends javax.swing.JFrame {
                 mt4x4Model.addRow(records);
             }
             MT4x4AlltimeTable.setModel(mt4x4Model);
+                        
+            //U P D A T E   M E M O R Y 6  A L L T I M E   J T A B L E
+            mt6x6Model = (DefaultTableModel) MT6x6AlltimeTable.getModel();
+            mt6x6Model.setColumnIdentifiers(tableColumnsName);
+
+            rs = stmt.executeQuery("SELECT * FROM MEMORYT6X6ALLTIME ORDER BY SCORE DESC");
+
+            rsmd = rs.getMetaData();
+            colNo = rsmd.getColumnCount();
+            while(rs.next()){
+                Object[] records = new Object[colNo];
+                for(int i = 0; i < colNo; i++){
+                    records[i] = rs.getString(i + 1);
+                }
+                mt6x6Model.addRow(records);
+            }
+            MT6x6AlltimeTable.setModel(mt6x6Model);
         }
         catch (SQLException err) {
             System.out.println( err.getMessage());

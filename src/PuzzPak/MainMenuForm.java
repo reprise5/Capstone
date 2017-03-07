@@ -1,5 +1,7 @@
 package PuzzPak;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,8 +12,17 @@ import javax.swing.JOptionPane;
  * @author reprise
  */
 public class MainMenuForm extends javax.swing.JFrame {
-
     public MainMenuForm() {
+        //TikTak and Hangman have best-out-of-3-or-more post rules, which uses a windowListener.
+        //TikTak Window listener: TiktakMain class (needs to be there to help handle infinite loop).
+        //Hangman Window listener: Below
+        hangman.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e) {
+                //call reset methods.
+                System.out.println("Resetting Hangman Post Rules...");
+            }
+        });  
         initComponents();
     }
 
@@ -25,7 +36,7 @@ public class MainMenuForm extends javax.swing.JFrame {
         MemoryTiles6x6Button = new javax.swing.JButton();
         tikTakButton = new javax.swing.JButton();
         leaderboardsButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        continueAsButton = new javax.swing.JButton();
         loggedInAsLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -89,10 +100,10 @@ public class MainMenuForm extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Continue-As...");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        continueAsButton.setText("Continue-As...");
+        continueAsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                continueAsButtonActionPerformed(evt);
             }
         });
 
@@ -168,7 +179,7 @@ public class MainMenuForm extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(leaderboardsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(continueAsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(hangmanButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
@@ -193,7 +204,7 @@ public class MainMenuForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(leaderboardsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(continueAsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(loggedInAsLabel)
                 .addContainerGap())
@@ -209,6 +220,8 @@ public class MainMenuForm extends javax.swing.JFrame {
 
     //Launch Tik-Tak (ticTacToe Game) from the Main Menu
     private void tikTakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tikTakButtonActionPerformed
+        //TikTak and Hangman have best-out-of-3-or-more post rules.  They both reset on close.
+        //TIk-Tak windowlistener is in TikTakMain class, or the tikTak object ccreated on this form. not here
         try {
             tiktak.run();
         } 
@@ -246,9 +259,9 @@ public class MainMenuForm extends javax.swing.JFrame {
         admin.setVisible(true);
     }//GEN-LAST:event_adminCornerMenuItemActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void continueAsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueAsButtonActionPerformed
             try{
-                JOptionPane.showInputDialog(rootPane, "Enter your username", "Who are you?", HEIGHT, who, null, DISPOSE_ON_CLOSE);
+                //JOptionPane.showInputDialog(rootPane, "Enter your username", "Who are you?", HEIGHT, who, null, DISPOSE_ON_CLOSE);
                 username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
                 hangman.setUsername(username);
                 smallMT.setUsername(username);
@@ -265,9 +278,8 @@ public class MainMenuForm extends javax.swing.JFrame {
                 System.out.println(e.getMessage());
                 loggedInAsLabel.setText("Not logged in.");
                 username = "";
-            
             }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_continueAsButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -276,8 +288,8 @@ public class MainMenuForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem Memorytiles4x4MenuItem;
     private javax.swing.JMenuItem TiktakMenuItem;
     private javax.swing.JMenuItem adminCornerMenuItem;
+    private javax.swing.JButton continueAsButton;
     private javax.swing.JButton hangmanButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

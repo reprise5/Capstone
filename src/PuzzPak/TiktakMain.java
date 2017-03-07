@@ -19,11 +19,12 @@ public class TiktakMain {
             public void run() {
                 /* create a new form and open it. */
                 TikTakForm game = new TikTakForm();
+                
                 game.addWindowListener(new WindowAdapter(){
                     @Override
                     public void windowClosing(WindowEvent e) {
                         int num = windowClosingSwitch(1);
-                        System.out.println("    <><> Form closing <><> (^_^)/");
+                        System.out.println("Resetting Tik-Tak Post Rules...");
                     }
                 });
                 game.setVisible(true);

@@ -292,26 +292,41 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dump Hangman"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dumpHangmanButonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="DumpTIktakButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dump Tik Tak"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DumpTIktakButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="dumpMT4Button">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dump MT 4"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dumpMT4ButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="dumpMT6Button">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dump MT 6"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dumpMT6ButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="dumpAllButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dump All Records"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dumpAllButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="deletefromLabel">
               <Properties>

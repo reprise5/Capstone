@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -75,14 +76,39 @@ public class AdminForm extends javax.swing.JFrame {
         adminTabbedPane.addTab("All Records", jScrollPane1);
 
         dumpHangmanButon.setText("Dump Hangman");
+        dumpHangmanButon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dumpHangmanButonActionPerformed(evt);
+            }
+        });
 
         DumpTIktakButton.setText("Dump Tik Tak");
+        DumpTIktakButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DumpTIktakButtonActionPerformed(evt);
+            }
+        });
 
         dumpMT4Button.setText("Dump MT 4");
+        dumpMT4Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dumpMT4ButtonActionPerformed(evt);
+            }
+        });
 
         dumpMT6Button.setText("Dump MT 6");
+        dumpMT6Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dumpMT6ButtonActionPerformed(evt);
+            }
+        });
 
         dumpAllButton.setText("Dump All Records");
+        dumpAllButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dumpAllButtonActionPerformed(evt);
+            }
+        });
 
         deletefromLabel.setText("DELETE FROM ");
 
@@ -450,11 +476,83 @@ public class AdminForm extends javax.swing.JFrame {
                 mt4x4Model.addRow(records);
             }
             databaseTable.setModel(mt4x4Model);
+            
+            //U P D A T E   M E M O R Y 6  A L L T I M E   J T A B L E
+            mt6x6Model = (DefaultTableModel) databaseTable.getModel();
+            mt6x6Model.setColumnIdentifiers(tableColumnsName);
+
+            rs = stmt.executeQuery("SELECT * FROM MEMORYT6X6ALLTIME ORDER BY SCORE DESC");
+
+            rsmd = rs.getMetaData();
+            colNo = rsmd.getColumnCount();
+            while(rs.next()){
+                Object[] records = new Object[colNo];
+                for(int i = 0; i < colNo; i++){
+                    records[i] = rs.getString(i + 1);
+                }
+                mt6x6Model.addRow(records);
+            }
+            databaseTable.setModel(mt6x6Model);
         }
         catch (SQLException err) {
             System.out.println( err.getMessage());
         }
     }//GEN-LAST:event_refreshTableButtonActionPerformed
+
+    private void dumpHangmanButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dumpHangmanButonActionPerformed
+        int n = JOptionPane.showConfirmDialog(
+            rootPane,
+            "Permanently delete all hangman records?\n"
+            + "You cannot undo this action.",
+            "Record Deletion Confirmation",
+            JOptionPane.YES_NO_OPTION
+        );
+        if(n == 0) database.wipeTable("HANGMANALLTIME");
+    }//GEN-LAST:event_dumpHangmanButonActionPerformed
+
+    private void DumpTIktakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DumpTIktakButtonActionPerformed
+        int n = JOptionPane.showConfirmDialog(
+            rootPane,
+            "Permanently delete all Tik-Tak records?\n"
+            + "You cannot undo this action.",
+            "Record Deletion Confirmation",
+            JOptionPane.YES_NO_OPTION
+        );
+        if(n == 0) database.wipeTable("TIKTAKALLTIME"); 
+    }//GEN-LAST:event_DumpTIktakButtonActionPerformed
+
+    private void dumpMT4ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dumpMT4ButtonActionPerformed
+        int n = JOptionPane.showConfirmDialog(
+            rootPane,
+            "Permanently delete all MemoryTiles 4x4 records?\n"
+            + "You cannot undo this action.",
+            "Record Deletion Confirmation",
+            JOptionPane.YES_NO_OPTION
+        );
+        if(n == 0) database.wipeTable("MEMORYT4X4ALLTIME");
+    }//GEN-LAST:event_dumpMT4ButtonActionPerformed
+
+    private void dumpMT6ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dumpMT6ButtonActionPerformed
+        int n = JOptionPane.showConfirmDialog(
+            rootPane,
+            "Permanently delete all MemoryTiles 6x6 records?\n"
+            + "You cannot undo this action.",
+            "Record Deletion Confirmation",
+            JOptionPane.YES_NO_OPTION
+        );
+        if(n == 0) database.wipeTable("MEMORYT6X6ALLTIME");
+    }//GEN-LAST:event_dumpMT6ButtonActionPerformed
+
+    private void dumpAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dumpAllButtonActionPerformed
+        int n = JOptionPane.showConfirmDialog(
+            rootPane,
+            "WARNING: Permanently delete all database records?\n"
+            + "This action is permanent.",
+            "WARNING: Scores Annihilation",
+            JOptionPane.YES_NO_OPTION
+        );
+        if(n == 0) database.wipeTable("*"); //<-- Did not test
+    }//GEN-LAST:event_dumpAllButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -494,17 +592,20 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JLabel whereLabel1;
     // End of variables declaration//GEN-END:variables
  
+    //Database connection Variables
     DatabaseControl database = new DatabaseControl("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
     boolean connSuccess;
     String host = "jdbc:derby://localhost:1527/PPleaderboard"; 
     String userID = "operator";
     String password = "westfield";
     
+    //Local Background Variables
     String table = "...";
     String attributeType = "...";
     String attribute = "...";
     String message = "";
     
+    //Jtable filling Variables
     ResultSetMetaData rsmd;
     ResultSet rs;
     int columnsNumber;

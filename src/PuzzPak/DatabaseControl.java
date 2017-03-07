@@ -111,8 +111,21 @@ public class DatabaseControl {
         }
         return message;
     }
-    public boolean removeDuplicateTuples(){
     
-        return true;
+    //wipes the table passed.  pass '*' for all.
+    public boolean wipeTable(String table){
+        boolean succ = false;
+        try {
+            Connection con = DriverManager.getConnection(host, userID, password );
+            Statement stmt = con.createStatement();
+
+            stmt.executeUpdate("DELETE FROM " + table);
+            succ = true;
+        }
+        catch (SQLException err) {
+            System.out.println( err.getMessage());
+            succ = false;
+        }
+        return succ;  
     }
 }

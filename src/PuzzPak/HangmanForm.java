@@ -1941,12 +1941,9 @@ public class HangmanForm extends javax.swing.JFrame {
             "Score reset confirmation",
             JOptionPane.YES_NO_OPTION
         );
-        
         System.out.println("JOptionPane_ScoreReset var: " + n);
         
-        if (n == 0){
-//            JOptionPane.showMessageDialog(rootPane, "RIOT.", "Hype? or riot?", WIDTH);
-                    
+        if (n == 0){               
             loseCounter = 0;
             sLoseCounter = Integer.toString(loseCounter);
             LossesScreen.setText(sLoseCounter);
@@ -2492,6 +2489,7 @@ public class HangmanForm extends javax.swing.JFrame {
     int loseCounter = 0;            //tracks/tallies losses
     String sWinsCounter;            //the string version that goes to the label.
     String sLoseCounter;            //the string version that goes to the label.
+    int roundCounter = 0;           //Keeps track of how many games were played (won or lost, resets don't count).
     
     //Declaring icons used in hangScreen component.
     ImageIcon Post   = new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/hangman/post.png"));

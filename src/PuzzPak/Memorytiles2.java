@@ -1298,7 +1298,7 @@ public class Memorytiles2 extends javax.swing.JFrame {
     private void postScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postScoreButtonActionPerformed
         if (username.equals("")) username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
         username = username.toLowerCase();
-        database.addScore(username, score, "mg4x4");   
+        database.addScore(username, score, "mg6x6");   
         
         postScoreButton.setEnabled(false);
     }//GEN-LAST:event_postScoreButtonActionPerformed

@@ -39,7 +39,7 @@ public class TikTakForm extends javax.swing.JFrame {
         postScoreButton = new javax.swing.JButton();
         informationLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("TIK-TAK (Tic-Tac-Toe Game)");
 
         stickerLabel.setIcon(new javax.swing.ImageIcon("/home/reprise/Dropbox/Programming/01 Java/PuzzPak/src/PuzzPak/images/tiktak/BoardSticker.png")); // NOI18N
@@ -176,6 +176,8 @@ public class TikTakForm extends javax.swing.JFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
+        resetBoardButton.setBackground(new java.awt.Color(255, 255, 0));
+        resetBoardButton.setForeground(new java.awt.Color(0, 0, 0));
         resetBoardButton.setText("Reset");
         resetBoardButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,6 +202,8 @@ public class TikTakForm extends javax.swing.JFrame {
 
         p2_score_label.setText("Player2");
 
+        postScoreButton.setBackground(new java.awt.Color(255, 255, 0));
+        postScoreButton.setForeground(new java.awt.Color(0, 0, 0));
         postScoreButton.setText("Post");
 
         informationLabel.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
