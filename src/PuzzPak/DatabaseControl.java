@@ -128,4 +128,21 @@ public class DatabaseControl {
         }
         return succ;  
     }
+    public String executeQuery(String query){
+        String message = "";
+        try {
+            Connection con = DriverManager.getConnection(host, userID, password );
+            Statement stmt = con.createStatement();
+            
+            stmt.executeUpdate(query);
+            System.out.println("SQL Query entered: " + query);
+            message = "SQL query: \"" + query + "\" was successful";
+        }
+        catch (SQLException err) {
+            System.out.println( err.getMessage());
+            message = err.getMessage();
+        }
+        
+        return message;
+    }
 }

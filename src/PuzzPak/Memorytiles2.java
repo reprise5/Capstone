@@ -729,12 +729,11 @@ public class Memorytiles2 extends javax.swing.JFrame {
         match = false;
         count = 0;
         score = 0;
-        sScore = "0";
         accuracy = 0;
         correctPairs = 0;
         totalPairs = 0;
 
-        ScoreScreen.setText(sScore);
+        ScoreScreen.setText(Integer.toString(score));
 
         //Re-Enable the buttons.
         Tile11.setEnabled(true);
@@ -805,8 +804,7 @@ public class Memorytiles2 extends javax.swing.JFrame {
         match = false;
         count = 0;
         score = 0;
-        sScore = "0";
-        ScoreScreen.setText(sScore);
+        ScoreScreen.setText(Integer.toString(score));
         accuracy = 0;
         totalPairs = 0;
         correctPairs = 0;
@@ -1238,8 +1236,7 @@ public class Memorytiles2 extends javax.swing.JFrame {
         match = false;
         count = 0;
         score = 0;
-        sScore = "0";
-        ScoreScreen.setText(sScore);
+        ScoreScreen.setText(Integer.toString(score));
         accuracy = 0;
         correctPairs = 0;
         totalPairs = 0;
@@ -1816,15 +1813,13 @@ public class Memorytiles2 extends javax.swing.JFrame {
                 if(!match){
                     System.out.println("     *No Match.*     ");
                     score = score - 2;
-                    sScore = Integer.toString(score);
-                    ScoreScreen.setText(sScore);
+                    ScoreScreen.setText(Integer.toString(score));
                     totalPairs++;
                 }
                 else{
                     System.out.println("     *MATCH!*     ");
                     score = score + 5;
-                    sScore = Integer.toString(score);
-                    ScoreScreen.setText(sScore);
+                    ScoreScreen.setText(Integer.toString(score));
 
                     buttonEnabledSwitch(false, ID_Guess1);
                     buttonEnabledSwitch(false, ID_Guess2);
@@ -1923,7 +1918,6 @@ public class Memorytiles2 extends javax.swing.JFrame {
     int type_Guess1, type_Guess2;               //the ShapeCodes for the 2 guesses.  used for testing a match. 
     boolean match;                              //catches the result from testMatch sub.
     int score;                                  //saves the player's score
-    String sScore;                              //to be sent to the label.
     int PrevID_Guess1;                          //these 2 are used to store the 2 tiles from the LAST matching, to know which (locations) to 
     int PrevID_Guess2;                          //return to blanks when a new matching has started.
     double totalPairs;                          //Keeps track of how many pairs happened. used to calculate accuracy %.

@@ -57,6 +57,10 @@ public class AdminForm extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         adminConsole = new javax.swing.JTextField();
         consoleLabel = new javax.swing.JLabel();
+        freehandQueryTextbox = new javax.swing.JTextField();
+        freehandQueryLabel = new javax.swing.JLabel();
+        executefreeHand = new javax.swing.JButton();
+        dumpAllKey = new javax.swing.JCheckBox();
         debugmodePanel = new javax.swing.JPanel();
         refreshTableButton = new javax.swing.JButton();
 
@@ -103,6 +107,7 @@ public class AdminForm extends javax.swing.JFrame {
             }
         });
 
+        dumpAllButton.setBackground(new java.awt.Color(204, 0, 0));
         dumpAllButton.setText("Dump All Records");
         dumpAllButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,22 +167,33 @@ public class AdminForm extends javax.swing.JFrame {
         consoleLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         consoleLabel.setText("SQL Query Execution Console");
 
+        freehandQueryTextbox.setFont(new java.awt.Font("Courier New", 1, 10)); // NOI18N
+
+        freehandQueryLabel.setText("Enter a freehand Query");
+
+        executefreeHand.setText("Execute");
+        executefreeHand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                executefreeHandActionPerformed(evt);
+            }
+        });
+
+        dumpAllKey.setText("Insert Key");
+        dumpAllKey.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                dumpAllKeyItemStateChanged(evt);
+            }
+        });
+        dumpAllKey.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                dumpAllKeyStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout queriesPanelLayout = new javax.swing.GroupLayout(queriesPanel);
         queriesPanel.setLayout(queriesPanelLayout);
         queriesPanelLayout.setHorizontalGroup(
             queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(queriesPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(dumpHangmanButon)
-                .addGap(18, 18, 18)
-                .addComponent(DumpTIktakButton)
-                .addGap(18, 18, 18)
-                .addComponent(dumpMT4Button)
-                .addGap(18, 18, 18)
-                .addComponent(dumpMT6Button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(dumpAllButton)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, queriesPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,60 +206,76 @@ public class AdminForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(queriesPanelLayout.createSequentialGroup()
-                        .addComponent(syntaxLabel1)
-                        .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(queriesPanelLayout.createSequentialGroup()
-                                .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(queriesPanelLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(usernameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(syntaxLabel2)
-                                        .addGap(68, 68, 68)
-                                        .addComponent(syntaxLabel3)
-                                        .addGap(3, 3, 3)
-                                        .addComponent(gameCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(2, 2, 2)
-                                        .addComponent(syntaxLabel4))
-                                    .addGroup(queriesPanelLayout.createSequentialGroup()
-                                        .addGap(182, 182, 182)
-                                        .addComponent(attributeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(executeDeleteFrom)
-                                    .addComponent(executeInsertInto)))
-                            .addGroup(queriesPanelLayout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(usernameLabel)
-                                .addGap(141, 141, 141)
-                                .addComponent(gameLabel))))
-                    .addGroup(queriesPanelLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(queriesPanelLayout.createSequentialGroup()
+                        .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, queriesPanelLayout.createSequentialGroup()
+                                .addComponent(usernameLabel)
+                                .addGap(103, 103, 103))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, queriesPanelLayout.createSequentialGroup()
                                 .addComponent(whereLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(atributeCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(equalsLabel1))
-                            .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(queriesPanelLayout.createSequentialGroup()
-                                    .addGap(12, 12, 12)
-                                    .addComponent(scoreLabel))
-                                .addComponent(scoreTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(39, 39, 39))
+                                .addComponent(equalsLabel1))))
+                    .addGroup(queriesPanelLayout.createSequentialGroup()
+                        .addComponent(syntaxLabel1)
+                        .addGap(6, 6, 6)
+                        .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(attributeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(queriesPanelLayout.createSequentialGroup()
+                                .addComponent(usernameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(syntaxLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(queriesPanelLayout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(scoreLabel)
+                                        .addGap(68, 68, 68)
+                                        .addComponent(gameLabel))
+                                    .addGroup(queriesPanelLayout.createSequentialGroup()
+                                        .addComponent(scoreTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(syntaxLabel3)
+                                        .addGap(7, 7, 7)
+                                        .addComponent(gameCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(syntaxLabel4)
+                        .addGap(18, 18, 18)
+                        .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(executeDeleteFrom)
+                            .addComponent(executeInsertInto))
+                        .addGap(39, 39, 39))))
             .addGroup(queriesPanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(queriesPanelLayout.createSequentialGroup()
-                        .addComponent(consoleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 34, Short.MAX_VALUE))
-                    .addGroup(queriesPanelLayout.createSequentialGroup()
-                        .addComponent(jSeparator1)
-                        .addContainerGap())))
+                .addComponent(consoleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 41, Short.MAX_VALUE))
             .addGroup(queriesPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(adminConsole)
+                .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(freehandQueryLabel)
+                    .addGroup(queriesPanelLayout.createSequentialGroup()
+                        .addComponent(freehandQueryTextbox, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(executefreeHand)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(queriesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(adminConsole)
+                    .addComponent(jSeparator1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, queriesPanelLayout.createSequentialGroup()
+                        .addComponent(dumpHangmanButon)
+                        .addGap(18, 18, 18)
+                        .addComponent(DumpTIktakButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(dumpMT4Button)
+                        .addGap(18, 18, 18)
+                        .addComponent(dumpMT6Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dumpAllKey)
+                            .addComponent(dumpAllButton))))
                 .addContainerGap())
         );
         queriesPanelLayout.setVerticalGroup(
@@ -270,34 +302,43 @@ public class AdminForm extends javax.swing.JFrame {
                                 .addComponent(equalsLabel1))
                             .addComponent(executeDeleteFrom))
                         .addGap(18, 18, 18)
-                        .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(syntaxLabel1)
+                                .addComponent(syntaxLabel2)
+                                .addComponent(syntaxLabel3)
+                                .addComponent(syntaxLabel4)
+                                .addComponent(executeInsertInto))
                             .addComponent(usernameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(scoreTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(gameCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(syntaxLabel1)
-                            .addComponent(syntaxLabel2)
-                            .addComponent(syntaxLabel3)
-                            .addComponent(syntaxLabel4)
-                            .addComponent(executeInsertInto))
+                            .addComponent(gameCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(usernameLabel)
-                            .addComponent(scoreLabel)
-                            .addComponent(gameLabel))))
-                .addGap(54, 54, 54)
+                        .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(usernameLabel)
+                                .addComponent(gameLabel))
+                            .addComponent(scoreLabel))))
+                .addGap(15, 15, 15)
+                .addComponent(freehandQueryLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(freehandQueryTextbox, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(executefreeHand))
+                .addGap(24, 24, 24)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(consoleLabel)
-                .addGap(14, 14, 14)
-                .addComponent(adminConsole, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(adminConsole, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(queriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dumpHangmanButon)
                     .addComponent(DumpTIktakButton)
                     .addComponent(dumpMT4Button)
                     .addComponent(dumpMT6Button)
                     .addComponent(dumpAllButton))
-                .addGap(22, 22, 22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dumpAllKey))
         );
 
         adminTabbedPane.addTab("Execute Queries", queriesPanel);
@@ -306,7 +347,7 @@ public class AdminForm extends javax.swing.JFrame {
         debugmodePanel.setLayout(debugmodePanelLayout);
         debugmodePanelLayout.setHorizontalGroup(
             debugmodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 779, Short.MAX_VALUE)
+            .addGap(0, 786, Short.MAX_VALUE)
         );
         debugmodePanelLayout.setVerticalGroup(
             debugmodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,7 +548,10 @@ public class AdminForm extends javax.swing.JFrame {
             "Record Deletion Confirmation",
             JOptionPane.YES_NO_OPTION
         );
-        if(n == 0) database.wipeTable("HANGMANALLTIME");
+        if(n == 0){
+            database.wipeTable("HANGMANALLTIME");
+            adminConsole.setText("Dumped all records in HANGMANALLTIME");
+        }
     }//GEN-LAST:event_dumpHangmanButonActionPerformed
 
     private void DumpTIktakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DumpTIktakButtonActionPerformed
@@ -518,7 +562,10 @@ public class AdminForm extends javax.swing.JFrame {
             "Record Deletion Confirmation",
             JOptionPane.YES_NO_OPTION
         );
-        if(n == 0) database.wipeTable("TIKTAKALLTIME"); 
+        if(n == 0){
+            database.wipeTable("TIKTAKALLTIME");
+            adminConsole.setText("Dumped all records in TIKTAKALLTIME");
+        } 
     }//GEN-LAST:event_DumpTIktakButtonActionPerformed
 
     private void dumpMT4ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dumpMT4ButtonActionPerformed
@@ -529,7 +576,10 @@ public class AdminForm extends javax.swing.JFrame {
             "Record Deletion Confirmation",
             JOptionPane.YES_NO_OPTION
         );
-        if(n == 0) database.wipeTable("MEMORYT4X4ALLTIME");
+        if(n == 0){
+            database.wipeTable("MEMORYT4X4ALLTIME");
+            adminConsole.setText("Dumped all records in MEMORYT4x4ALLTIME");
+        }
     }//GEN-LAST:event_dumpMT4ButtonActionPerformed
 
     private void dumpMT6ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dumpMT6ButtonActionPerformed
@@ -540,7 +590,11 @@ public class AdminForm extends javax.swing.JFrame {
             "Record Deletion Confirmation",
             JOptionPane.YES_NO_OPTION
         );
-        if(n == 0) database.wipeTable("MEMORYT6X6ALLTIME");
+        if(n == 0){ 
+            database.wipeTable("MEMORYT6X6ALLTIME");
+            adminConsole.setText("Dumped all records in MEMORYT6x6ALLTIME");
+        }
+        
     }//GEN-LAST:event_dumpMT6ButtonActionPerformed
 
     private void dumpAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dumpAllButtonActionPerformed
@@ -551,8 +605,33 @@ public class AdminForm extends javax.swing.JFrame {
             "WARNING: Scores Annihilation",
             JOptionPane.YES_NO_OPTION
         );
-        if(n == 0) database.wipeTable("*"); //<-- Did not test
+        if(n == 0 && dumpAllKey.isSelected()){
+            database.wipeTable("*"); //<-- Did not test
+            adminConsole.setText("All records have been dumped from the database. :( ");
+        } 
     }//GEN-LAST:event_dumpAllButtonActionPerformed
+
+    //Submitting a freehand query
+    private void executefreeHandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executefreeHandActionPerformed
+        message = database.executeQuery(freehandQueryTextbox.getText());
+        adminConsole.setText(message);
+    }//GEN-LAST:event_executefreeHandActionPerformed
+
+    private void dumpAllKeyStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_dumpAllKeyStateChanged
+        if(dumpAllKey.isSelected()){
+            dumpAllButton.enable(true);
+        }
+        else
+            dumpAllButton.enable(false);
+    }//GEN-LAST:event_dumpAllKeyStateChanged
+
+    private void dumpAllKeyItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_dumpAllKeyItemStateChanged
+        if(dumpAllKey.isSelected()){
+            dumpAllButton.enable(true);
+        }
+        else
+            dumpAllButton.enable(false);
+    }//GEN-LAST:event_dumpAllKeyItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -566,12 +645,16 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JPanel debugmodePanel;
     private javax.swing.JLabel deletefromLabel;
     private javax.swing.JButton dumpAllButton;
+    private javax.swing.JCheckBox dumpAllKey;
     private javax.swing.JButton dumpHangmanButon;
     private javax.swing.JButton dumpMT4Button;
     private javax.swing.JButton dumpMT6Button;
     private javax.swing.JLabel equalsLabel1;
     private javax.swing.JButton executeDeleteFrom;
     private javax.swing.JButton executeInsertInto;
+    private javax.swing.JButton executefreeHand;
+    private javax.swing.JLabel freehandQueryLabel;
+    private javax.swing.JTextField freehandQueryTextbox;
     private javax.swing.JComboBox<String> gameCombobox;
     private javax.swing.JLabel gameLabel;
     private javax.swing.JLabel insertintoLabel;

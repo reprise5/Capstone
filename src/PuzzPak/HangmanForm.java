@@ -362,11 +362,6 @@ public class HangmanForm extends javax.swing.JFrame {
                 GuessEnterButtonActionPerformed(evt);
             }
         });
-        GuessEnterButton.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                GuessEnterButtonKeyPressed(evt);
-            }
-        });
 
         GuessWordBox.setBackground(new java.awt.Color(255, 255, 204));
         GuessWordBox.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -705,10 +700,8 @@ public class HangmanForm extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(startGameButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(postScoreButton)
-                                .addGap(0, 27, Short.MAX_VALUE))
+                                .addComponent(postScoreButton))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1)
                                     .addComponent(WinsLabel)
@@ -720,7 +713,7 @@ public class HangmanForm extends javax.swing.JFrame {
                                     .addComponent(triesLeftScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(displayRightAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                        .addGap(0, 45, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(letterTile1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(letterTile2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -788,7 +781,6 @@ public class HangmanForm extends javax.swing.JFrame {
 
     //=================================END=Generated=Code=======================================
 
-
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=START-GAME-BUTTON-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     private void startGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameButtonActionPerformed
 
@@ -823,10 +815,8 @@ public class HangmanForm extends javax.swing.JFrame {
         displayRightAnswer.setText("");
 
         //set the wins and losses screens with the variable stored
-        sWinsCounter = Integer.toString(winsCounter);
-        WinsScreen.setText(sWinsCounter);
-        sLoseCounter = Integer.toString(loseCounter);
-        LossesScreen.setText(sLoseCounter);
+        WinsScreen.setText(Integer.toString(winsCounter));
+        LossesScreen.setText(Integer.toString(loseCounter));
 
         //re-enable all of the buttons, they are disabled until a new game is started.
         Abutton.setEnabled(true);
@@ -909,39 +899,8 @@ public class HangmanForm extends javax.swing.JFrame {
     //A Button Press
     private void AbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbuttonActionPerformed
         letter = 'a';
-        sLetter= "a";
-
         Abutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter);
     }//GEN-LAST:event_AbuttonActionPerformed
 
     //Send in the word guessed in the text box
@@ -952,8 +911,7 @@ public class HangmanForm extends javax.swing.JFrame {
             //winner!
             disableGame();
             winsCounter++;
-            sWinsCounter = Integer.toString(winsCounter);
-            WinsScreen.setText(sWinsCounter);
+            WinsScreen.setText(Integer.toString(winsCounter));
 
             hangScreen.setIcon(Winner);
             System.out.println("*WIN by text box response*");
@@ -961,8 +919,7 @@ public class HangmanForm extends javax.swing.JFrame {
         else{
             //wrong response, but game isn't over. remove a chance left.
             chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
+            triesLeftScreen.setText(Integer.toString(chancesLeftCounter));
             changeHangmanIcon();
             GuessWordBox.setText("");
         }
@@ -971,955 +928,178 @@ public class HangmanForm extends javax.swing.JFrame {
     //B Button Press
     private void BbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BbuttonActionPerformed
         letter = 'b';
-        sLetter= "b";
-
         Bbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter);
     }//GEN-LAST:event_BbuttonActionPerformed
 
     //C Button Press
     private void CbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuttonActionPerformed
         letter = 'c';
-        sLetter= "c";
-
         Cbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
+        letterPress(letter);
 
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
     }//GEN-LAST:event_CbuttonActionPerformed
 
     //D Button Press
     private void DbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DbuttonActionPerformed
         letter = 'd';
-        sLetter= "d";
-
         Dbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter);
     }//GEN-LAST:event_DbuttonActionPerformed
 
     //E Button Press
     private void EbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EbuttonActionPerformed
-      letter = 'e';
-      sLetter= "e";
-
+        letter = 'e';
         Ebutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter);
     }//GEN-LAST:event_EbuttonActionPerformed
 
     //F Button Press
     private void FbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FbuttonActionPerformed
         letter = 'f';
-        sLetter= "f";
-
         Fbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        } 
-        
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter);
     }//GEN-LAST:event_FbuttonActionPerformed
 
     //G Button Press
     private void GbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GbuttonActionPerformed
         letter = 'g';
-        sLetter= "g";
-        
         Gbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-        
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter);
     }//GEN-LAST:event_GbuttonActionPerformed
 
     //H Button Press
     private void HbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HbuttonActionPerformed
         letter = 'h';
-        sLetter= "h";
-        
         Hbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }  
-        
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter);
     }//GEN-LAST:event_HbuttonActionPerformed
 
     //I Button Press
     private void IbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IbuttonActionPerformed
         letter = 'i';
-        sLetter= "i";
-        
         Ibutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        } 
-        
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter);
     }//GEN-LAST:event_IbuttonActionPerformed
 
     //J Button Press
     private void JbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbuttonActionPerformed
         letter = 'j';
-        sLetter= "j";
-        
         Jbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }  
-        
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter);
     }//GEN-LAST:event_JbuttonActionPerformed
 
     //K Button Press
     private void KbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KbuttonActionPerformed
         letter = 'k';
-        sLetter= "k";
-        
         Kbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        } 
-        
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-           hangScreen.setIcon(Winner);
-        }
+        letterPress(letter);
     }//GEN-LAST:event_KbuttonActionPerformed
 
     //L Button Press
     private void LbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LbuttonActionPerformed
-        letter = 'l';
-        sLetter= "l";
-        
+        letter = 'l';     
         Lbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        } 
-        
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter);
     }//GEN-LAST:event_LbuttonActionPerformed
 
     //M Button Press
     private void MbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MbuttonActionPerformed
         letter = 'm';
-        sLetter= "m";
-        
         Mbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        } 
-        
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter);
     }//GEN-LAST:event_MbuttonActionPerformed
 
     //N Button Press
     private void NbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NbuttonActionPerformed
-        letter = 'n';
-        sLetter= "n";
-        
+        letter = 'n';        
         Nbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        } 
-        
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter);  
     }//GEN-LAST:event_NbuttonActionPerformed
 
     //O Button Press
     private void ObuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ObuttonActionPerformed
         letter = 'o';
-        sLetter= "o";
-        
         Obutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        } 
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter); 
     }//GEN-LAST:event_ObuttonActionPerformed
 
     //P Button Press
     private void PbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PbuttonActionPerformed
         letter = 'p';
-        sLetter= "p";
-        
         Pbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter); 
     }//GEN-LAST:event_PbuttonActionPerformed
 
     //Q Button Press
     private void QbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QbuttonActionPerformed
         letter = 'q';
-        sLetter= "q";
-
         Qbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter); 
     }//GEN-LAST:event_QbuttonActionPerformed
 
     //R Button Press
     private void RbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RbuttonActionPerformed
         letter = 'r';
-        sLetter= "r";
-
         Rbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter); 
     }//GEN-LAST:event_RbuttonActionPerformed
 
     //S Button Press
     private void SbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SbuttonActionPerformed
         letter = 's';
-        sLetter= "s";
-
         Sbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter); 
     }//GEN-LAST:event_SbuttonActionPerformed
 
     //T Button Press
     private void TbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TbuttonActionPerformed
         letter = 't';
-        sLetter= "t";
-
         Tbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter); 
     }//GEN-LAST:event_TbuttonActionPerformed
 
     //U Button Press
     private void UbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UbuttonActionPerformed
         letter = 'u';
-        sLetter= "u";
-
         Ubutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter); 
     }//GEN-LAST:event_UbuttonActionPerformed
 
     //V Button Press
     private void VbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VbuttonActionPerformed
         letter = 'v';
-        sLetter= "v";
-
         Vbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter); 
     }//GEN-LAST:event_VbuttonActionPerformed
 
     //W Button Press
     private void WbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WbuttonActionPerformed
         letter = 'w';
-        sLetter= "w";
-
         Wbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter); 
     }//GEN-LAST:event_WbuttonActionPerformed
 
     //X Button Press
     private void XbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XbuttonActionPerformed
         letter = 'x';
-        sLetter= "x";
-
         Xbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        }
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter); 
     }//GEN-LAST:event_XbuttonActionPerformed
 
     //Y Button Press
     private void YbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YbuttonActionPerformed
         letter = 'y';
-        sLetter= "y";
-
         Ybutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        } 
-        
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter); 
     }//GEN-LAST:event_YbuttonActionPerformed
 
     //Z Button Press
     private void ZbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZbuttonActionPerformed
         letter = 'z';
-        sLetter= "z";
-        
         Zbutton.setEnabled(false);
-        correctResponse = game.testLetterResponse(letter);
-        if (correctResponse){
-            int index;
-
-            index = wordToGuess.indexOf(letter);
-            System.out.println("FirstInstanceIndex: " + index);
-            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
-            flipTile(index, sLetter);
-
-            while (index !=  -1) {
-                index = wordToGuess.indexOf(letter, index + 1);
-                System.out.println("NextInstanceIndex: " + index);
-                flipTile(index, sLetter);
-            }
-        }
-        else{
-            //they're wrong so take away a chance left.
-            chancesLeftCounter--;
-            sChancesLeft = Integer.toString(chancesLeftCounter);
-            triesLeftScreen.setText(sChancesLeft);
-            changeHangmanIcon();
-            GuessWordBox.setText("");
-        } 
-        
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
-        }
+        letterPress(letter); 
     }//GEN-LAST:event_ZbuttonActionPerformed
-
-    //is this how you add a keybinding to a button...?  I don't know.
-    private void GuessEnterButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GuessEnterButtonKeyPressed
-        // TODO add your handling code here:       
-    }//GEN-LAST:event_GuessEnterButtonKeyPressed
 
     //File>Quit, Quits the game
     private void QuitGameMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitGameMenuItemActionPerformed
@@ -1945,12 +1125,10 @@ public class HangmanForm extends javax.swing.JFrame {
         
         if (n == 0){               
             loseCounter = 0;
-            sLoseCounter = Integer.toString(loseCounter);
-            LossesScreen.setText(sLoseCounter);
+            LossesScreen.setText(Integer.toString(loseCounter));
 
             winsCounter = 0;
-            sWinsCounter = Integer.toString(winsCounter);
-            WinsScreen.setText(sWinsCounter);
+            WinsScreen.setText(Integer.toString(winsCounter));
         }
     }//GEN-LAST:event_ResetScoreMenuItemActionPerformed
 
@@ -1981,6 +1159,40 @@ public class HangmanForm extends javax.swing.JFrame {
         database.addScore(username, score, "hangman");
     }//GEN-LAST:event_postScoreButtonActionPerformed
 
+    //When the user presses a letter on the keypad, the game shoul react in this way:
+    public void letterPress(char letter){
+       
+        correctResponse = game.testLetterResponse(letter);
+        if (correctResponse){
+            int index;
+
+            index = wordToGuess.indexOf(letter);
+            System.out.println("FirstInstanceIndex: " + index);
+            //Send to switchTiles(); subroutine to flip the tiles with the button's letter, at the index found here.
+            flipTile(index, String.valueOf(letter));
+
+            while (index !=  -1) {
+                index = wordToGuess.indexOf(letter, index + 1);
+                System.out.println("NextInstanceIndex: " + index);
+                flipTile(index, String.valueOf(letter));
+            }
+        }
+        else{
+            //they're wrong so take away a chance left.
+            chancesLeftCounter--;
+            triesLeftScreen.setText(Integer.toString(chancesLeftCounter));
+            changeHangmanIcon();
+            GuessWordBox.setText("");
+        }
+
+        win = TestTileWin(wordToGuessLength);
+        if (win){
+            chancesLeftCounter = 0;
+            disableGame();
+            hangScreen.setIcon(Winner);
+        }
+    }
+    
     //Update Global username Score recieved from continue-as...
     public boolean setUsername(String username){
         if(!username.equals("")){
@@ -2021,8 +1233,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
                 //update the losses counter and screen
                 loseCounter++;
-                sLoseCounter = Integer.toString(loseCounter);
-                LossesScreen.setText(sLoseCounter);
+                LossesScreen.setText(Integer.toString(loseCounter));
                 break;
         }
     }
@@ -2364,8 +1575,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         if (win){
             winsCounter++;
-            sWinsCounter = Integer.toString(winsCounter);
-            WinsScreen.setText(sWinsCounter);
+            WinsScreen.setText(Integer.toString(winsCounter));
         }
         return win;
     }
@@ -2481,14 +1691,10 @@ public class HangmanForm extends javax.swing.JFrame {
     String wordToGuess = "";        //this is the word to test against.  the secret word.
     String guessedWord = "";        //what the user TYPED to guess.
     char letter;                    //guessed letter from a button
-    String sLetter;                 //string version of char letter, to be sent to flipped tiles. needs to be a string type.
     int wordToGuessLength = 0;      //how long the wordToGuess is, used to draw the underscores.
     int chancesLeftCounter = 6;     //how many tries are left.  decrements with wrong attempts.
-    String sChancesLeft;            //the string version of chancesLeftCounter, to be sent to be displayed.
     int winsCounter = 0;            //tracks/tallies wins
     int loseCounter = 0;            //tracks/tallies losses
-    String sWinsCounter;            //the string version that goes to the label.
-    String sLoseCounter;            //the string version that goes to the label.
     int roundCounter = 0;           //Keeps track of how many games were played (won or lost, resets don't count).
     
     //Declaring icons used in hangScreen component.
