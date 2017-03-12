@@ -1,6 +1,8 @@
 package PuzzPak;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -407,13 +409,18 @@ public class Memorytiles1 extends javax.swing.JFrame {
             int type = tileControl.get4x4TileType(i);
             
             //will show all the shapes on the buttons, for debugging reasons.
-            //check the box, and THEN click start for it to work. 
             if (DebugCheck.isSelected()){
                 showTileShape(i, type);
             }
         }
+        //carriage return.
         System.out.println();
         
+        //let the user see the board for a second.  Then they match by memory.
+        flashShapes();
+        
+        //if the user didn't want to post their score, jsut re-disable the button.
+        postScoreButton.setEnabled(false);
     }//GEN-LAST:event_startGameButtonActionPerformed
 
     //Tile 1,1 | ID 0 - Press
@@ -968,7 +975,28 @@ public class Memorytiles1 extends javax.swing.JFrame {
             count = 0;
         }  
     }
-
+    
+    private void flashShapes(){
+        Thread thread = new Thread() {
+            public void run() {
+                try {
+                    for (int i = 0; i<= 15; i++){
+                        int type = tileControl.get4x4TileType(i);
+                        showTileShape(i, type);
+                    }
+                    Thread.sleep(800);
+                    if (!DebugCheck.isSelected()){
+                        wipeBoard();
+                    }
+                } 
+                catch (InterruptedException ex) {
+                    Logger.getLogger(Memorytiles1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        thread.start(); 
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox DebugCheck;
     private javax.swing.JMenu FileMenu;

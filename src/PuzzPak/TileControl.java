@@ -293,4 +293,3 @@ public class TileControl {
         return type;
     }
 }
-

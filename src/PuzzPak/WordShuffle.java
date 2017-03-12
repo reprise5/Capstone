@@ -18,9 +18,9 @@ public class WordShuffle {
         int randomNumber;
         Random randomGenerator = new Random();
 
-        String WordBag1[]= new String[] {"whale","joy", "spirit","court","trees","dream","dozen","mouse","cinema","book",
-                                         "pond","moon","stars","elbow","nurse","belief","peace","farmer","garden","love",
-                                         "ocean","watch","school","beach","money",};
+        String WordBag1[]= new String[] {"cookbook","downstream", "spirit","wireless","trees","acceleration","airplane","mouse","cinema","book",
+                                         "college","moon","stars","continent","forgotten","generous","information","strawberry","videogame","equipment",
+                                         "chocolate","population","school","weekday","money",};
 
         randomNumber = randomGenerator.nextInt(24); // from 0 to 24, is 25 entries.
         wordToGuess = WordBag1[randomNumber];
@@ -34,9 +34,9 @@ public class WordShuffle {
         int randomNumber;
         Random randomGenerator = new Random();
 
-        String WordBag2[]= new String[] {"centipede","continent","chocolate","rectangle","population","sandwich","exciting","philosopher","dishonest","equipment",
-                                         "generous","confusion","friendship","airplane","strawberry","information","continent","landscape","staircase","zipper",
-                                         "automobile","technician","arpeggio","acceleration","mountain"};
+        String WordBag2[]= new String[] {"believer","continent","ocean","rectangle","follower","dozen","exciting","philosophy","dishonest","",
+                                         "generous","confusion","friendship","rhythm","fear","tonight","elbow","landscape","relax","zipper",
+                                         "automobile","technician","arpeggio","watch","mountain"};
 
         randomNumber = randomGenerator.nextInt(24);
         wordToGuess = WordBag2[randomNumber];
@@ -78,4 +78,3 @@ public class WordShuffle {
         return isCorrectLetter;
     }
 }
-

@@ -95,15 +95,27 @@ public class DatabaseControl {
         return message;
     }
         
-    public String deleteRecord(String table, String attribute, String user){
+    public String deleteRecord(String table, String attributeType, String attribute, int attrCode){
         String message = "";
         try {
             Connection con = DriverManager.getConnection(host, userID, password );
             Statement stmt = con.createStatement();
             
-            stmt.executeUpdate("DELETE FROM " + table + " WHERE " + attribute + " = '" + user + "'");
-            System.out.println("DELETE FROM " + table + " WHERE " + attribute + " = '" + user + "'");
-            message = "SQL query:\"DELETE FROM " + table + " WHERE " + attribute + " = '" + user + "'\" was successful.";
+            //AttributeCode == 0 means attributeType is a string. (or anything that would go in single quotes).
+            if (attrCode == 0){
+                stmt.executeUpdate("DELETE FROM " + table + " WHERE " + attributeType + " = '" + attribute + "'");
+                System.out.println("DELETE FROM " + table + " WHERE " + attributeType + " = '" + attribute + "'");
+                message = "SQL query:\"DELETE FROM " + table + " WHERE " + attributeType + " = '" + attribute + "'\" was successful.";
+            }
+            
+            //AtttributeCode == 1 means attributeType is a numeric.
+            else if (attrCode == 1){
+                int intAttribute = Integer.parseInt(attribute);
+                stmt.executeUpdate("DELETE FROM " + table + " WHERE " + attributeType + " = " + attribute);
+                System.out.println("DELETE FROM " + table + " WHERE " + attributeType + " = " + attribute);
+                message = "SQL query:\"DELETE FROM " + table + " WHERE " + attributeType + " = " + attribute + " was successful.";
+            
+            }
         }
         catch (SQLException err) {
             System.out.println( err.getMessage());

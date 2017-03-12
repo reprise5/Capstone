@@ -1,6 +1,8 @@
 package PuzzPak;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -69,7 +71,7 @@ public class Memorytiles2 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("6x6 Memory Game");
-        setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
         ScoreScreenLabel.setFont(new java.awt.Font("FreeSerif", 1, 14)); // NOI18N
@@ -787,7 +789,14 @@ public class Memorytiles2 extends javax.swing.JFrame {
                 showTileShape(i, type);
             }
         }
+        //carriage return
         System.out.println();
+        
+        //let the user see the board for a second.  Then they match by memory.
+        flashShapes();
+        
+        //if the user didn't want to post their score, jsut re-disable the button.
+        postScoreButton.setEnabled(false);
 
     }//GEN-LAST:event_startGameButtonActionPerformed
 
@@ -1832,6 +1841,27 @@ public class Memorytiles2 extends javax.swing.JFrame {
             }
             count = 0;
         }        
+    }
+    
+        private void flashShapes(){
+        Thread thread = new Thread() {
+            public void run() {
+                try {
+                    for (int i = 0; i<= 35; i++){
+                        int type = tileControl.get6x6TileType(i);
+                        showTileShape(i, type);
+                    }
+                    Thread.sleep(1000);
+                    if (!DebugCheck.isSelected()){
+                        wipeBoard();
+                    }
+                } 
+                catch (InterruptedException ex) {
+                    Logger.getLogger(Memorytiles1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        thread.start(); 
     }
     //===============================================================================================
 

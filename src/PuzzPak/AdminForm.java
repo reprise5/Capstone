@@ -439,6 +439,7 @@ public class AdminForm extends javax.swing.JFrame {
         if(enteredPass.equals(passphrase)){
             int tableIndex = tablescombo1.getSelectedIndex();
             int attributeIndex = atributeCombobox.getSelectedIndex();
+            int attrCode = -1;
 
             attribute = attributeTextField.getText();
 
@@ -457,17 +458,21 @@ public class AdminForm extends javax.swing.JFrame {
 
             if (attributeIndex == 0){
                 attributeType = "username";
+                attrCode = 0;
             }
             else if (attributeIndex == 1){
                 attributeType = "score";
+                attrCode = 1;
             }
             else if (attributeIndex == 2){
                 attributeType = "date";
+                attrCode = 1;
             }
             else
                 attributeType = "game";
+            attrCode = 1;
 
-            message = database.deleteRecord(table, attributeType, attribute);
+            message = database.deleteRecord(table, attributeType, attribute, attrCode);
             adminConsole.setText(message);
         }
         else showPermissionDeniedDiag();

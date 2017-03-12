@@ -1155,15 +1155,15 @@ public class HangmanForm extends javax.swing.JFrame {
         if (username.equals("")) username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
         username = username.toLowerCase();
         
-        if(winsCounter == 0 && loseCounter == 0){
+        if(winsCounter == 0 && loseCounter == 0 || winsCounter == 0){
             score = 0;
-            System.out.println("ERROR");
+            System.out.println("Did not post 0 score.");
         }
         else {
             score = ( (double)winsCounter / ((double)winsCounter + (double)loseCounter) * 100);
+            database.addScore(username, score, "hangman");
         }
-        System.out.println(score);
-        database.addScore(username, score, "hangman");
+        postScoreButton.setEnabled(false);
     }//GEN-LAST:event_postScoreButtonActionPerformed
 
     //When the user presses a letter on the keypad, the game shoul react in this way:
