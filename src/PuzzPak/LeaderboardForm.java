@@ -360,7 +360,6 @@ public class LeaderboardForm extends javax.swing.JFrame {
     DefaultTableModel mt4x4Model;
     DefaultTableModel mt6x6Model;
     
-
 //    DefaultTableModel hangmanAlltimeModel   = (DefaultTableModel) hangmanAlltimeTable.getModel();
 //    DefaultTableModel hangmanTop10Model     = (DefaultTableModel) hangmanTop10Table.getModel();
 

@@ -1,8 +1,10 @@
 package PuzzPak;
 
+import static java.awt.image.ImageObserver.HEIGHT;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  * @author reprise
@@ -205,6 +207,12 @@ public class TikTakForm extends javax.swing.JFrame {
         postScoreButton.setBackground(new java.awt.Color(255, 255, 0));
         postScoreButton.setForeground(new java.awt.Color(0, 0, 0));
         postScoreButton.setText("Post");
+        postScoreButton.setEnabled(false);
+        postScoreButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postScoreButtonActionPerformed(evt);
+            }
+        });
 
         informationLabel.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
         informationLabel.setText("YOUR TURN");
@@ -357,11 +365,38 @@ public class TikTakForm extends javax.swing.JFrame {
             }
         }
         
+        /* UNCOMMENT THIS IF you want the reset button open on reset, instead of after a
+         * win or loss happens (which would change the score, so it's not the same as last time).
+         */
+        
+//        //Can they post their score yet?
+//        if (gamesCounter >= 3){
+//            postScoreButton.setEnabled(true);
+//        }
+        
         System.out.println("\nNEW GAME");
 //        for (int b = 0; b < board.length; b++){
 //            System.out.println(board[b]);
 //        }
     }//GEN-LAST:event_resetBoardButtonActionPerformed
+
+    private void postScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postScoreButtonActionPerformed
+    if (username.equals("")) username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
+        username = username.toLowerCase();
+        
+        if(p1Score == 0 && p2Score == 0){
+            score = 0;
+            System.out.println("ERROR");
+        }
+        else {
+            score = ( (double)p1Score / ((double)p1Score + (double)p2Score) * 100);
+        }
+        System.out.println(score);
+        database.addScore(username, score, "tiktak");
+        
+        postScoreButton.setEnabled(false);
+        
+    }//GEN-LAST:event_postScoreButtonActionPerformed
 
     //pass the baton to next player.
     public void nextPlayer(){
@@ -377,9 +412,9 @@ public class TikTakForm extends javax.swing.JFrame {
         }
     }
     
-    /**Pass player number, and Tile ID.
-     *Player (either 1 or 2), which decides if it's a nought or cross, 
-     *And ID is WHICH tile to change to a nought or cross. */
+    /** Pass player number, and Tile ID.
+     *  Player (either 1 or 2), which decides if it's a nought or cross, 
+     *  And ID is WHICH tile to change to a nought or cross. */
     private void changeIcon(int ID, int player){
         ArrayList<ImageIcon> pieces = new ArrayList();
         pieces.add(cross);      //Player 1's piece  HUMAN
@@ -449,11 +484,23 @@ public class TikTakForm extends javax.swing.JFrame {
                 informationLabel.setText("YOU WIN!");
                 p1Score++;
                 p1_score_screen.setText(Integer.toString(p1Score));
+                gamesCounter++;
+                
+                //Can they post their score?
+                if (gamesCounter >= 3){
+                    postScoreButton.setEnabled(true);
+                }
             }
             else {
                 informationLabel.setText("YOU LOSE!");
                 p2Score++;
                 p2_score_screen.setText(Integer.toString(p2Score));
+                gamesCounter++;
+                
+                //Can they post their score?
+                if (gamesCounter >= 3){
+                    postScoreButton.setEnabled(true);
+                }
             }
             //disable board
             //change to win-cross.png
@@ -484,6 +531,7 @@ public class TikTakForm extends javax.swing.JFrame {
             board[2][0] != '-' && board[2][1] != '-' && board[2][2] != '-'){
             informationLabel.setText("TIE GAME!");
             tie = true;
+            gamesCounter++;
         }
         return tie;
     }
@@ -588,6 +636,17 @@ public class TikTakForm extends javax.swing.JFrame {
         return closing;
     }
     
+    //Update Global username Score recieved from continue-as...
+    public boolean setUsername(String username){
+        if(!username.equals("")){
+            this.username = username;
+            System.out.println(username);
+            return true;
+            
+        }
+        else return false;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel boardPanel;
     private javax.swing.JLabel informationLabel;
@@ -613,18 +672,22 @@ public class TikTakForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //GLOBALS
-    int closing = 0;
-    private int player  = 0;                    //0=Human 1=COM
-    private boolean win = false;                //whether or not somebody won.
-    private int p1Score = 0;                    //player1's score
-    private int p2Score = 0;                    //player 2's score
-    private char[][] board = {                  //The Game Board as a multidim array.
+    int gamesCounter = 0;               //tracks # of games won for post rules.  Must play min 3 games to post score.  reset when form closed.
+    String username = "";               //Username of the person playing for posting to the leaderboard.
+    double score = 0.0;                 //The average wins vs losses to be sent to the database
+    private int player  = 0;            //0=Human 1=COM
+    private boolean win = false;        //whether or not somebody won.
+    private int p1Score = 0;            //player1's score
+    private int p2Score = 0;            //player 2's score
+    private char[][] board = {          //The Game Board as a multidim array.
         {'-','-','-'},
         {'-','-','-'},
         {'-','-','-'}
     };
+    DatabaseControl database = new DatabaseControl("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
     ArrayList<Character> pieces = new ArrayList<Character>(Arrays.asList('X','O'));
     ImageIcon cross     = new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/tiktak/cross.png"));
     ImageIcon nought    = new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/tiktak/nought.png"));
     ComputerPlayer com  = new ComputerPlayer(board, player);
+    
 }

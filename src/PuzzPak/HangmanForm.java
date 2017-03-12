@@ -482,6 +482,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         postScoreButton.setBackground(new java.awt.Color(255, 51, 51));
         postScoreButton.setText("POST SCORE");
+        postScoreButton.setEnabled(false);
         postScoreButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 postScoreButtonActionPerformed(evt);
@@ -858,7 +859,12 @@ public class HangmanForm extends javax.swing.JFrame {
         //get user requested difficulty. index 0 is easy, index 1 is medium, index 2 is hard.
         difficulty = DifficultyCombobox.getSelectedIndex();
         System.out.println("\ndifficulty index: " + difficulty );
-
+        
+        //Can they post their score yet?
+        if (gamesCounter >= 3){
+            postScoreButton.setEnabled(true);
+        }
+            
         if (difficulty == 0){
             //easy game started
 
@@ -915,6 +921,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
             hangScreen.setIcon(Winner);
             System.out.println("*WIN by text box response*");
+            gamesCounter++;
         }
         else{
             //wrong response, but game isn't over. remove a chance left.
@@ -1234,6 +1241,9 @@ public class HangmanForm extends javax.swing.JFrame {
                 //update the losses counter and screen
                 loseCounter++;
                 LossesScreen.setText(Integer.toString(loseCounter));
+                
+                gamesCounter++;     //for posting rules.
+                System.out.println("Games played: " + gamesCounter);
                 break;
         }
     }
@@ -1576,6 +1586,8 @@ public class HangmanForm extends javax.swing.JFrame {
         if (win){
             winsCounter++;
             WinsScreen.setText(Integer.toString(winsCounter));
+            System.out.println("Games Played: " + gamesCounter);
+            gamesCounter++;     //for posting rules.
         }
         return win;
     }
@@ -1610,6 +1622,18 @@ public class HangmanForm extends javax.swing.JFrame {
         Zbutton.setEnabled(false);
         GuessEnterButton.setEnabled(false);
         GuessWordBox.setEnabled(false);
+    }
+    
+    //Reset the game data so that it's a new Game-Day.  they must play at least 3 games to score.
+    public void resetPostRule(){
+        gamesCounter = 0;
+        postScoreButton.setEnabled(false);
+        
+        loseCounter = 0;
+        LossesScreen.setText(Integer.toString(loseCounter));
+
+        winsCounter = 0;
+        WinsScreen.setText(Integer.toString(winsCounter));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1696,6 +1720,7 @@ public class HangmanForm extends javax.swing.JFrame {
     int winsCounter = 0;            //tracks/tallies wins
     int loseCounter = 0;            //tracks/tallies losses
     int roundCounter = 0;           //Keeps track of how many games were played (won or lost, resets don't count).
+    int gamesCounter = 0;           //tracks # of games won for post rules.  Must play min 3 games to post score.  reset when form closed.
     
     //Declaring icons used in hangScreen component.
     ImageIcon Post   = new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/hangman/post.png"));

@@ -21,6 +21,7 @@ public class MainMenuForm extends javax.swing.JFrame {
             public void windowClosing(WindowEvent e) {
                 //call reset methods.
                 System.out.println("Resetting Hangman Post Rules...");
+                hangman.resetPostRule();
             }
         });  
         initComponents();
@@ -50,7 +51,7 @@ public class MainMenuForm extends javax.swing.JFrame {
         viewLeaderboardMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         adminCornerMenuItem = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PUZZPAK - play, score, win!");
@@ -147,7 +148,7 @@ public class MainMenuForm extends javax.swing.JFrame {
 
         jMenu2.setText("Help");
 
-        adminCornerMenuItem.setText("Admin's Corner");
+        adminCornerMenuItem.setText("Settings");
         adminCornerMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adminCornerMenuItemActionPerformed(evt);
@@ -155,8 +156,13 @@ public class MainMenuForm extends javax.swing.JFrame {
         });
         jMenu2.add(adminCornerMenuItem);
 
-        jMenu5.setText("About...");
-        jMenu2.add(jMenu5);
+        aboutMenuItem.setText("About...");
+        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu2.add(aboutMenuItem);
 
         jMenuBar1.add(jMenu2);
 
@@ -222,12 +228,51 @@ public class MainMenuForm extends javax.swing.JFrame {
     private void tikTakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tikTakButtonActionPerformed
         //TikTak and Hangman have best-out-of-3-or-more post rules.  They both reset on close.
         //TIk-Tak windowlistener is in TikTakMain class, or the tikTak object ccreated on this form. not here
-        try {
-            tiktak.run();
-        } 
-        catch (InterruptedException ex) {
-            Logger.getLogger(MainMenuForm.class.getName()).log(Level.SEVERE, null, ex);
-        }     
+//        try {
+//            tiktak.run();
+//        } 
+//        catch (InterruptedException ex) {
+//            Logger.getLogger(MainMenuForm.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+
+        /* Create new thread to prevent hangup */
+        Thread thread = new Thread(username) {
+            public void run() {
+                /* create a new form and open it. */
+                TikTakForm game = new TikTakForm();
+                game.setUsername(username);
+                
+                //TikTak and Hangman have best-out-of-3-or-more post rules, which uses a windowListener.
+                game.addWindowListener(new WindowAdapter(){
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        int num = windowClosingSwitch(1);
+                        System.out.println("Resetting Tik-Tak Post Rules...");
+                    }
+                });
+                game.setVisible(true);
+                
+                /* keep track of the game */
+                do{
+                    if (game.getPlayer() == 1){
+                        try {
+                            Thread.sleep(1100);
+                        } 
+                        catch (InterruptedException ex) {
+                            Logger.getLogger(TikTakForm.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                        win = game.checkWin2();
+                        tie = game.checkTie();
+
+                        if (!tie && !win){
+                            game.playComputer();
+                        }
+                    }
+                } while(windowClosingSwitch(0) == 0);
+            }
+        };
+        thread.start();
     }//GEN-LAST:event_tikTakButtonActionPerformed
 
     //Launch Memory Tiles 4x4 from the main menu
@@ -260,33 +305,54 @@ public class MainMenuForm extends javax.swing.JFrame {
     }//GEN-LAST:event_adminCornerMenuItemActionPerformed
 
     private void continueAsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueAsButtonActionPerformed
-            try{
-                //JOptionPane.showInputDialog(rootPane, "Enter your username", "Who are you?", HEIGHT, who, null, DISPOSE_ON_CLOSE);
-                username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
-                hangman.setUsername(username);
-                smallMT.setUsername(username);
-                largMT.setUsername(username);
-                //tiktak.setUsername(username);
-                loggedInAsLabel.setText("Logged In As: " + username);
-                
-                if("".equals(username)){
-                    username = "";
-                    loggedInAsLabel.setText("Not logged in.");
-                }
-            }
-            catch(NullPointerException e){
-                System.out.println(e.getMessage());
-                loggedInAsLabel.setText("Not logged in.");
+        try{
+            //JOptionPane.showInputDialog(rootPane, "Enter your username", "Who are you?", HEIGHT, who, null, DISPOSE_ON_CLOSE);
+            username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
+            hangman.setUsername(username);
+            smallMT.setUsername(username);
+            largMT.setUsername(username);
+            //tiktak gets the username when the form is opened. (it's in a seperate thread)
+            
+            loggedInAsLabel.setText("Logged In As: " + username);
+
+            if("".equals(username)){
                 username = "";
+                loggedInAsLabel.setText("Not logged in.");
             }
+        }
+        catch(NullPointerException e){
+            System.out.println(e.getMessage());
+            loggedInAsLabel.setText("Not logged in.");
+            username = "";
+        }
     }//GEN-LAST:event_continueAsButtonActionPerformed
 
+    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aboutMenuItemActionPerformed
+
+    //WindowClosing will pass a 1 to signify it's closing, to end do-while loop.
+    //this probably doesn't work as intended.
+    public static int windowClosingSwitch(int num){
+        int numb = 0;
+        System.out.print("");
+        if (num == 0){
+            //IGNORE THE 0 AT ALL COSTS
+            return numb;
+        }
+        else{
+            System.out.println("Close Signal Recieved.");
+            numb = num;
+            return numb;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem HangmanMenuItem;
     private javax.swing.JButton MemoryTiles6x6Button;
     private javax.swing.JMenuItem Memorytiles4x4MenuItem;
     private javax.swing.JMenuItem TiktakMenuItem;
+    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem adminCornerMenuItem;
     private javax.swing.JButton continueAsButton;
     private javax.swing.JButton hangmanButton;
@@ -294,7 +360,6 @@ public class MainMenuForm extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -318,7 +383,6 @@ public class MainMenuForm extends javax.swing.JFrame {
     HangmanForm     hangman      = new HangmanForm();
     Memorytiles1    smallMT      = new Memorytiles1();
     Memorytiles2    largMT       = new Memorytiles2();
-    TiktakMain      tiktak       = new TiktakMain();
     
     /* other forms */
     AdminForm       admin        = new AdminForm();

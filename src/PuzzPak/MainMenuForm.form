@@ -77,17 +77,20 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="adminCornerMenuItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Admin&apos;s Corner"/>
+                <Property name="text" type="java.lang.String" value="Settings"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adminCornerMenuItemActionPerformed"/>
               </Events>
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="jMenu5">
+            <MenuItem class="javax.swing.JMenuItem" name="aboutMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="About..."/>
               </Properties>
-            </Menu>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aboutMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>

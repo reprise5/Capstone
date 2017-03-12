@@ -29,6 +29,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="refreshTableButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="adminTabbedPane" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="rootLoginLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="rootPasswordField" min="-2" pref="123" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="rootLoginButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -39,8 +48,14 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="refreshTableButton" min="-2" pref="48" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="adminTabbedPane" pref="446" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <Component id="adminTabbedPane" pref="434" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="rootLoginButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rootPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rootLoginLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -117,89 +132,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="deletefromLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="insertintoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="tablesCombo2" pref="213" max="32767" attributes="0"/>
-                          <Component id="tablescombo1" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="usernameLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="whereLabel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="atributeCombobox" min="-2" pref="105" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="equalsLabel1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="syntaxLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="attributeTextField" min="-2" pref="113" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="usernameTextfield" min="-2" pref="85" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="syntaxLabel2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                              <Component id="scoreLabel" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                                              <Component id="gameLabel" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="scoreTextfield" min="-2" pref="58" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="syntaxLabel3" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                                              <Component id="gameCombobox" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="syntaxLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="executeDeleteFrom" min="-2" max="-2" attributes="0"/>
-                                  <Component id="executeInsertInto" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Component id="consoleLabel" min="-2" pref="722" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="41" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="freehandQueryLabel" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="freehandQueryTextbox" min="-2" pref="650" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="executefreeHand" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -220,6 +156,71 @@
                                   <Component id="dumpAllButton" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="deletefromLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="insertintoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="tablesCombo2" pref="213" max="32767" attributes="0"/>
+                                          <Component id="tablescombo1" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="valuesLabel" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="usernameTextfield" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                                                  <Component id="usernameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="scoreTextfield" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                                                      <Component id="scoreLabel" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                                                      <Component id="gameLabel" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="gameCombobox" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="executeInsertInto" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="whereLabel1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="atributeCombobox" min="-2" pref="105" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="equalsLabel1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="attributeTextField" max="32767" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="executeDeleteFrom" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Component id="freehandQueryLabel" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="freehandQueryTextbox" min="-2" pref="619" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="executefreeHand" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -228,55 +229,33 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="deletefromLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tablescombo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="insertintoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tablesCombo2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="23" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                      <Component id="whereLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="atributeCombobox" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="attributeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="equalsLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="executeDeleteFrom" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="syntaxLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="syntaxLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="syntaxLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="syntaxLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="executeInsertInto" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="usernameTextfield" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="scoreTextfield" min="-2" max="-2" attributes="0"/>
-                                  <Component id="gameCombobox" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="usernameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="gameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="scoreLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="deletefromLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tablescombo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="whereLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="atributeCombobox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="equalsLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="attributeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="executeDeleteFrom" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="insertintoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tablesCombo2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="scoreTextfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="gameCombobox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="executeInsertInto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="valuesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="usernameTextfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="scoreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="gameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="usernameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="freehandQueryLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -289,7 +268,7 @@
                       <Component id="consoleLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="adminConsole" min="-2" pref="110" max="-2" attributes="0"/>
-                      <EmptySpace pref="19" max="32767" attributes="0"/>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="dumpHangmanButon" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="DumpTIktakButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -341,7 +320,7 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="cc" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Dump All Records"/>
+                <Property name="text" type="java.lang.String" value=" Alle Datens&#xe4;tze l&#xf6;schen"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dumpAllButtonActionPerformed"/>
@@ -448,29 +427,9 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="syntaxLabel1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="(&apos;"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="syntaxLabel2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&apos; ,"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="syntaxLabel3">
-              <Properties>
-                <Property name="text" type="java.lang.String" value=", &apos;"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="syntaxLabel4">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&apos;)"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="executeDeleteFrom">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Execute"/>
+                <Property name="text" type="java.lang.String" value="ausf&#xfc;hren"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="executeDeleteFromActionPerformed"/>
@@ -478,8 +437,11 @@
             </Component>
             <Component class="javax.swing.JButton" name="executeInsertInto">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Execute"/>
+                <Property name="text" type="java.lang.String" value="ausf&#xfc;hren"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="executeInsertIntoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator1">
             </Component>
@@ -526,7 +488,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="executefreeHand">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Execute"/>
+                <Property name="text" type="java.lang.String" value="ausf&#xfc;hren"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="executefreeHandActionPerformed"/>
@@ -536,18 +498,19 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Insert Key"/>
               </Properties>
-              <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="dumpAllKeyItemStateChanged"/>
-                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="dumpAllKeyStateChanged"/>
-              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="valuesLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="VALUES"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="debugmodePanel">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Enable Universal Debug Mode">
-                <Property name="tabTitle" type="java.lang.String" value="Enable Universal Debug Mode"/>
+              <JTabbedPaneConstraints tabName="Database Settings">
+                <Property name="tabTitle" type="java.lang.String" value="Database Settings"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -555,15 +518,100 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="786" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="saveDBconfigButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="passwordLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="passwordTextField" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="hostLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="usernameLabel2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="hostTextField" pref="312" max="32767" attributes="0"/>
+                                  <Component id="usernameTextField" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="152" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="420" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace pref="181" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="hostTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="hostLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="usernameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="usernameLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="passwordTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="passwordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
+                      <Component id="saveDBconfigButton" min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JTextField" name="usernameTextField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="operator"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="passwordTextField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="westfield"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="hostTextField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jdbc:derby://localhost:1527/PPleaderboard"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="usernameLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Username"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="hostLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Host"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="passwordLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Password"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="saveDBconfigButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Save Configuration"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveDBconfigButtonActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
         </Container>
       </SubComponents>
     </Container>
@@ -575,11 +623,26 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="*==== R E F R E S H    T A B L E ====*"/>
+        <Property name="text" type="java.lang.String" value="=== Datenbanktabelle aktualisieren ==="/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshTableButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="rootLoginButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Log-In"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rootLoginButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="rootLoginLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Root Login"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="rootPasswordField">
     </Component>
   </SubComponents>
 </Form>

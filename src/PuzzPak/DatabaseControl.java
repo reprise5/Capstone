@@ -145,4 +145,20 @@ public class DatabaseControl {
         
         return message;
     }
+    
+    
+    //
+    public void setDBhost(String host){
+        this.host = host;
+    }
+    
+    // "
+    public void getDBusername(String userID){
+        this.userID = userID;
+    }
+    
+    // "
+    public void getDBpassword(String password){
+        this.password = password;
+    }
 }
