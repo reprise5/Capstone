@@ -1152,18 +1152,31 @@ public class HangmanForm extends javax.swing.JFrame {
 
     //Post score to HANGMANALLTIMETABLE.
     private void postScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postScoreButtonActionPerformed
-        if (username.equals("")) username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
-        username = username.toLowerCase();
-        
-        if(winsCounter == 0 && loseCounter == 0 || winsCounter == 0){
-            score = 0;
-            System.out.println("Did not post 0 score.");
+        try{
+            //if no username set, ask:
+            if (username.equals("")){
+                username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
+                username = username.toLowerCase();
+                
+                //if the score amounts to 0, do not post it.
+                if(winsCounter == 0 && loseCounter == 0 || winsCounter == 0){
+                    score = 0;
+                    System.out.println("Did not post 0 score.");
+                }
+                
+                //then, if the user DID set a username, we can calc & post score.
+                else if (!username.equals("")) {
+                    score = ( (double)winsCounter / ((double)winsCounter + (double)loseCounter) * 100);
+                    database.addScore(username, score, "hangman");
+                }
+            }
         }
-        else {
-            score = ( (double)winsCounter / ((double)winsCounter + (double)loseCounter) * 100);
-            database.addScore(username, score, "hangman");
+        catch (NullPointerException ex){
+            System.out.println(ex.getMessage());
         }
-        postScoreButton.setEnabled(false);
+        finally{
+            postScoreButton.setEnabled(false);
+        }
     }//GEN-LAST:event_postScoreButtonActionPerformed
 
     //When the user presses a letter on the keypad, the game shoul react in this way:

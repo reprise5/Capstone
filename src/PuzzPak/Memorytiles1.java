@@ -419,7 +419,7 @@ public class Memorytiles1 extends javax.swing.JFrame {
         //let the user see the board for a second.  Then they match by memory.
         flashShapes();
         
-        //if the user didn't want to post their score, jsut re-disable the button.
+        //if the user didn't want to post their score, just re-disable the button.
         postScoreButton.setEnabled(false);
     }//GEN-LAST:event_startGameButtonActionPerformed
 
@@ -440,7 +440,9 @@ public class Memorytiles1 extends javax.swing.JFrame {
         
         System.out.print("1,2 -- ");
         type = tileControl.get4x4TileType(ID);
-        buttonPress(ID, type);
+        buttonPress(ID, type);//        System.out.println("========================\n"
+//                 + "*** 4 x 4  C L O S E ***\n"
+//                 + "========================");
     }//GEN-LAST:event_Tile12ActionPerformed
 
     //Tile 1,3 | ID 2 - Press
@@ -585,9 +587,6 @@ public class Memorytiles1 extends javax.swing.JFrame {
 
     //File>Quit | Reset the board as if it had never been opened, and then close it.  doesn't quit program.
     private void QuitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitMenuItemActionPerformed
-//        System.out.println("========================\n"
-//                 + "*** 4 x 4  C L O S E ***\n"
-//                 + "========================");
         resetBoardMenuItemActionPerformed(evt);
         this.dispose();
     }//GEN-LAST:event_QuitMenuItemActionPerformed
@@ -628,7 +627,7 @@ public class Memorytiles1 extends javax.swing.JFrame {
         buttonEnabledSwitch(false, 13);
         buttonEnabledSwitch(false, 14);
         buttonEnabledSwitch(false, 15);
-         postScoreButton.setEnabled(false);
+        postScoreButton.setEnabled(false);
         
         DebugCheck.setEnabled(false);
     }//GEN-LAST:event_resetBoardMenuItemActionPerformed
@@ -650,11 +649,21 @@ public class Memorytiles1 extends javax.swing.JFrame {
 
     //Post score to MEMORYT4X4ALLTIME table
     private void postScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postScoreButtonActionPerformed
-        if (username.equals("")) username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
-        username = username.toLowerCase();
-        database.addScore(username, score, "mg4x4");   
-        
-        postScoreButton.setEnabled(false);
+        try{
+            if (username.equals("")){
+                username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
+                username = username.toLowerCase();
+                if (!username.equals("")){
+                    database.addScore(username, score, "mg4x4");
+                }
+            }
+        }
+        catch (NullPointerException ex){
+            System.out.println(ex.getMessage());
+        }
+        finally{
+            postScoreButton.setEnabled(false);
+        }
     }//GEN-LAST:event_postScoreButtonActionPerformed
 
     //Update Global username Score recieved from continue-as...
@@ -665,7 +674,6 @@ public class Memorytiles1 extends javax.swing.JFrame {
         }
         else return false;
     }
-    //===================================OTHER DEFINED SUBROUTINES==================================
     
     // will display an icon on the button based on the shape_code that the button asks for prior to calling this sub.
     private void showTileShape(int ID, int type){
@@ -976,6 +984,7 @@ public class Memorytiles1 extends javax.swing.JFrame {
         }  
     }
     
+    //Shows the shapes to the player for a small duration of time, then trturns the buttons to blank again.
     private void flashShapes(){
         Thread thread = new Thread() {
             public void run() {

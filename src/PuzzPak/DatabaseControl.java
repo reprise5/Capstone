@@ -3,7 +3,6 @@ package PuzzPak;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -86,7 +85,7 @@ public class DatabaseControl {
             
             stmt.executeUpdate("INSERT INTO " + table + " VALUES ('" + user + "', " + score + ", '" + date +"', '" + game + "')");
             System.out.println("INSERT INTO " + table + " VALUES ('" + user + "', " + score + ", '" + date +"', '" + game + "')");
-            message = "SQL query:\"INSERT INTO " + table + " VALUES ('" + user + "', " + score + ", '" + date +"', '" + game + "')\" was successful";
+            message = "SQL query: \"INSERT INTO " + table + " VALUES ('" + user + "', " + score + ", '" + date +"', '" + game + "')\" was successful";
         }
         catch (SQLException err) {
             System.out.println( err.getMessage());
@@ -101,19 +100,20 @@ public class DatabaseControl {
             Connection con = DriverManager.getConnection(host, userID, password );
             Statement stmt = con.createStatement();
             
-            //AttributeCode == 0 means attributeType is a string. (or anything that would go in single quotes).
+            //AttributeCode == 0 means attributeType is followed by a String or item between ' quotes.
             if (attrCode == 0){
                 stmt.executeUpdate("DELETE FROM " + table + " WHERE " + attributeType + " = '" + attribute + "'");
                 System.out.println("DELETE FROM " + table + " WHERE " + attributeType + " = '" + attribute + "'");
-                message = "SQL query:\"DELETE FROM " + table + " WHERE " + attributeType + " = '" + attribute + "'\" was successful.";
+                message = "SQL query: \"DELETE FROM " + table + " WHERE " + attributeType + " = '" + attribute + "'\" was successful.";
             }
             
-            //AtttributeCode == 1 means attributeType is a numeric.
+            //AtttributeCode == 1 means attributeType is followed by a numeric attribute.
             else if (attrCode == 1){
                 int intAttribute = Integer.parseInt(attribute);
-                stmt.executeUpdate("DELETE FROM " + table + " WHERE " + attributeType + " = " + attribute);
-                System.out.println("DELETE FROM " + table + " WHERE " + attributeType + " = " + attribute);
-                message = "SQL query:\"DELETE FROM " + table + " WHERE " + attributeType + " = " + attribute + " was successful.";
+                
+                stmt.executeUpdate("DELETE FROM " + table + " WHERE " + attributeType + " = " + intAttribute);
+                System.out.println("DELETE FROM " + table + " WHERE " + attributeType + " = " + intAttribute);
+                message = "SQL query: \"DELETE FROM " + table + " WHERE " + attributeType + " = " + intAttribute + "\" was successful.";
             
             }
         }

@@ -466,12 +466,14 @@ public class AdminForm extends javax.swing.JFrame {
             }
             else if (attributeIndex == 2){
                 attributeType = "date";
-                attrCode = 1;
+                attrCode = 0;
             }
-            else
+            else{
                 attributeType = "game";
-            attrCode = 1;
+                attrCode = 0;
+            }
 
+            System.out.println("attr code is " + attrCode);
             message = database.deleteRecord(table, attributeType, attribute, attrCode);
             adminConsole.setText(message);
         }

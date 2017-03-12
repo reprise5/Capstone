@@ -802,9 +802,6 @@ public class Memorytiles2 extends javax.swing.JFrame {
 
     //desc="Reset the board as if it had never been opened, and then close it.  doesn't quit program."
     private void QuitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitButtonActionPerformed
-//        System.out.println("========================\n"
-//                         + "*** 6 x 6  C L O S E ***\n"
-//                         + "========================");
         wipeBoard();
         PrevID_Guess1 = 100;
         PrevID_Guess2 = 100;
@@ -1293,20 +1290,27 @@ public class Memorytiles2 extends javax.swing.JFrame {
 
     //File>Quit
     private void QuitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitMenuItemActionPerformed
-        System.out.println("========================\n"
-                 + "*** 6 x 6  C L O S E ***\n"
-                 + "========================");
         resetBoardMenuItemActionPerformed(evt);
         this.dispose();
     }//GEN-LAST:event_QuitMenuItemActionPerformed
 
     //Add score to MEMORYT6x6ALLTIME table.
     private void postScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postScoreButtonActionPerformed
-        if (username.equals("")) username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
-        username = username.toLowerCase();
-        database.addScore(username, score, "mg6x6");   
-        
-        postScoreButton.setEnabled(false);
+        try{
+            if (username.equals("")){
+                username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
+                username = username.toLowerCase();
+                if (!username.equals("")){
+                    database.addScore(username, score, "mg6x6");
+                }
+            }
+        }
+        catch (NullPointerException ex){
+            System.out.println(ex.getMessage());
+        }
+        finally{
+            postScoreButton.setEnabled(false);
+        }
     }//GEN-LAST:event_postScoreButtonActionPerformed
     
     //Update Global username Score recieved from continue-as...
@@ -1317,8 +1321,6 @@ public class Memorytiles2 extends javax.swing.JFrame {
         }
         else return false;
     }
-    
-    //====================================OTHER DEFINED SUBROUTINES==================================
     
     // will display an icon on the button based on the shape_code that the button asks for prior to calling this sub.
     private void showTileShape(int ID, int type){
@@ -1842,8 +1844,9 @@ public class Memorytiles2 extends javax.swing.JFrame {
             count = 0;
         }        
     }
-    
-        private void flashShapes(){
+   
+    //Shows the shapes to the player for a small duration of time, then trturns the buttons to blank again.
+    private void flashShapes(){
         Thread thread = new Thread() {
             public void run() {
                 try {
@@ -1851,7 +1854,7 @@ public class Memorytiles2 extends javax.swing.JFrame {
                         int type = tileControl.get6x6TileType(i);
                         showTileShape(i, type);
                     }
-                    Thread.sleep(1000);
+                    Thread.sleep(1200);
                     if (!DebugCheck.isSelected()){
                         wipeBoard();
                     }

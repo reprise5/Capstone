@@ -2,9 +2,6 @@ package PuzzPak;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import static java.awt.image.ImageObserver.WIDTH;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -259,7 +256,7 @@ public class MainMenuForm extends javax.swing.JFrame {
                             Thread.sleep(1100);
                         } 
                         catch (InterruptedException ex) {
-                            Logger.getLogger(TikTakForm.class.getName()).log(Level.SEVERE, null, ex);
+                            System.out.println(ex.getMessage());
                         }
 
                         win = game.checkWin2();
