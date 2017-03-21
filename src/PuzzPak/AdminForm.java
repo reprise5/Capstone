@@ -26,8 +26,6 @@ public class AdminForm extends javax.swing.JFrame {
     private void initComponents() {
 
         adminTabbedPane = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        databaseTable = new javax.swing.JTable();
         queriesPanel = new javax.swing.JPanel();
         dumpHangmanButon = new javax.swing.JButton();
         DumpTIktakButton = new javax.swing.JButton();
@@ -58,6 +56,8 @@ public class AdminForm extends javax.swing.JFrame {
         executefreeHand = new javax.swing.JButton();
         dumpAllKey = new javax.swing.JCheckBox();
         valuesLabel = new javax.swing.JLabel();
+        recordListingScrollPane = new javax.swing.JScrollPane();
+        databaseTable = new javax.swing.JTable();
         debugmodePanel = new javax.swing.JPanel();
         usernameTextField = new javax.swing.JTextField();
         passwordTextField = new javax.swing.JTextField();
@@ -73,18 +73,6 @@ public class AdminForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Admin's Corner - PuzzPak Administrative Panel");
-
-        databaseTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Username", "Score", "Date Achieved", "Game"
-            }
-        ));
-        jScrollPane1.setViewportView(databaseTable);
-
-        adminTabbedPane.addTab("All Records", jScrollPane1);
 
         dumpHangmanButon.setText("Dump Hangman");
         dumpHangmanButon.addActionListener(new java.awt.event.ActionListener() {
@@ -314,6 +302,18 @@ public class AdminForm extends javax.swing.JFrame {
 
         adminTabbedPane.addTab("Execute Queries", queriesPanel);
 
+        databaseTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Username", "Score", "Date Achieved", "Game"
+            }
+        ));
+        recordListingScrollPane.setViewportView(databaseTable);
+
+        adminTabbedPane.addTab("All Records", recordListingScrollPane);
+
         usernameTextField.setText("operator");
 
         passwordTextField.setText("westfield");
@@ -338,30 +338,30 @@ public class AdminForm extends javax.swing.JFrame {
         debugmodePanelLayout.setHorizontalGroup(
             debugmodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, debugmodePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(619, Short.MAX_VALUE)
                 .addComponent(saveDBconfigButton)
                 .addContainerGap())
             .addGroup(debugmodePanelLayout.createSequentialGroup()
-                .addGap(237, 237, 237)
-                .addGroup(debugmodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(187, 187, 187)
+                .addGroup(debugmodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(debugmodePanelLayout.createSequentialGroup()
                         .addComponent(passwordLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(passwordTextField))
+                        .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(debugmodePanelLayout.createSequentialGroup()
                         .addGroup(debugmodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(hostLabel)
                             .addComponent(usernameLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(debugmodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(hostTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                            .addComponent(usernameTextField))))
-                .addContainerGap(152, Short.MAX_VALUE))
+                            .addComponent(hostTextField)
+                            .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         debugmodePanelLayout.setVerticalGroup(
             debugmodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(debugmodePanelLayout.createSequentialGroup()
-                .addContainerGap(181, Short.MAX_VALUE)
+                .addContainerGap(165, Short.MAX_VALUE)
                 .addGroup(debugmodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hostTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hostLabel))
@@ -373,7 +373,7 @@ public class AdminForm extends javax.swing.JFrame {
                 .addGroup(debugmodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passwordLabel))
-                .addGap(117, 117, 117)
+                .addGap(133, 133, 133)
                 .addComponent(saveDBconfigButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -484,7 +484,6 @@ public class AdminForm extends javax.swing.JFrame {
     private void refreshTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTableButtonActionPerformed
         try {
             Connection con = DriverManager.getConnection(host, userID, password);
-            System.out.println("Connection is OK!");
             Statement stmt = con.createStatement();
 
             //Clear ALL tables before refreshing.
@@ -711,30 +710,23 @@ public class AdminForm extends javax.swing.JFrame {
 
     //commit new Database connection information to memory
     private void saveDBconfigButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveDBconfigButtonActionPerformed
-        host = hostTextField.getText();
-        userID = usernameTextField.getText();
-        password = passwordTextField.getText();   
+        database.setDBhost(hostTextField.getText());
+        database.setDBusername(usernameTextField.getText());
+        database.setDBpassword(passwordTextField.getText());
+        System.out.println("Connecting to new database at: "
+                + "\nHOST:  " + hostTextField.getText()
+                + "\nUSER:  " + usernameTextField.getText()
+                + "\nPASS:  " + passwordTextField.getText()
+        );
     }//GEN-LAST:event_saveDBconfigButtonActionPerformed
 
     private void showPermissionDeniedDiag(){
         JOptionPane.showMessageDialog(rootPane,
                 "Root privelages required to perform that action.\n"
               + "Sie haben keine Berechtigung diese Aktion auszuführen.\n", 
-                "Permission Denied", WIDTH, null);   
-    }
-    //Allows other classes to get the new database connection variables that the user entered.
-    public String getDBhost(){
-        return host;
-    }
-    
-    // "
-    public String getDBusername(){
-        return userID;
-    }
-    
-    // "
-    public String getDBpassword(){
-        return password;
+                "Permission Denied", 
+                WIDTH, null
+        );   
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -763,11 +755,11 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JLabel hostLabel;
     private javax.swing.JTextField hostTextField;
     private javax.swing.JLabel insertintoLabel;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JTextField passwordTextField;
     private javax.swing.JPanel queriesPanel;
+    private javax.swing.JScrollPane recordListingScrollPane;
     private javax.swing.JButton refreshTableButton;
     private javax.swing.JButton rootLoginButton;
     private javax.swing.JLabel rootLoginLabel;

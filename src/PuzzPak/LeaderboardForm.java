@@ -13,26 +13,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class LeaderboardForm extends javax.swing.JFrame {
 
-    public LeaderboardForm(String userID, String password, String host) {
-        this.userID = userID;
-        this.password = password;
-        this.host = host;
+    public LeaderboardForm(/*String userID, String password, String host*/) {
+//        this.userID = userID;
+//        this.password = password;
+//        this.host = host;
         initComponents();
     }
     
     //populates leaderboardform's jTables with results from the database.  Will populate every time the form is called.
-    public void populate(String userID, String password, String host){
+    public void populate(){
         try {
-            Connection con = DriverManager.getConnection(host, userID, password);
-            System.out.println("Connection is OK!");
+            Connection con = DriverManager.getConnection(database.getDBhost(), database.getDBusername(), database.getDBpassword());
             Statement stmt = con.createStatement();
             
-//            stmt.executeUpdate("INSERT INTO HANGMANALLTIME VALUES ('Reprise', 90.0, '2017-02-24', 'hangman')");
-//            stmt.executeUpdate("INSERT INTO HANGMANALLTIME VALUES ('Tetra', 53.0, '2017-02-25', 'hangman')");
-//            stmt.executeUpdate("DELETE FROM HANGMANALLTIME WHERE USERNAME = 'Reprise'");
-//            stmt.executeUpdate("DELETE FROM HANGMANALLTIME WHERE USERNAME = 'Tetra'");
-            
-            //PRINT OUT HANGMANALLTIME RESULTSET TO CONSOLE.
+//            PRINT OUT HANGMANALLTIME RESULTSET TO CONSOLE.
 //            ResultSet rs = stmt.executeQuery("SELECT * FROM HANGMANALLTIME");
 //            rsmd = rs.getMetaData();
 //            columnsNumber = rsmd.getColumnCount();
@@ -69,10 +63,17 @@ public class LeaderboardForm extends javax.swing.JFrame {
                     }
                 }
                 //memorytiles 6x6 all-time
-                rowNo = mt4x4Model.getRowCount();
+                rowNo = mt6x6Model.getRowCount();
                 if (rowNo > 0){
                     for (int i = rowNo - 1; i >= 0; i--) {
-                        mt4x4Model.removeRow(i);
+                        mt6x6Model.removeRow(i);
+                    }
+                }
+                //players table
+                rowNo = playersModel.getRowCount();
+                if (rowNo > 0){
+                    for (int i = rowNo - 1; i >= 0; i--) {
+                        playersModel.removeRow(i);
                     }
                 }
             }
@@ -149,10 +150,29 @@ public class LeaderboardForm extends javax.swing.JFrame {
                 mt6x6Model.addRow(records);
             }
             MT6x6AlltimeTable.setModel(mt6x6Model);
+            
+            //U P D A T E   P L A Y E R S   J T A B L E
+            String [] playerColumnsName = {"Username","Hangman","Tik-Tak","MemoryTiles 4x4","MemoryTiles 6x6"};
+            playersModel = (DefaultTableModel) playersTable.getModel();
+            playersModel.setColumnIdentifiers(playerColumnsName);
+
+            rs = stmt.executeQuery("SELECT * FROM PLAYER");
+
+            rsmd = rs.getMetaData();
+            colNo = rsmd.getColumnCount();
+            while(rs.next()){
+                Object[] records = new Object[colNo];
+                for(int i = 0; i < colNo; i++){
+                    records[i] = rs.getString(i + 1);
+                }
+                playersModel.addRow(records);
+            }
+            playersTable.setModel(playersModel);
         }
         catch (SQLException err) {
             System.out.println( err.getMessage());
         }
+        
     }    
 
     @SuppressWarnings("unchecked")
@@ -177,8 +197,8 @@ public class LeaderboardForm extends javax.swing.JFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         MT6x6Top10Table = new javax.swing.JTable();
         jScrollPane9 = new javax.swing.JScrollPane();
-        usersTable = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        playersTable = new javax.swing.JTable();
+        LeaderboardsBannerLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("<><>Leaderboards<><>");
@@ -191,7 +211,15 @@ public class LeaderboardForm extends javax.swing.JFrame {
             new String [] {
                 "Username", "Score", "Date", "Game"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         hangmanAlltimeTable.setSelectionBackground(new java.awt.Color(0, 204, 255));
         jScrollPane1.setViewportView(hangmanAlltimeTable);
 
@@ -204,7 +232,15 @@ public class LeaderboardForm extends javax.swing.JFrame {
             new String [] {
                 "Username", "Score", "Date", "Game"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tiktakAlltimeTable);
 
         leaderboardTabbedPane.addTab("Tik-Tak (All-Time)", jScrollPane2);
@@ -216,7 +252,15 @@ public class LeaderboardForm extends javax.swing.JFrame {
             new String [] {
                 "Username", "Score", "Date", "Game"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(MT4x4AlltimeTable);
 
         leaderboardTabbedPane.addTab("MemoryTiles 4x4 (All-Time)", jScrollPane3);
@@ -228,7 +272,15 @@ public class LeaderboardForm extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane4.setViewportView(MT6x6AlltimeTable);
 
         leaderboardTabbedPane.addTab("MemoryTIles 6x6 (All-Time)", jScrollPane4);
@@ -281,22 +333,27 @@ public class LeaderboardForm extends javax.swing.JFrame {
 
         leaderboardTabbedPane.addTab("MemoryTIles 6x6 (Top-10)", jScrollPane8);
 
-        usersTable.setModel(new javax.swing.table.DefaultTableModel(
+        playersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Username", "Hangman", "Tik-Tak", "MemoryTiles 4x4", "MemotyTiles 6x6"
             }
-        ));
-        jScrollPane9.setViewportView(usersTable);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane9.setViewportView(playersTable);
 
         leaderboardTabbedPane.addTab("Players", jScrollPane9);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/main-menu/leaderboardBanner.png"))); // NOI18N
+        LeaderboardsBannerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/main-menu/leaderboardBanner.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -306,14 +363,14 @@ public class LeaderboardForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(leaderboardTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE))
+                    .addComponent(LeaderboardsBannerLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LeaderboardsBannerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(leaderboardTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
                 .addGap(6, 6, 6))
@@ -323,13 +380,13 @@ public class LeaderboardForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LeaderboardsBannerLabel;
     private javax.swing.JTable MT4x4AlltimeTable;
     private javax.swing.JTable MT4x4Top10Table;
     private javax.swing.JTable MT6x6AlltimeTable;
     private javax.swing.JTable MT6x6Top10Table;
     private javax.swing.JTable hangmanAlltimeTable;
     private javax.swing.JTable hangmanTop10Table;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -340,16 +397,13 @@ public class LeaderboardForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane leaderboardTabbedPane;
+    private javax.swing.JTable playersTable;
     private javax.swing.JTable tiktakAlltimeTable;
     private javax.swing.JTable tiktakTop10Table;
-    private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
 
     DatabaseControl database = new DatabaseControl("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
     boolean connSuccess;
-    String host = "jdbc:derby://localhost:1527/PPleaderboard"; 
-    String userID = "operator";
-    String password = "westfield";
     
     ResultSetMetaData rsmd;
     ResultSet rs;
@@ -359,6 +413,7 @@ public class LeaderboardForm extends javax.swing.JFrame {
     DefaultTableModel tiktakModel;
     DefaultTableModel mt4x4Model;
     DefaultTableModel mt6x6Model;
+    DefaultTableModel playersModel;
     
 //    DefaultTableModel hangmanAlltimeModel   = (DefaultTableModel) hangmanAlltimeTable.getModel();
 //    DefaultTableModel hangmanTop10Model     = (DefaultTableModel) hangmanTop10Table.getModel();

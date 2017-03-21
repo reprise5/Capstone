@@ -12,7 +12,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
 
     //init
-    public HangmanForm() {
+    public HangmanForm(){
         initComponents();
     }
     //=================================Generated=Code================================================
@@ -1152,31 +1152,24 @@ public class HangmanForm extends javax.swing.JFrame {
 
     //Post score to HANGMANALLTIMETABLE.
     private void postScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postScoreButtonActionPerformed
-        try{
-            //if no username set, ask:
-            if (username.equals("")){
-                username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
-                username = username.toLowerCase();
-                
-                //if the score amounts to 0, do not post it.
-                if(winsCounter == 0 && loseCounter == 0 || winsCounter == 0){
-                    score = 0;
-                    System.out.println("Did not post 0 score.");
-                }
-                
-                //then, if the user DID set a username, we can calc & post score.
-                else if (!username.equals("")) {
-                    score = ( (double)winsCounter / ((double)winsCounter + (double)loseCounter) * 100);
-                    database.addScore(username, score, "hangman");
-                }
+        //if no username set, they did not log-in.  Don't post.
+        if (!username.equals("")){
+            //if the score amounts to 0, do not post it.
+            if(winsCounter == 0 && loseCounter == 0 || winsCounter == 0){
+                score = 0;
+                System.out.println("Did not post 0 score.");
+            }
+
+            //then, if the user DID set a username, we can calc & post score.
+            else if (!username.equals("")) {
+                score = ( (double)winsCounter / ((double)winsCounter + (double)loseCounter) * 100);
+
+                //add the score to its correct table, then update the player's account
+                database.addScore(username, score, "hangman");
+                database.updatePlayerAccount(username, score, "hangman"); //<-- the query in here looks ok but the tuple is not updated.
             }
         }
-        catch (NullPointerException ex){
-            System.out.println(ex.getMessage());
-        }
-        finally{
-            postScoreButton.setEnabled(false);
-        }
+        postScoreButton.setEnabled(false);
     }//GEN-LAST:event_postScoreButtonActionPerformed
 
     //When the user presses a letter on the keypad, the game shoul react in this way:

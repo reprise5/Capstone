@@ -27,7 +27,6 @@ public class DatabaseControl {
     
     // Try a connection.
     public boolean connect(){
-        System.out.println(userID + " " + password + " " + host);
         try {
             Connection con = DriverManager.getConnection(host, userID, password);
             return true;
@@ -77,6 +76,7 @@ public class DatabaseControl {
         return success;
     }
     
+    //Adding a record to a table in the database 
     public String addRecord(String table, String user, double score, String game){
         String message = "";
         try {
@@ -93,7 +93,8 @@ public class DatabaseControl {
         }
         return message;
     }
-        
+    
+    //Deleting record(s) from a table in the database    
     public String deleteRecord(String table, String attributeType, String attribute, int attrCode){
         String message = "";
         try {
@@ -124,6 +125,26 @@ public class DatabaseControl {
         return message;
     }
     
+    //will update player's score in the player's table for a gertain game.  Only saves the player's top score for a game.
+    public boolean updatePlayerAccount(String player, double score, String game){
+        String columnValue;
+        boolean success = false;
+        try {
+            Connection con = DriverManager.getConnection(host, userID, password );
+            Statement stmt = con.createStatement();
+            
+            //if game == hangman,
+            System.out.println("UPDATE PLAYER SET HANGMAN = 100 WHERE USERNAME = '" +player + "'");
+            stmt.executeUpdate("UPDATE PLAYER SET HANGMAN = 100 WHERE USERNAME = '" +player + "'");
+
+        }
+        catch (SQLException err) {
+            System.out.println( err.getMessage());
+            success = false;
+        }
+        return success;
+    }
+    
     //wipes the table passed.  pass '*' for all.
     public boolean wipeTable(String table){
         boolean succ = false;
@@ -140,6 +161,8 @@ public class DatabaseControl {
         }
         return succ;  
     }
+    
+    //Executing a freehand SQL query.
     public String executeQuery(String query){
         String message = "";
         try {
@@ -158,19 +181,36 @@ public class DatabaseControl {
         return message;
     }
     
-    
-    //
+    //Set new database Hostname
     public void setDBhost(String host){
-        this.host = host;
+        if (host != null)
+            this.host = host;
     }
     
-    // "
-    public void getDBusername(String userID){
-        this.userID = userID;
+    //Set new database Username
+    public void setDBusername(String userID){
+        if (userID != null)
+            this.userID = userID;
     }
     
-    // "
-    public void getDBpassword(String password){
-        this.password = password;
+    //Set new database Password
+    public void setDBpassword(String password){
+        if (password != null)
+            this.password = password;
+    }
+    
+    //Get current database Hostname
+    public String getDBhost(){
+        return host;
+    }
+    
+    //Get current database Username
+    public String getDBusername(){
+        return userID;
+    }
+    
+    //Get current database Password
+    public String getDBpassword(){
+        return password;
     }
 }

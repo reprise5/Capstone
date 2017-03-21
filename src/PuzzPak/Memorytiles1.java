@@ -440,9 +440,7 @@ public class Memorytiles1 extends javax.swing.JFrame {
         
         System.out.print("1,2 -- ");
         type = tileControl.get4x4TileType(ID);
-        buttonPress(ID, type);//        System.out.println("========================\n"
-//                 + "*** 4 x 4  C L O S E ***\n"
-//                 + "========================");
+        buttonPress(ID, type);
     }//GEN-LAST:event_Tile12ActionPerformed
 
     //Tile 1,3 | ID 2 - Press

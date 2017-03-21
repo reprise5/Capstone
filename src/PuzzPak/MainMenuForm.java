@@ -1,7 +1,12 @@
 package PuzzPak;
 
+import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -11,8 +16,6 @@ import javax.swing.JOptionPane;
 public class MainMenuForm extends javax.swing.JFrame {
     public MainMenuForm() {
         //TikTak and Hangman have best-out-of-3-or-more post rules, which uses a windowListener.
-        //TikTak Window listener: TiktakMain class (needs to be there to help handle infinite loop).
-        //Hangman Window listener: Below
         hangman.addWindowListener(new WindowAdapter(){
             @Override
             public void windowClosing(WindowEvent e) {
@@ -223,14 +226,6 @@ public class MainMenuForm extends javax.swing.JFrame {
 
     //Launch Tik-Tak (ticTacToe Game) from the Main Menu
     private void tikTakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tikTakButtonActionPerformed
-        //TikTak and Hangman have best-out-of-3-or-more post rules.  They both reset on close.
-        //TIk-Tak windowlistener is in TikTakMain class, or the tikTak object ccreated on this form. not here
-//        try {
-//            tiktak.run();
-//        } 
-//        catch (InterruptedException ex) {
-//            Logger.getLogger(MainMenuForm.class.getName()).log(Level.SEVERE, null, ex);
-//        } 
 
         /* Create new thread to prevent hangup */
         Thread thread = new Thread(username) {
@@ -289,13 +284,16 @@ public class MainMenuForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane,
                 "Failed to connect to the Leaderboards Database.\n"
               + "is it running?", 
-                "Database Error", 
-                WIDTH);
+                "Database Error", 0x1);
         } 
-        else leaderboards.populate("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
+        else leaderboards.populate();
         
     }//GEN-LAST:event_leaderboardsButtonActionPerformed
 
+    //when the user signs in, a username is created for them.
+    public void createAccount(String username){
+        
+    }
     //Launch ADMINFORM after typing in a passphrase.
     private void adminCornerMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminCornerMenuItemActionPerformed
         admin.setVisible(true);
@@ -303,7 +301,9 @@ public class MainMenuForm extends javax.swing.JFrame {
 
     private void continueAsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueAsButtonActionPerformed
         try{
-            //JOptionPane.showInputDialog(rootPane, "Enter your username", "Who are you?", HEIGHT, who, null, DISPOSE_ON_CLOSE);
+            Connection con = DriverManager.getConnection(database.getDBhost(), database.getDBusername(), database.getDBpassword());
+            Statement stmt = con.createStatement();
+            
             username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
             hangman.setUsername(username);
             smallMT.setUsername(username);
@@ -317,15 +317,21 @@ public class MainMenuForm extends javax.swing.JFrame {
                 loggedInAsLabel.setText("Not logged in.");
             }
         }
-        catch(NullPointerException e){
+        catch(SQLException | HeadlessException e){
             System.out.println(e.getMessage());
-            loggedInAsLabel.setText("Not logged in.");
-            username = "";
         }
     }//GEN-LAST:event_continueAsButtonActionPerformed
 
+    //Display a dialog with information about this project.
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(rootPane,
+                "                                    PuzzPak\n"
+              + "This is a Game Pack which provides 4 form games for you to play.\n"
+              + "Play and score in each game. See how you measure up to other players\n"
+              + "in the leaderboards: arcade style.  Source files can be found at:\n"
+              + "           https://github.com/reprise5/SeniorProject\n", 
+                "**About PUZZPAK**", WIDTH, null);
+        
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     //WindowClosing will pass a 1 to signify it's closing, to end do-while loop.
@@ -375,7 +381,7 @@ public class MainMenuForm extends javax.swing.JFrame {
     ImageIcon who = new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/main-menu/loginIcon.png"));
     
     /* Games */
-    LeaderboardForm leaderboards = new LeaderboardForm("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
+    LeaderboardForm leaderboards = new LeaderboardForm(/*"operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard"*/);
     DatabaseControl database     = new DatabaseControl("operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard");
     HangmanForm     hangman      = new HangmanForm();
     Memorytiles1    smallMT      = new Memorytiles1();
