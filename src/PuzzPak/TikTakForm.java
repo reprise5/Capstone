@@ -381,21 +381,21 @@ public class TikTakForm extends javax.swing.JFrame {
     }//GEN-LAST:event_resetBoardButtonActionPerformed
 
     private void postScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postScoreButtonActionPerformed
-    if (username.equals("")) username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
-        username = username.toLowerCase();
-        
-        if(p1Score == 0 && p2Score == 0){
-            score = 0;
-            System.out.println("ERROR");
+        if (username.equals("")){
+            JOptionPane.showMessageDialog(rootPane, "You must log in on the main page to post your score.", "Please log in", 1);
         }
         else {
             score = ( (double)p1Score / ((double)p1Score + (double)p2Score) * 100);
+            if(score != 0.0){
+                database.addScore(username, score, "tiktak");
+                database.updatePlayerAccount(username, score, "TIKTAK");
+                postScoreButton.setEnabled(false);
+            }
+            else {
+                System.out.println("Did not post 0 score.");
+                JOptionPane.showMessageDialog(rootPane, "You must achieve a score of higher than 0 to\n participate in the leaderboards.", "Score too low", 1);
+            }
         }
-        System.out.println(score);
-        database.addScore(username, score, "tiktak");
-        
-        postScoreButton.setEnabled(false);
-        
     }//GEN-LAST:event_postScoreButtonActionPerformed
 
     //pass the baton to next player.

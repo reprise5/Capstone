@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -229,6 +231,7 @@ public class MainMenuForm extends javax.swing.JFrame {
 
         /* Create new thread to prevent hangup */
         Thread thread = new Thread(username) {
+            @Override
             public void run() {
                 /* create a new form and open it. */
                 TikTakForm game = new TikTakForm();
@@ -304,17 +307,36 @@ public class MainMenuForm extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection(database.getDBhost(), database.getDBusername(), database.getDBpassword());
             Statement stmt = con.createStatement();
             
-            username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
+            username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", 3);
+            
             hangman.setUsername(username);
             smallMT.setUsername(username);
             largMT.setUsername(username);
-            //tiktak gets the username when the form is opened. (it's in a seperate thread)
+            //tiktak gets the username when the form is opened. (it's in a seperate thread, so we can't access it here.)
             
             loggedInAsLabel.setText("Logged In As: " + username);
 
-            if("".equals(username)){
-                username = "";
-                loggedInAsLabel.setText("Not logged in.");
+            //if username is null, say not logged in, and keep "invalid username" message up for a few seconds, revert back.  end of thread.
+            //else, make an account.
+            if(username == null || username.equals("")){
+                Thread thread = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            loggedInAsLabel.setText("INVALID USERNAME");
+                            Thread.sleep(1500);
+                            loggedInAsLabel.setText("Not logged in");
+                        } 
+                        catch (InterruptedException ex) {
+                            Logger.getLogger(MainMenuForm.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                };
+                thread.start();
+            }
+            else{
+                //handles account creation
+                database.addNewAccount(username);
             }
         }
         catch(SQLException | HeadlessException e){
@@ -374,11 +396,11 @@ public class MainMenuForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem viewLeaderboardMenuItem;
     // End of variables declaration//GEN-END:variables
 
-    //GLOBALS
-    String username = "";
-    boolean win;
-    boolean tie;
-    ImageIcon who = new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/main-menu/loginIcon.png"));
+    /* GLOBALS */
+    String username = "";   //Global Username
+    boolean win;            //For tik-Tak
+    boolean tie;            //for Tik-Tak
+    ImageIcon who = new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/main-menu/loginIcon.png")); //<-- Not using.
     
     /* Games */
     LeaderboardForm leaderboards = new LeaderboardForm(/*"operator", "westfield", "jdbc:derby://localhost:1527/PPleaderboard"*/);
@@ -388,6 +410,5 @@ public class MainMenuForm extends javax.swing.JFrame {
     Memorytiles2    largMT       = new Memorytiles2();
     
     /* other forms */
-    AdminForm       admin        = new AdminForm();
-    
+    AdminForm       admin        = new AdminForm();   
 }

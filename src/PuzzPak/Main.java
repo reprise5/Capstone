@@ -1,7 +1,6 @@
 package PuzzPak;
 
 /**
- *
  * @author reprise
  */
 public class Main {
@@ -24,5 +23,3 @@ public class Main {
         mainMenu.setVisible(true);   
     }
 }
-  
-

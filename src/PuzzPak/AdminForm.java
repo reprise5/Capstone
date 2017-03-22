@@ -396,7 +396,7 @@ public class AdminForm extends javax.swing.JFrame {
             }
         });
 
-        rootLoginLabel.setText("Root Login");
+        rootLoginLabel.setText("Admin Login");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -722,10 +722,10 @@ public class AdminForm extends javax.swing.JFrame {
 
     private void showPermissionDeniedDiag(){
         JOptionPane.showMessageDialog(rootPane,
-                "Root privelages required to perform that action.\n"
+                "Admin privelages required to perform that action.\n"
               + "Sie haben keine Berechtigung diese Aktion auszuführen.\n", 
                 "Permission Denied", 
-                WIDTH, null
+                0, null
         );   
     }
 

@@ -647,26 +647,23 @@ public class Memorytiles1 extends javax.swing.JFrame {
 
     //Post score to MEMORYT4X4ALLTIME table
     private void postScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postScoreButtonActionPerformed
-        try{
-            if (username.equals("")){
-                username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", HEIGHT);
-                username = username.toLowerCase();
-                if (!username.equals("")){
-                    database.addScore(username, score, "mg4x4");
-                }
-            }
+        if (username.equals("")){
+            JOptionPane.showMessageDialog(rootPane, "You must log in on the main page to post your score.", "Please log in", 1);
         }
-        catch (NullPointerException ex){
-            System.out.println(ex.getMessage());
-        }
-        finally{
+        if(score > 0){
+            database.addScore(username, score, "mg4x4");
+            database.updatePlayerAccount(username, score, "MT4X4");
             postScoreButton.setEnabled(false);
+        }
+        else {
+            System.out.println("Did not post 0 score");
+            JOptionPane.showMessageDialog(rootPane, "You must achieve a score of higher than 0 to\n participate in the leaderboards.", "Score too low", 1);
         }
     }//GEN-LAST:event_postScoreButtonActionPerformed
 
     //Update Global username Score recieved from continue-as...
     public boolean setUsername(String username){
-        if(!username.equals("")){
+        if(username != null){
             this.username = username;
             return true;
         }

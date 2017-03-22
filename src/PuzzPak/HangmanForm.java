@@ -15,7 +15,7 @@ public class HangmanForm extends javax.swing.JFrame {
     public HangmanForm(){
         initComponents();
     }
-    //=================================Generated=Code================================================
+    //=================================Generated=Code===========================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -865,40 +865,39 @@ public class HangmanForm extends javax.swing.JFrame {
             postScoreButton.setEnabled(true);
         }
             
-        if (difficulty == 0){
-            //easy game started
-
-            //shuffle the bag and pick a word
-            wordToGuess = game.doWordBag1();
-            System.out.println("Word: " + wordToGuess);
-
-            //Set up the guesser tiles.
-            wordToGuessLength = wordToGuess.length();
-            initializeTiles(wordToGuessLength);
-        }
-
-        else if (difficulty == 1){
-            //medium game started
-
-            //shuffle the bag and pick a word
-            wordToGuess = game.doWordBag2();
-            System.out.println("Word: " + wordToGuess);
-
-            //Set up the guesser tiles.
-            wordToGuessLength = wordToGuess.length();
-            initializeTiles(wordToGuessLength);
-        }
-
-        else if (difficulty == 2){
-            //hard game started
-
-            //shuffle the bag and pick a word
-            wordToGuess = game.doWordBag3();
-            System.out.println("Word: " + wordToGuess);
-
-            //Set up the guesser tiles.
-            wordToGuessLength = wordToGuess.length();
-            initializeTiles(wordToGuessLength);
+        switch (difficulty) {
+            case 0:
+                //easy game started
+                
+                //shuffle the bag and pick a word
+                wordToGuess = game.doWordBag1();
+                System.out.println("Word: " + wordToGuess);
+                //Set up the guesser tiles.
+                wordToGuessLength = wordToGuess.length();
+                initializeTiles(wordToGuessLength);
+                break;
+            case 1:
+                //medium game started
+                
+                //shuffle the bag and pick a word
+                wordToGuess = game.doWordBag2();
+                System.out.println("Word: " + wordToGuess);
+                //Set up the guesser tiles.
+                wordToGuessLength = wordToGuess.length();
+                initializeTiles(wordToGuessLength);
+                break;
+            case 2:
+                //hard game started
+                
+                //shuffle the bag and pick a word
+                wordToGuess = game.doWordBag3();
+                System.out.println("Word: " + wordToGuess);
+                //Set up the guesser tiles.
+                wordToGuessLength = wordToGuess.length();
+                initializeTiles(wordToGuessLength);
+                break;
+            default:
+                break;
         }
     }//GEN-LAST:event_startGameButtonActionPerformed
 
@@ -1153,23 +1152,25 @@ public class HangmanForm extends javax.swing.JFrame {
     //Post score to HANGMANALLTIMETABLE.
     private void postScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postScoreButtonActionPerformed
         //if no username set, they did not log-in.  Don't post.
-        if (!username.equals("")){
+        if (username.equals("")){
+            JOptionPane.showMessageDialog(rootPane, "You must log in on the main page to post your score.", "Please log in", 2);
+        }
+        else {
             //if the score amounts to 0, do not post it.
-            if(winsCounter == 0 && loseCounter == 0 || winsCounter == 0){
-                score = 0;
-                System.out.println("Did not post 0 score.");
-            }
-
-            //then, if the user DID set a username, we can calc & post score.
-            else if (!username.equals("")) {
+            if(winsCounter != 0 && loseCounter != 0 || winsCounter != 0){
                 score = ( (double)winsCounter / ((double)winsCounter + (double)loseCounter) * 100);
 
                 //add the score to its correct table, then update the player's account
                 database.addScore(username, score, "hangman");
-                database.updatePlayerAccount(username, score, "hangman"); //<-- the query in here looks ok but the tuple is not updated.
+                database.updatePlayerAccount(username, score, "HANGMAN");
+                postScoreButton.setEnabled(false);
+            }
+            else{
+                System.out.println("Did not post 0 score.");
+                postScoreButton.setEnabled(false);
+                JOptionPane.showMessageDialog(rootPane, "You must achieve a score higher than 0 to\n participate in the leaderboards.", "Score too low", 0); 
             }
         }
-        postScoreButton.setEnabled(false);
     }//GEN-LAST:event_postScoreButtonActionPerformed
 
     //When the user presses a letter on the keypad, the game shoul react in this way:
@@ -1208,7 +1209,7 @@ public class HangmanForm extends javax.swing.JFrame {
     
     //Update Global username Score recieved from continue-as...
     public boolean setUsername(String username){
-        if(!username.equals("")){
+        if(username != null){
             this.username = username;
             return true;
         }

@@ -101,6 +101,7 @@ public class DatabaseControl {
             Connection con = DriverManager.getConnection(host, userID, password );
             Statement stmt = con.createStatement();
             
+            
             //AttributeCode == 0 means attributeType is followed by a String or item between ' quotes.
             if (attrCode == 0){
                 stmt.executeUpdate("DELETE FROM " + table + " WHERE " + attributeType + " = '" + attribute + "'");
@@ -117,26 +118,60 @@ public class DatabaseControl {
                 message = "SQL query: \"DELETE FROM " + table + " WHERE " + attributeType + " = " + intAttribute + "\" was successful.";
             
             }
+            //if the user doesn't exist in any table, remove them from players.
+            //
+            //    
         }
         catch (SQLException err) {
-            System.out.println( err.getMessage());
+            System.out.println(err.getMessage());
             message = err.getMessage();
         }
         return message;
     }
     
-    //will update player's score in the player's table for a gertain game.  Only saves the player's top score for a game.
-    public boolean updatePlayerAccount(String player, double score, String game){
-        String columnValue;
-        boolean success = false;
+    //Add a new player to the database when they log in.  if they're already here, leave it be.
+    public boolean addNewAccount(String username){ 
+        boolean success;
+        
         try {
             Connection con = DriverManager.getConnection(host, userID, password );
             Statement stmt = con.createStatement();
             
-            //if game == hangman,
-            System.out.println("UPDATE PLAYER SET HANGMAN = 100 WHERE USERNAME = '" +player + "'");
-            stmt.executeUpdate("UPDATE PLAYER SET HANGMAN = 100 WHERE USERNAME = '" +player + "'");
+            stmt.executeUpdate("INSERT INTO PLAYER (USERNAME, HANGMAN, TIKTAK, MT4x4, MT6x6) VALUES ('" + username + "', 0.0 ,0.0 ,0.0 ,0.0 )");
+            System.out.println("INSERT INTO PLAYER (USERNAME, HANGMAN, TIKTAK, MT4x4, MT6x6) VALUES ('" + username + "', 0.0 ,0.0 ,0.0 ,0.0 )");
+            
+            success = true;
+        }
+        catch(SQLException err){
+            success = false;
+            //System.out.println(err.getMessage());
+            System.out.println("Account already exists");
+        }
+        return success;
+    }
+    
+    //will update player's score in the player's table for a gertain game.  Only saves the player's top score for a game.
+    public boolean updatePlayerAccount(String player, double score, String game){
+        boolean success = false;
+        try {
+            Connection con = DriverManager.getConnection(host, userID, password );
+            Statement stmt = con.createStatement();
 
+            //Update player table.  Set the value in the attribute (the game name) equal to the new score if the score for 
+            //the player in that game is greater than the score saved already.
+            System.out.println("\nUPDATE PLAYER\n" +
+                            "SET " + game + " = " + score + "\n" +
+                            "WHERE " + game + " IN (\n" +
+                            "    SELECT " + game + "\n" +
+                            "    FROM PLAYER\n" +
+                            "    WHERE USERNAME = '" + player + "' AND " + game + " < " + score + "\n" +
+                            ")");
+            stmt.executeUpdate("UPDATE PLAYER " +
+                            "SET " + game + " = " + score +
+                            "WHERE " + game + " IN (" +
+                            "    SELECT " + game +
+                            "    FROM PLAYER" +
+                            "    WHERE USERNAME = '" + player + "' AND " + game + " < " + score + ")");
         }
         catch (SQLException err) {
             System.out.println( err.getMessage());
@@ -145,7 +180,7 @@ public class DatabaseControl {
         return success;
     }
     
-    //wipes the table passed.  pass '*' for all.
+    //wipes the table passed.
     public boolean wipeTable(String table){
         boolean succ = false;
         try {

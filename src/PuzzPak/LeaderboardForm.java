@@ -156,7 +156,7 @@ public class LeaderboardForm extends javax.swing.JFrame {
             playersModel = (DefaultTableModel) playersTable.getModel();
             playersModel.setColumnIdentifiers(playerColumnsName);
 
-            rs = stmt.executeQuery("SELECT * FROM PLAYER");
+            rs = stmt.executeQuery("SELECT * FROM PLAYER ORDER BY USERNAME");
 
             rsmd = rs.getMetaData();
             colNo = rsmd.getColumnCount();
@@ -172,7 +172,6 @@ public class LeaderboardForm extends javax.swing.JFrame {
         catch (SQLException err) {
             System.out.println( err.getMessage());
         }
-        
     }    
 
     @SuppressWarnings("unchecked")
