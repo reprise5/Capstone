@@ -76,7 +76,7 @@ public class DatabaseControl {
         return success;
     }
     
-    //Adding a record to a table in the database 
+    //Adding a record to a table in the database (called from adminform)
     public String addRecord(String table, String user, double score, String game){
         String message = "";
         try {
@@ -85,7 +85,7 @@ public class DatabaseControl {
             
             stmt.executeUpdate("INSERT INTO " + table + " VALUES ('" + user + "', " + score + ", '" + date +"', '" + game + "')");
             System.out.println("INSERT INTO " + table + " VALUES ('" + user + "', " + score + ", '" + date +"', '" + game + "')");
-            message = "SQL query: \"INSERT INTO " + table + " VALUES ('" + user + "', " + score + ", '" + date +"', '" + game + "')\" was successful";
+            message = "SQL query: \"INSERT INTO " + table + " VALUES ('" + user + "', " + score + ", '" + date +"', '" + game + "')\" was successful";  
         }
         catch (SQLException err) {
             System.out.println( err.getMessage());

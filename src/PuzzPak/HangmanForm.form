@@ -186,10 +186,6 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="displayRightAnswer" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -302,8 +298,6 @@
                                   <Component id="WinsScreen" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                                   <Component id="triesLeftScreen" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="displayRightAnswer" min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="45" max="32767" attributes="0"/>
@@ -751,7 +745,7 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="36" style="0"/>
+          <Font name="Dialog" size="24" style="0"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="This is the word you need to guess."/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -766,7 +760,7 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="36" style="0"/>
+          <Font name="Dialog" size="24" style="0"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="This is the word you need to guess."/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -781,7 +775,7 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="36" style="0"/>
+          <Font name="Dialog" size="24" style="0"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="This is the word you need to guess."/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -796,7 +790,7 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="36" style="0"/>
+          <Font name="Dialog" size="24" style="0"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="This is the word you need to guess."/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -811,7 +805,7 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="36" style="0"/>
+          <Font name="Dialog" size="24" style="0"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="This is the word you need to guess."/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -826,7 +820,7 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="36" style="0"/>
+          <Font name="Dialog" size="24" style="0"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="This is the word you need to guess."/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -841,7 +835,7 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="36" style="0"/>
+          <Font name="Dialog" size="24" style="0"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="This is the word you need to guess."/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -856,7 +850,7 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="36" style="0"/>
+          <Font name="Dialog" size="24" style="0"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="This is the word you need to guess."/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -871,7 +865,7 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="36" style="0"/>
+          <Font name="Dialog" size="24" style="0"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="This is the word you need to guess."/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -886,7 +880,7 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="36" style="0"/>
+          <Font name="Dialog" size="24" style="0"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="This is the word you need to guess."/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -901,7 +895,7 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="36" style="0"/>
+          <Font name="Dialog" size="24" style="0"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="This is the word you need to guess."/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -916,19 +910,12 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="36" style="0"/>
+          <Font name="Dialog" size="24" style="0"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="This is the word you need to guess."/>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
         <Property name="requestFocusEnabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="displayRightAnswer">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="16" style="0"/>
-        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="ProgrammerLabel">

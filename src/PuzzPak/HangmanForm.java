@@ -69,7 +69,6 @@ public class HangmanForm extends javax.swing.JFrame {
         letterTile10 = new javax.swing.JTextField();
         letterTile12 = new javax.swing.JTextField();
         letterTile11 = new javax.swing.JTextField();
-        displayRightAnswer = new javax.swing.JLabel();
         ProgrammerLabel = new javax.swing.JLabel();
         LossesScreen = new javax.swing.JTextField();
         WinsScreen = new javax.swing.JTextField();
@@ -369,7 +368,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         letterTile1.setEditable(false);
         letterTile1.setBackground(new java.awt.Color(204, 204, 204));
-        letterTile1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        letterTile1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         letterTile1.setToolTipText("This is the word you need to guess.");
         letterTile1.setFocusable(false);
         letterTile1.setName(""); // NOI18N
@@ -377,7 +376,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         letterTile2.setEditable(false);
         letterTile2.setBackground(new java.awt.Color(204, 204, 204));
-        letterTile2.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        letterTile2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         letterTile2.setToolTipText("This is the word you need to guess.");
         letterTile2.setFocusable(false);
         letterTile2.setName(""); // NOI18N
@@ -385,7 +384,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         letterTile3.setEditable(false);
         letterTile3.setBackground(new java.awt.Color(204, 204, 204));
-        letterTile3.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        letterTile3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         letterTile3.setToolTipText("This is the word you need to guess.");
         letterTile3.setFocusable(false);
         letterTile3.setName(""); // NOI18N
@@ -393,7 +392,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         letterTile5.setEditable(false);
         letterTile5.setBackground(new java.awt.Color(204, 204, 204));
-        letterTile5.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        letterTile5.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         letterTile5.setToolTipText("This is the word you need to guess.");
         letterTile5.setFocusable(false);
         letterTile5.setName(""); // NOI18N
@@ -401,7 +400,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         letterTile4.setEditable(false);
         letterTile4.setBackground(new java.awt.Color(204, 204, 204));
-        letterTile4.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        letterTile4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         letterTile4.setToolTipText("This is the word you need to guess.");
         letterTile4.setFocusable(false);
         letterTile4.setName(""); // NOI18N
@@ -409,7 +408,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         letterTile6.setEditable(false);
         letterTile6.setBackground(new java.awt.Color(204, 204, 204));
-        letterTile6.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        letterTile6.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         letterTile6.setToolTipText("This is the word you need to guess.");
         letterTile6.setFocusable(false);
         letterTile6.setName(""); // NOI18N
@@ -417,7 +416,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         letterTile7.setEditable(false);
         letterTile7.setBackground(new java.awt.Color(204, 204, 204));
-        letterTile7.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        letterTile7.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         letterTile7.setToolTipText("This is the word you need to guess.");
         letterTile7.setFocusable(false);
         letterTile7.setName(""); // NOI18N
@@ -425,7 +424,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         letterTile8.setEditable(false);
         letterTile8.setBackground(new java.awt.Color(204, 204, 204));
-        letterTile8.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        letterTile8.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         letterTile8.setToolTipText("This is the word you need to guess.");
         letterTile8.setFocusable(false);
         letterTile8.setName(""); // NOI18N
@@ -433,7 +432,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         letterTile9.setEditable(false);
         letterTile9.setBackground(new java.awt.Color(204, 204, 204));
-        letterTile9.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        letterTile9.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         letterTile9.setToolTipText("This is the word you need to guess.");
         letterTile9.setFocusable(false);
         letterTile9.setName(""); // NOI18N
@@ -441,7 +440,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         letterTile10.setEditable(false);
         letterTile10.setBackground(new java.awt.Color(204, 204, 204));
-        letterTile10.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        letterTile10.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         letterTile10.setToolTipText("This is the word you need to guess.");
         letterTile10.setFocusable(false);
         letterTile10.setName(""); // NOI18N
@@ -449,7 +448,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         letterTile12.setEditable(false);
         letterTile12.setBackground(new java.awt.Color(204, 204, 204));
-        letterTile12.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        letterTile12.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         letterTile12.setToolTipText("This is the word you need to guess.");
         letterTile12.setFocusable(false);
         letterTile12.setName(""); // NOI18N
@@ -457,13 +456,11 @@ public class HangmanForm extends javax.swing.JFrame {
 
         letterTile11.setEditable(false);
         letterTile11.setBackground(new java.awt.Color(204, 204, 204));
-        letterTile11.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        letterTile11.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         letterTile11.setToolTipText("This is the word you need to guess.");
         letterTile11.setFocusable(false);
         letterTile11.setName(""); // NOI18N
         letterTile11.setRequestFocusEnabled(false);
-
-        displayRightAnswer.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
         ProgrammerLabel.setFont(new java.awt.Font("Dialog", 0, 8)); // NOI18N
         ProgrammerLabel.setText("Programmed by: Danielle Marcoullier");
@@ -614,10 +611,7 @@ public class HangmanForm extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(postScoreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(startGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(displayRightAnswer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(194, 194, 194))))
+                                            .addComponent(startGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(ProgrammerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -711,9 +705,7 @@ public class HangmanForm extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(LossesScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(WinsScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(triesLeftScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(displayRightAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(triesLeftScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 45, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(letterTile1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -813,7 +805,6 @@ public class HangmanForm extends javax.swing.JFrame {
 
         //clear the guess word box, and the answer box.
         GuessWordBox.setText("");
-        displayRightAnswer.setText("");
 
         //set the wins and losses screens with the variable stored
         WinsScreen.setText(Integer.toString(winsCounter));
@@ -921,6 +912,8 @@ public class HangmanForm extends javax.swing.JFrame {
             hangScreen.setIcon(Winner);
             System.out.println("*WIN by text box response*");
             gamesCounter++;
+            
+            showWord();
         }
         else{
             //wrong response, but game isn't over. remove a chance left.
@@ -928,6 +921,10 @@ public class HangmanForm extends javax.swing.JFrame {
             triesLeftScreen.setText(Integer.toString(chancesLeftCounter));
             changeHangmanIcon();
             GuessWordBox.setText("");
+            
+            if (chancesLeftCounter == 0){
+                showWord();
+            }
         }
     }//GEN-LAST:event_GuessEnterButtonActionPerformed
 
@@ -1198,12 +1195,8 @@ public class HangmanForm extends javax.swing.JFrame {
             changeHangmanIcon();
             GuessWordBox.setText("");
         }
-
-        win = TestTileWin(wordToGuessLength);
-        if (win){
-            chancesLeftCounter = 0;
-            disableGame();
-            hangScreen.setIcon(Winner);
+        if(!testTileWin(wordToGuessLength) && chancesLeftCounter == 0){
+            
         }
     }
     
@@ -1242,23 +1235,125 @@ public class HangmanForm extends javax.swing.JFrame {
                 //and then disable all of the buttons.  they will be re-enabled when the user clicks "start game".
                 disableGame();
 
-                //simply display the right answer in a label for now while figuring how to fill in the tiles.
-                displayRightAnswer.setText("Correct Word: " + wordToGuess);
-
                 //update the losses counter and screen
                 loseCounter++;
                 LossesScreen.setText(Integer.toString(loseCounter));
                 
-                gamesCounter++;     //for posting rules.
-                System.out.println("Games played: " + gamesCounter);
+                gamesCounter++;     //for posting rules  
                 break;
         }
+    }
+    
+    //shows the correct word on the tiles when the game is over.
+    public void showWord(){
+        switch (wordToGuessLength){
+            case 1:
+                letterTile1.setText(Character.toString(wordToGuess.charAt(0)).toUpperCase());
+                break;
+            case 2:
+                letterTile1.setText(Character.toString(wordToGuess.charAt(0)).toUpperCase());
+                letterTile2.setText(Character.toString(wordToGuess.charAt(1)).toUpperCase());
+                break;
+            case 3:
+                letterTile1.setText(Character.toString(wordToGuess.charAt(0)).toUpperCase());
+                letterTile2.setText(Character.toString(wordToGuess.charAt(1)).toUpperCase());
+                letterTile3.setText(Character.toString(wordToGuess.charAt(2)).toUpperCase());
+                break;
+            case 4:
+                letterTile1.setText(Character.toString(wordToGuess.charAt(0)).toUpperCase());
+                letterTile2.setText(Character.toString(wordToGuess.charAt(1)).toUpperCase());
+                letterTile3.setText(Character.toString(wordToGuess.charAt(2)).toUpperCase());
+                letterTile4.setText(Character.toString(wordToGuess.charAt(3)).toUpperCase());
+                break;
+            case 5:
+                letterTile1.setText(Character.toString(wordToGuess.charAt(0)).toUpperCase());
+                letterTile2.setText(Character.toString(wordToGuess.charAt(1)).toUpperCase());
+                letterTile3.setText(Character.toString(wordToGuess.charAt(2)).toUpperCase());
+                letterTile4.setText(Character.toString(wordToGuess.charAt(3)).toUpperCase());               
+                letterTile5.setText(Character.toString(wordToGuess.charAt(4)).toUpperCase());
+                break;
+            case 6:
+                letterTile1.setText(Character.toString(wordToGuess.charAt(0)).toUpperCase());
+                letterTile2.setText(Character.toString(wordToGuess.charAt(1)).toUpperCase());
+                letterTile3.setText(Character.toString(wordToGuess.charAt(2)).toUpperCase());
+                letterTile4.setText(Character.toString(wordToGuess.charAt(3)).toUpperCase());               
+                letterTile5.setText(Character.toString(wordToGuess.charAt(4)).toUpperCase());
+                letterTile6.setText(Character.toString(wordToGuess.charAt(5)).toUpperCase());
+                break;
+            case 7:
+                letterTile1.setText(Character.toString(wordToGuess.charAt(0)).toUpperCase());
+                letterTile2.setText(Character.toString(wordToGuess.charAt(1)).toUpperCase());
+                letterTile3.setText(Character.toString(wordToGuess.charAt(2)).toUpperCase());
+                letterTile4.setText(Character.toString(wordToGuess.charAt(3)).toUpperCase());               
+                letterTile5.setText(Character.toString(wordToGuess.charAt(4)).toUpperCase());
+                letterTile6.setText(Character.toString(wordToGuess.charAt(5)).toUpperCase());
+                letterTile7.setText(Character.toString(wordToGuess.charAt(6)).toUpperCase());
+                break;
+            case 8:
+                letterTile1.setText(Character.toString(wordToGuess.charAt(0)).toUpperCase());
+                letterTile2.setText(Character.toString(wordToGuess.charAt(1)).toUpperCase());
+                letterTile3.setText(Character.toString(wordToGuess.charAt(2)).toUpperCase());
+                letterTile4.setText(Character.toString(wordToGuess.charAt(3)).toUpperCase());               
+                letterTile5.setText(Character.toString(wordToGuess.charAt(4)).toUpperCase());
+                letterTile6.setText(Character.toString(wordToGuess.charAt(5)).toUpperCase());
+                letterTile7.setText(Character.toString(wordToGuess.charAt(6)).toUpperCase());
+                letterTile8.setText(Character.toString(wordToGuess.charAt(7)).toUpperCase());
+                break;
+            case 9:
+                letterTile1.setText(Character.toString(wordToGuess.charAt(0)).toUpperCase());
+                letterTile2.setText(Character.toString(wordToGuess.charAt(1)).toUpperCase());
+                letterTile3.setText(Character.toString(wordToGuess.charAt(2)).toUpperCase());
+                letterTile4.setText(Character.toString(wordToGuess.charAt(3)).toUpperCase());               
+                letterTile5.setText(Character.toString(wordToGuess.charAt(4)).toUpperCase());
+                letterTile6.setText(Character.toString(wordToGuess.charAt(5)).toUpperCase());
+                letterTile7.setText(Character.toString(wordToGuess.charAt(6)).toUpperCase());
+                letterTile8.setText(Character.toString(wordToGuess.charAt(7)).toUpperCase());
+                letterTile9.setText(Character.toString(wordToGuess.charAt(8)).toUpperCase());
+                break;
+            case 10:
+                letterTile1.setText(Character.toString(wordToGuess.charAt(0)).toUpperCase());
+                letterTile2.setText(Character.toString(wordToGuess.charAt(1)).toUpperCase());
+                letterTile3.setText(Character.toString(wordToGuess.charAt(2)).toUpperCase());
+                letterTile4.setText(Character.toString(wordToGuess.charAt(3)).toUpperCase());               
+                letterTile5.setText(Character.toString(wordToGuess.charAt(4)).toUpperCase());
+                letterTile6.setText(Character.toString(wordToGuess.charAt(5)).toUpperCase());
+                letterTile7.setText(Character.toString(wordToGuess.charAt(6)).toUpperCase());
+                letterTile8.setText(Character.toString(wordToGuess.charAt(7)).toUpperCase());
+                letterTile9.setText(Character.toString(wordToGuess.charAt(8)).toUpperCase());
+                letterTile10.setText(Character.toString(wordToGuess.charAt(9)).toUpperCase());
+                break;
+            case 11:
+                letterTile1.setText(Character.toString(wordToGuess.charAt(0)).toUpperCase());
+                letterTile2.setText(Character.toString(wordToGuess.charAt(1)).toUpperCase());
+                letterTile3.setText(Character.toString(wordToGuess.charAt(2)).toUpperCase());
+                letterTile4.setText(Character.toString(wordToGuess.charAt(3)).toUpperCase());               
+                letterTile5.setText(Character.toString(wordToGuess.charAt(4)).toUpperCase());
+                letterTile6.setText(Character.toString(wordToGuess.charAt(5)).toUpperCase());
+                letterTile7.setText(Character.toString(wordToGuess.charAt(6)).toUpperCase());
+                letterTile8.setText(Character.toString(wordToGuess.charAt(7)).toUpperCase());
+                letterTile9.setText(Character.toString(wordToGuess.charAt(8)).toUpperCase());
+                letterTile10.setText(Character.toString(wordToGuess.charAt(9)).toUpperCase());
+                letterTile11.setText(Character.toString(wordToGuess.charAt(10)).toUpperCase());
+                break;
+            case 12:
+                letterTile1.setText(Character.toString(wordToGuess.charAt(0)).toUpperCase());
+                letterTile2.setText(Character.toString(wordToGuess.charAt(1)).toUpperCase());
+                letterTile3.setText(Character.toString(wordToGuess.charAt(2)).toUpperCase());
+                letterTile4.setText(Character.toString(wordToGuess.charAt(3)).toUpperCase());               
+                letterTile5.setText(Character.toString(wordToGuess.charAt(4)).toUpperCase());
+                letterTile6.setText(Character.toString(wordToGuess.charAt(5)).toUpperCase());
+                letterTile7.setText(Character.toString(wordToGuess.charAt(6)).toUpperCase());
+                letterTile8.setText(Character.toString(wordToGuess.charAt(7)).toUpperCase());
+                letterTile9.setText(Character.toString(wordToGuess.charAt(8)).toUpperCase());
+                letterTile10.setText(Character.toString(wordToGuess.charAt(9)).toUpperCase());
+                letterTile11.setText(Character.toString(wordToGuess.charAt(10)).toUpperCase());
+                letterTile12.setText(Character.toString(wordToGuess.charAt(11)).toUpperCase());
+                break;
+        }   
     }
 
     //based on how many letters in the secret word, it will "initialize" that many tiles with color and underscore.
     public void initializeTiles(int wordToGuessLength){
-
-
         switch (wordToGuessLength){
             case 1:
                 letterTile1.setBackground(Color.cyan);
@@ -1448,57 +1543,57 @@ public class HangmanForm extends javax.swing.JFrame {
         switch (index){
             case 0:
                 //flip tile 1 to the letter sent, at this index.
-                letterTile1.setText(letter);
+                letterTile1.setText(letter.toUpperCase());
                 break;
             case 1:
                 //flip tile 2 to the letter sent, at this index.
-                letterTile2.setText(letter);
+                letterTile2.setText(letter.toUpperCase());
                 break;
             case 2:
                 //flip tile 3 to the letter sent, at this index.
-                letterTile3.setText(letter);
+                letterTile3.setText(letter.toUpperCase());
                 break;
             case 3:
                 //flip tile 4 to the letter sent, at this index.
-                letterTile4.setText(letter);
+                letterTile4.setText(letter.toUpperCase());
                 break;
             case 4:
                 //flip tile 5 to the letter sent, at this index.
-                letterTile5.setText(letter);
+                letterTile5.setText(letter.toUpperCase());
                 break;
             case 5:
                 //flip tile 6 to the letter sent, at this index.
-                letterTile6.setText(letter);
+                letterTile6.setText(letter.toUpperCase());
                 break;
             case 6:
                 //flip tile 7 to the letter sent, at this index.
-                letterTile7.setText(letter);
+                letterTile7.setText(letter.toUpperCase());
                 break;
             case 7:
                 //flip tile 8 to the letter sent, at this index.
-                letterTile8.setText(letter);
+                letterTile8.setText(letter.toUpperCase());
                 break;
             case 8:
                 //flip tile 9 to the letter sent, at this index.
-                letterTile9.setText(letter);
+                letterTile9.setText(letter.toUpperCase());
                 break;
             case 9:
                 //flip tile 10 to the letter sent, at this index.
-                letterTile10.setText(letter);
+                letterTile10.setText(letter.toUpperCase());
                 break;
             case 10:
                 //flip tile 11 to the letter sent, at this index.
-                letterTile11.setText(letter);
+                letterTile11.setText(letter.toUpperCase());
                 break;
             case 11:
                 //flip tile 12 to the letter sent, at this index.
-                letterTile12.setText(letter);
+                letterTile12.setText(letter.toUpperCase());
                 break;
         }
     }
 
     //tests if the user won by filling in tiles and not by typing the word in the box.
-    public boolean TestTileWin(int wordToGuessLength){
+    public boolean testTileWin(int wordToGuessLength){
         boolean win = false;
 
         //based on how many tiles are initialized, or the wordToGuessLength, is how many tiles to check for underscores.
@@ -1595,7 +1690,14 @@ public class HangmanForm extends javax.swing.JFrame {
             WinsScreen.setText(Integer.toString(winsCounter));
             System.out.println("Games Played: " + gamesCounter);
             gamesCounter++;     //for posting rules.
+            chancesLeftCounter = 0;
+            disableGame();
+            hangScreen.setIcon(Winner);
         }
+        else if (!win && chancesLeftCounter == 0){
+            showWord();
+        }
+        
         return win;
     }
 
@@ -1686,7 +1788,6 @@ public class HangmanForm extends javax.swing.JFrame {
     private javax.swing.JButton Xbutton;
     private javax.swing.JButton Ybutton;
     private javax.swing.JButton Zbutton;
-    private javax.swing.JLabel displayRightAnswer;
     private javax.swing.JLabel hangScreen;
     private javax.swing.JPanel hangScreenPanel;
     private javax.swing.JLabel jLabel1;

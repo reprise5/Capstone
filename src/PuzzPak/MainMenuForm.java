@@ -307,7 +307,7 @@ public class MainMenuForm extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection(database.getDBhost(), database.getDBusername(), database.getDBpassword());
             Statement stmt = con.createStatement();
             
-            username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", 3);
+            username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", 3).toLowerCase();
             
             hangman.setUsername(username);
             smallMT.setUsername(username);
@@ -319,20 +319,7 @@ public class MainMenuForm extends javax.swing.JFrame {
             //if username is null, say not logged in, and keep "invalid username" message up for a few seconds, revert back.  end of thread.
             //else, make an account.
             if(username == null || username.equals("")){
-                Thread thread = new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            loggedInAsLabel.setText("INVALID USERNAME");
-                            Thread.sleep(1500);
-                            loggedInAsLabel.setText("Not logged in");
-                        } 
-                        catch (InterruptedException ex) {
-                            Logger.getLogger(MainMenuForm.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                };
-                thread.start();
+                loggedInAsLabel.setText("INVALID USERNAME");
             }
             else{
                 //handles account creation
