@@ -1,7 +1,6 @@
 # SeniorProject
 
- [![GitHub release](https://img.shields.io/github/release/reprise5/SeniorProject.svg)](https://github.com/reprise5/SeniorProject/releases) 
- ![Github build](https://img.shields.io/travis/reprise5/SeniorProject.svg)
+ [![GitHub release](https://img.shields.io/github/release/reprise5/SeniorProject.svg)](https://github.com/reprise5/SeniorProject/releases)
  
 
 
