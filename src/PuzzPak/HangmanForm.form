@@ -188,10 +188,6 @@
                           </Group>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ProgrammerLabel" min="-2" pref="195" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="710" max="-2" attributes="0"/>
@@ -362,9 +358,7 @@
                   <Component id="Zbutton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Tbutton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Component id="ProgrammerLabel" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -737,6 +731,9 @@
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
       </AccessibilityProperties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GuessWordBoxActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="letterTile1">
       <Properties>
@@ -916,14 +913,6 @@
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
         <Property name="requestFocusEnabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="ProgrammerLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="8" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Programmed by: Danielle Marcoullier"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="LossesScreen">

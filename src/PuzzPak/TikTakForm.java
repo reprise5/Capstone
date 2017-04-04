@@ -1,6 +1,5 @@
 package PuzzPak;
 
-import static java.awt.image.ImageObserver.HEIGHT;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
@@ -215,8 +214,10 @@ public class TikTakForm extends javax.swing.JFrame {
         });
 
         informationLabel.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
-        informationLabel.setText("YOUR TURN");
+        informationLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        informationLabel.setText("PLAY YOUR MOVE");
         informationLabel.setFocusable(false);
+        informationLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         informationLabel.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -243,8 +244,8 @@ public class TikTakForm extends javax.swing.JFrame {
                 .addContainerGap(32, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(informationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(159, 159, 159))
+                .addComponent(informationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,6 +271,8 @@ public class TikTakForm extends javax.swing.JFrame {
                 .addComponent(informationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
         );
+
+        informationLabel.getAccessibleContext().setAccessibleName("PLAY YOUR MOVE");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -355,7 +358,12 @@ public class TikTakForm extends javax.swing.JFrame {
         
         //reset back to player 1's turn
         player = 0;
-        informationLabel.setText("YOUR TURN");
+        if (username == null || username == ""){
+            informationLabel.setText("YOUR TURN");
+        }
+        else{
+            informationLabel.setText(username.toUpperCase() + "'S TURN");
+        }
         win = false;
         
         //clear board array
@@ -364,17 +372,16 @@ public class TikTakForm extends javax.swing.JFrame {
                 board[a][b] = '-';
             }
         }
-        
         /* UNCOMMENT THIS IF you want the reset button open on reset, instead of after a
          * win or loss happens (which would change the score, so it's not the same as last time).
          */
-        
 //        //Can they post their score yet?
 //        if (gamesCounter >= 3){
 //            postScoreButton.setEnabled(true);
 //        }
         
         System.out.println("\nNEW GAME");
+        //prints the board:
 //        for (int b = 0; b < board.length; b++){
 //            System.out.println(board[b]);
 //        }
@@ -387,7 +394,7 @@ public class TikTakForm extends javax.swing.JFrame {
         else {
             score = ( (double)p1Score / ((double)p1Score + (double)p2Score) * 100);
             if(score != 0.0){
-                database.addScore(username, score, "tiktak");
+                database.addScore(username, score, "tiktak", "TIKTAKALLTIME");
                 database.updatePlayerAccount(username, score, "TIKTAK");
                 postScoreButton.setEnabled(false);
             }
@@ -408,7 +415,13 @@ public class TikTakForm extends javax.swing.JFrame {
         else {
             player = 0;
             System.out.println("Now it's player " + (player + 1) + "'s turn!");
-            informationLabel.setText("YOUR TURN");
+            
+            if (username == null || username == ""){
+                informationLabel.setText("YOUR TURN");
+            }
+            else{
+                informationLabel.setText(username.toUpperCase() + "'S TURN");
+            }
         }
     }
     

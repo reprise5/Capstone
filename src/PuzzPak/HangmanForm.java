@@ -15,7 +15,6 @@ public class HangmanForm extends javax.swing.JFrame {
     public HangmanForm(){
         initComponents();
     }
-    //=================================Generated=Code===========================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -69,7 +68,6 @@ public class HangmanForm extends javax.swing.JFrame {
         letterTile10 = new javax.swing.JTextField();
         letterTile12 = new javax.swing.JTextField();
         letterTile11 = new javax.swing.JTextField();
-        ProgrammerLabel = new javax.swing.JLabel();
         LossesScreen = new javax.swing.JTextField();
         WinsScreen = new javax.swing.JTextField();
         WinsLabel = new javax.swing.JLabel();
@@ -365,6 +363,11 @@ public class HangmanForm extends javax.swing.JFrame {
         GuessWordBox.setBackground(new java.awt.Color(255, 255, 204));
         GuessWordBox.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         GuessWordBox.setEnabled(false);
+        GuessWordBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuessWordBoxActionPerformed(evt);
+            }
+        });
 
         letterTile1.setEditable(false);
         letterTile1.setBackground(new java.awt.Color(204, 204, 204));
@@ -461,9 +464,6 @@ public class HangmanForm extends javax.swing.JFrame {
         letterTile11.setFocusable(false);
         letterTile11.setName(""); // NOI18N
         letterTile11.setRequestFocusEnabled(false);
-
-        ProgrammerLabel.setFont(new java.awt.Font("Dialog", 0, 8)); // NOI18N
-        ProgrammerLabel.setText("Programmed by: Danielle Marcoullier");
 
         LossesScreen.setEditable(false);
         LossesScreen.setFont(new java.awt.Font("Digital Readout Thick Upright", 0, 24)); // NOI18N
@@ -612,9 +612,6 @@ public class HangmanForm extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(postScoreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(startGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ProgrammerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -760,9 +757,7 @@ public class HangmanForm extends javax.swing.JFrame {
                     .addComponent(Ybutton)
                     .addComponent(Zbutton)
                     .addComponent(Tbutton))
-                .addGap(18, 18, 18)
-                .addComponent(ProgrammerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         DifficultyLabel.getAccessibleContext().setAccessibleName("DifficultyLabel");
@@ -771,8 +766,6 @@ public class HangmanForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    //=================================END=Generated=Code=======================================
 
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=START-GAME-BUTTON-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     private void startGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameButtonActionPerformed
@@ -910,7 +903,6 @@ public class HangmanForm extends javax.swing.JFrame {
             WinsScreen.setText(Integer.toString(winsCounter));
 
             hangScreen.setIcon(Winner);
-            System.out.println("*WIN by text box response*");
             gamesCounter++;
             
             showWord();
@@ -1157,8 +1149,8 @@ public class HangmanForm extends javax.swing.JFrame {
             if(winsCounter != 0 && loseCounter != 0 || winsCounter != 0){
                 score = ( (double)winsCounter / ((double)winsCounter + (double)loseCounter) * 100);
 
-                //add the score to its correct table, then update the player's account
-                database.addScore(username, score, "hangman");
+                    //add the score to its correct table, then update the player's account
+                    database.addScore(username, score, "hangman", "HANGMANALLTIME");
                 database.updatePlayerAccount(username, score, "HANGMAN");
                 postScoreButton.setEnabled(false);
             }
@@ -1169,6 +1161,10 @@ public class HangmanForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_postScoreButtonActionPerformed
+
+    private void GuessWordBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuessWordBoxActionPerformed
+        GuessEnterButtonActionPerformed(evt);
+    }//GEN-LAST:event_GuessWordBoxActionPerformed
 
     //When the user presses a letter on the keypad, the game shoul react in this way:
     public void letterPress(char letter){
@@ -1229,8 +1225,6 @@ public class HangmanForm extends javax.swing.JFrame {
                 break;
             case 0: 
                 //the game is over
-                System.out.println("*LOSS by tries left depleted to 0*");
-
                 hangScreen.setIcon(Wrong6);
                 //and then disable all of the buttons.  they will be re-enabled when the user clicks "start game".
                 disableGame();
@@ -1601,53 +1595,45 @@ public class HangmanForm extends javax.swing.JFrame {
             case 1:
                 //1 tile initialized, the word is 1 letter long. test that many tiles.
                 if (!letterTile1.getText().equals("_")){
-                    System.out.println("*WIN by tiles* x1");
                     win = true;
                 }
                 break;
             case 2:
                 if (!letterTile1.getText().equals("_") && !letterTile2.getText().equals("_")){
-                    System.out.println("*WIN by tiles* x2");
                     win = true;
                 }
                 break;
             case 3:
                 if (!letterTile1.getText().equals("_") && !letterTile2.getText().equals("_") && !letterTile3.getText().equals("_")){
-                    System.out.println("*WIN by tiles* x3");
                     win = true;
                 }
                 break;
             case 4:
                 if (!letterTile1.getText().equals("_") && !letterTile2.getText().equals("_") && !letterTile3.getText().equals("_") && !letterTile4.getText().equals("_")){
-                    System.out.println("*WIN by tiles* x4");
                     win = true;
                 }
                 break;
             case 5:
                 if (!letterTile1.getText().equals("_") && !letterTile2.getText().equals("_") && !letterTile3.getText().equals("_") && !letterTile4.getText().equals("_")
                         && !letterTile5.getText().equals("_")){
-                    System.out.println("*WIN by tiles* x5");
                     win = true;
                 }
                 break;
             case 6:
                 if (!letterTile1.getText().equals("_") && !letterTile2.getText().equals("_") && !letterTile3.getText().equals("_") && !letterTile4.getText().equals("_")
                         && !letterTile5.getText().equals("_") && !letterTile6.getText().equals("_")){
-                    System.out.println("*WIN by tiles* x6");
                     win = true;
                 }
                 break;
             case 7:
                 if (!letterTile1.getText().equals("_") && !letterTile2.getText().equals("_") && !letterTile3.getText().equals("_") && !letterTile4.getText().equals("_")
                         && !letterTile5.getText().equals("_") && !letterTile6.getText().equals("_") && !letterTile7.getText().equals("_")){
-                    System.out.println("*WIN by tiles* x7");
                     win = true;
                 }
                 break;
             case 8:
                 if (!letterTile1.getText().equals("_") && !letterTile2.getText().equals("_") && !letterTile3.getText().equals("_") && !letterTile4.getText().equals("_")
                         && !letterTile5.getText().equals("_") && !letterTile6.getText().equals("_") && !letterTile7.getText().equals("_") && !letterTile8.getText().equals("_")){
-                    System.out.println("*WIN by tiles* x8");
                     win = true;
                 }
                 break;
@@ -1655,7 +1641,6 @@ public class HangmanForm extends javax.swing.JFrame {
                 if (!letterTile1.getText().equals("_") && !letterTile2.getText().equals("_") && !letterTile3.getText().equals("_") && !letterTile4.getText().equals("_")
                         && !letterTile5.getText().equals("_") && !letterTile6.getText().equals("_") && !letterTile7.getText().equals("_") && !letterTile8.getText().equals("_")
                         && !letterTile9.getText().equals("_")){
-                    System.out.println("*WIN by tiles* x9");
                     win = true;
                 }
                 break;
@@ -1663,7 +1648,6 @@ public class HangmanForm extends javax.swing.JFrame {
                 if (!letterTile1.getText().equals("_") && !letterTile2.getText().equals("_") && !letterTile3.getText().equals("_") && !letterTile4.getText().equals("_")
                         && !letterTile5.getText().equals("_") && !letterTile6.getText().equals("_") && !letterTile7.getText().equals("_") && !letterTile8.getText().equals("_")
                         && !letterTile9.getText().equals("_") && !letterTile10.getText().equals("_")){
-                    System.out.println("*WIN by tiles* x10");
                     win = true;
                 }
                 break;
@@ -1671,7 +1655,6 @@ public class HangmanForm extends javax.swing.JFrame {
                 if (!letterTile1.getText().equals("_") && !letterTile2.getText().equals("_") && !letterTile3.getText().equals("_") && !letterTile4.getText().equals("_")
                         && !letterTile5.getText().equals("_") && !letterTile6.getText().equals("_") && !letterTile7.getText().equals("_") && !letterTile8.getText().equals("_")
                         && !letterTile9.getText().equals("_") && !letterTile10.getText().equals("_") && !letterTile11.getText().equals("_")){
-                    System.out.println("*WIN by tiles* x11");
                     win = true;
                 }
                 break;
@@ -1679,7 +1662,6 @@ public class HangmanForm extends javax.swing.JFrame {
                 if (!letterTile1.getText().equals("_") && !letterTile2.getText().equals("_") && !letterTile3.getText().equals("_") && !letterTile4.getText().equals("_")
                         && !letterTile5.getText().equals("_") && !letterTile6.getText().equals("_") && !letterTile7.getText().equals("_") && !letterTile8.getText().equals("_")
                         && !letterTile9.getText().equals("_") && !letterTile10.getText().equals("_") && !letterTile11.getText().equals("_") && !letterTile12.getText().equals("_")){
-                    System.out.println("*WIN by tiles* x12");
                     win = true;
                 }
                 break;
@@ -1771,7 +1753,6 @@ public class HangmanForm extends javax.swing.JFrame {
     private javax.swing.JButton Nbutton;
     private javax.swing.JButton Obutton;
     private javax.swing.JButton Pbutton;
-    private javax.swing.JLabel ProgrammerLabel;
     private javax.swing.JButton Qbutton;
     private javax.swing.JMenuItem QuitGameMenuItem;
     private javax.swing.JButton Rbutton;

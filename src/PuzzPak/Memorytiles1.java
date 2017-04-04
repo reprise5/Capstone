@@ -650,14 +650,16 @@ public class Memorytiles1 extends javax.swing.JFrame {
         if (username.equals("")){
             JOptionPane.showMessageDialog(rootPane, "You must log in on the main page to post your score.", "Please log in", 1);
         }
-        if(score > 0){
-            database.addScore(username, score, "mg4x4");
-            database.updatePlayerAccount(username, score, "MT4X4");
-            postScoreButton.setEnabled(false);
-        }
-        else {
-            System.out.println("Did not post 0 score");
-            JOptionPane.showMessageDialog(rootPane, "You must achieve a score of higher than 0 to\n participate in the leaderboards.", "Score too low", 1);
+        else{
+            if(score > 0){
+                database.addScore(username, score, "mg4x4", "MEMORYT4X4ALLTIME");
+                database.updatePlayerAccount(username, score, "MT4X4");
+                postScoreButton.setEnabled(false);
+            }
+            else {
+                System.out.println("Did not post 0 score");
+                JOptionPane.showMessageDialog(rootPane, "You must achieve a score of higher than 0 to\n participate in the leaderboards.", "Score too low", 1);
+            }
         }
     }//GEN-LAST:event_postScoreButtonActionPerformed
 

@@ -15,7 +15,7 @@ public class DatabaseControl {
     String userID = "user";
     String password = "pass";
     Date tempdate = new Date();
-    String date= new SimpleDateFormat("yyyy-MM-dd").format(tempdate);
+    String date = new SimpleDateFormat("yyyy-MM-dd").format(tempdate);
     
     
     //Main Constructor
@@ -37,41 +37,51 @@ public class DatabaseControl {
         }
     }
     
-    //A game calls this to add user's name to the leaderboard database
-    public boolean addScore(String user, double score, String game){
+    //A game calls this to add user's name to the leaderboard database (for all time scores)
+    public boolean addScore(String user, double score, String game, String table){
         boolean success = false;
         try {
             Connection con = DriverManager.getConnection(host, userID, password );
             Statement stmt = con.createStatement();
             
-            switch (game) {
-                case "hangman":
-                    stmt.executeUpdate("INSERT INTO HANGMANALLTIME VALUES ('" + user + "', " + score + ", '" + date +"', 'hangman')");
-                    System.out.println("INSERT INTO HANGMANALLTIME VALUES ('" + user + "', " + score + ", '" + date +"', 'hangman')");
-                    success = true;
-                    break;
-                case "tiktak":
-                    stmt.executeUpdate("INSERT INTO TIKTAKALLTIME VALUES ('" + user + "', " + score + ", '" + date +"', 'tiktak')");
-                    System.out.println("INSERT INTO TIKTAKALLTIME VALUES ('" + user + "', " + score + ", '" + date +"', 'tiktak')");
-                    success = true;
-                    break;
-                case "mg4x4":
-                    stmt.executeUpdate("INSERT INTO MEMORYT4X4ALLTIME VALUES ('" + user + "', " + score + ", '" + date +"', 'mg4x4')");
-                    System.out.println("INSERT INTO MEMORYT4X4ALLTIME VALUES ('" + user + "', " + score + ", '" + date +"', 'mg4x4')");
-                    success = true;
-                    break;
-                case "mg6x6":
-                    stmt.executeUpdate("INSERT INTO MEMORYT6X6ALLTIME VALUES ('" + user + "', " + score + ", '" + date +"', 'mg6x6')");
-                    System.out.println("INSERT INTO MEMORYT6X6ALLTIME VALUES ('" + user + "', " + score + ", '" + date +"', 'mg6x6')");
-                    success = true;
-                    break;
-                default:
-                    success = false;
-                    break;
-            }
+            //first try to add a new record from the start.
+            //if this Query fails it's probably because a record exists for that user. It will fall to catch, & try and update an existing record.
+            //if THAT fails, then it's probably a constraint thing (name is too long, etc.)
+            stmt.executeUpdate("INSERT INTO " + table + " VALUES ('" + user + "', " + score + ", '" + date +"', '" + game + "')");
+            System.out.println("INSERT INTO " + table + " VALUES ('" + user + "', " + score + ", '" + date +"', '" + game + "')");
+            success = true;
         }
-        catch (SQLException err) {
-            System.out.println( err.getMessage());
+        //OK, so the record exists already.  Try and update current user's post on the ALLTIME board.  
+        catch (SQLException err1) {
+            try {
+                Connection con = DriverManager.getConnection(host, userID, password);
+                Statement stmt = con.createStatement();
+                
+                System.out.println("\nUPDATE " + table + "\n" +
+                    "SET SCORE = " + score + ", DATE = '" + date + "'\n" +
+                    "WHERE SCORE IN (\n" +
+                    "    SELECT SCORE \n" +
+                    "    FROM " + table + "\n" +
+                    "    WHERE USERNAME = '" + user + "' AND SCORE < " + score + "\n" +
+                    ")");
+                                
+                stmt.executeUpdate("\nUPDATE " + table + "\n" +
+                    "SET SCORE = " + score + ", DATE = '" + date + "'\n" +
+                    "WHERE SCORE IN (\n" +
+                    "    SELECT SCORE \n" +
+                    "    FROM " + table + "\n" +
+                    "    WHERE USERNAME = '" + user + "' AND SCORE < " + score + "\n" +
+                    ")");
+                
+                System.out.println("ADDSCORE: update query executed for " + user);
+            }
+            
+            //second catch.  the backup try failed.
+            catch (SQLException err2) {
+                System.out.println(err2.getMessage() + "\nADD_SCORE: databaseControl.addScore(); -err2");
+            }
+            //print error from first catch
+            //System.out.println("ADD_SCORE:" + err1.getMessage());
         }
         return success;
     }
@@ -88,7 +98,7 @@ public class DatabaseControl {
             message = "SQL query: \"INSERT INTO " + table + " VALUES ('" + user + "', " + score + ", '" + date +"', '" + game + "')\" was successful";  
         }
         catch (SQLException err) {
-            System.out.println( err.getMessage());
+            System.out.println("ADD_RECORD:" + err.getMessage());
             message = err.getMessage();
         }
         return message;
@@ -117,13 +127,10 @@ public class DatabaseControl {
                 System.out.println("DELETE FROM " + table + " WHERE " + attributeType + " = " + intAttribute);
                 message = "SQL query: \"DELETE FROM " + table + " WHERE " + attributeType + " = " + intAttribute + "\" was successful.";
             
-            }
-            //if the user doesn't exist in any table, remove them from players.
-            //
-            //    
+            } 
         }
         catch (SQLException err) {
-            System.out.println(err.getMessage());
+            System.out.println("DELETE_RECORD: " + err.getMessage());
             message = err.getMessage();
         }
         return message;
@@ -144,8 +151,8 @@ public class DatabaseControl {
         }
         catch(SQLException err){
             success = false;
-            //System.out.println(err.getMessage());
-            System.out.println("Account already exists");
+            //System.out.println("PROFILES: " + err.getMessage());
+            System.out.println("PROFILES: Account already exists");
         }
         return success;
     }
@@ -174,7 +181,7 @@ public class DatabaseControl {
                             "    WHERE USERNAME = '" + player + "' AND " + game + " < " + score + ")");
         }
         catch (SQLException err) {
-            System.out.println( err.getMessage());
+            System.out.println("UPDATE_PLAYER: " + err.getMessage());
             success = false;
         }
         return success;

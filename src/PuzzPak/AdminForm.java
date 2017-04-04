@@ -443,34 +443,38 @@ public class AdminForm extends javax.swing.JFrame {
 
             attribute = attributeTextField.getText();
 
-            if (tableIndex == 0){
-                table = "HANGMANALLTIME";
+            switch (tableIndex) {
+                case 0:
+                    table = "HANGMANALLTIME";
+                    break;
+                case 1:
+                    table = "TIKTAKALLTIME";
+                    break;
+                case 2:
+                    table = "MEMORYT4X4ALLTIME";
+                    break;
+                default:
+                    table = "MEMORYT6X6ALLTIME";
+                    break;
             }
-            else if (tableIndex == 1){
-                table = "TIKTAKALLTIME";
-            }
-            else if (tableIndex == 2){
-                table = "MEMORYT4X4ALLTIME";
-            }
-            else
-                table = "MEMORYT6X6ALLTIME";
 
-
-            if (attributeIndex == 0){
-                attributeType = "username";
-                attrCode = 0;
-            }
-            else if (attributeIndex == 1){
-                attributeType = "score";
-                attrCode = 1;
-            }
-            else if (attributeIndex == 2){
-                attributeType = "date";
-                attrCode = 0;
-            }
-            else{
-                attributeType = "game";
-                attrCode = 0;
+            switch (attributeIndex) {
+                case 0:
+                    attributeType = "username";
+                    attrCode = 0;
+                    break;
+                case 1:
+                    attributeType = "score";
+                    attrCode = 1;
+                    break;
+                case 2:
+                    attributeType = "date";
+                    attrCode = 0;
+                    break;
+                default:
+                    attributeType = "game";
+                    attrCode = 0;
+                    break;
             }
 
             System.out.println("attr code is " + attrCode);

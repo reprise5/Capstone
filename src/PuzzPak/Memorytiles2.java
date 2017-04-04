@@ -1296,17 +1296,19 @@ public class Memorytiles2 extends javax.swing.JFrame {
 
     //Add score to MEMORYT6x6ALLTIME table.
     private void postScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postScoreButtonActionPerformed
-        if (username.equals("")){
+        if (username.equals("") || username == null){
             JOptionPane.showMessageDialog(rootPane, "You must log in on the main page to post your score.", "Please log in", 1);
         }
-        if(score > 0){
-            database.addScore(username, score, "mg6x6");
-            database.updatePlayerAccount(username, score, "MT6X6");
-            postScoreButton.setEnabled(false);
-        }
-        else {
-            System.out.println("Did not post 0 score");
-            JOptionPane.showMessageDialog(rootPane, "You must achieve a score of higher than 0 to\n participate in the leaderboards.", "Score too low", 1);
+        else{
+            if(score > 0){
+                database.addScore(username, score, "mg6x6", "MEMORYT6x6ALLTIME");
+                database.updatePlayerAccount(username, score, "MT6X6");
+                postScoreButton.setEnabled(false);
+            }
+            else {
+                System.out.println("Did not post 0 score");
+                JOptionPane.showMessageDialog(rootPane, "You must achieve a score of higher than 0 to\n participate in the leaderboards.", "Score too low", 1);
+            }
         }
     }//GEN-LAST:event_postScoreButtonActionPerformed
     
