@@ -326,7 +326,7 @@ public class MainMenuForm extends javax.swing.JFrame {
                 database.addNewAccount(username);
             }
         }
-        catch(SQLException | HeadlessException e){
+        catch(SQLException | HeadlessException | NullPointerException e){
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_continueAsButtonActionPerformed

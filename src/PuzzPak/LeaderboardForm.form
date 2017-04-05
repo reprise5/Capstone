@@ -30,8 +30,8 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="leaderboardTabbedPane" pref="773" max="32767" attributes="0"/>
-                  <Component id="LeaderboardsBannerLabel" alignment="1" pref="773" max="32767" attributes="0"/>
+                  <Component id="LeaderboardsBannerLabel" pref="773" max="32767" attributes="0"/>
+                  <Component id="leaderboardTabbedPane" alignment="0" pref="773" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -43,8 +43,8 @@
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Component id="LeaderboardsBannerLabel" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="leaderboardTabbedPane" pref="377" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+              <Component id="leaderboardTabbedPane" min="-2" pref="350" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

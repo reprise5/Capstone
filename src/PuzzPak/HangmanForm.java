@@ -1131,7 +1131,7 @@ public class HangmanForm extends javax.swing.JFrame {
     private void AboutMenuOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutMenuOptionActionPerformed
         JOptionPane.showMessageDialog(rootPane,
                 "                                        H A N G M A N             \n"
-              + "This is a simple GUI Program involving the clasic game \"Hangan\".\n"
+              + "This is a simple GUI Program involving the clasic game \"Hangman\".\n"
               + "This project was written entirely in Java by Danielle Marcoullier.\n"
               + "You can find out more about this project on Github at:            \n"
               + "           https://github.com/reprise5/Hangman                    \n", 
