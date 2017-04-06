@@ -1,8 +1,10 @@
 package PuzzPak;
 
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -42,6 +44,7 @@ public class TikTakForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("TIK-TAK (Tic-Tac-Toe Game)");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(JFrame.class.getResource("/PuzzPak/images/icons/icon.png")));
 
         stickerLabel.setIcon(new javax.swing.ImageIcon("/home/reprise/Dropbox/Programming/01 Java/PuzzPak/src/PuzzPak/images/tiktak/BoardSticker.png")); // NOI18N
 

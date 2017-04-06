@@ -1,7 +1,9 @@
 package PuzzPak;
 
 import java.awt.Color;
+import java.awt.Toolkit;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -85,6 +87,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hangman");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(JFrame.class.getResource("/PuzzPak/images/icons/icon.png")));
         setResizable(false);
 
         hangScreenPanel.setLayout(null);

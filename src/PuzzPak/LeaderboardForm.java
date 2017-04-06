@@ -1,11 +1,13 @@
 package PuzzPak;
 
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -305,8 +307,9 @@ public class LeaderboardForm extends javax.swing.JFrame {
         LeaderboardsBannerLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("<><>Leaderboards<><>");
+        setTitle("Leaderboards");
         setBackground(new java.awt.Color(0, 162, 232));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(JFrame.class.getResource("/PuzzPak/images/icons/icon.png")));
 
         hangmanAlltimeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -466,17 +469,17 @@ public class LeaderboardForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LeaderboardsBannerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
-                    .addComponent(leaderboardTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE))
+                    .addComponent(LeaderboardsBannerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 773, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(leaderboardTabbedPane))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(LeaderboardsBannerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(LeaderboardsBannerLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(leaderboardTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(leaderboardTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

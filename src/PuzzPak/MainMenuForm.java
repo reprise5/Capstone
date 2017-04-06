@@ -1,15 +1,15 @@
 package PuzzPak;
 
-import java.awt.HeadlessException;
+import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -57,6 +57,7 @@ public class MainMenuForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PUZZPAK - play, score, win!");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(JFrame.class.getResource("/PuzzPak/images/icons/icon.png")));
         setResizable(false);
 
         splashLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/main-menu/PuzzPak Logo.png"))); // NOI18N
@@ -307,27 +308,35 @@ public class MainMenuForm extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection(database.getDBhost(), database.getDBusername(), database.getDBpassword());
             Statement stmt = con.createStatement();
             
-            username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", 3).toLowerCase();
+            //username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", 3).toLowerCase();
+            Object[] selectionValues = null;
+            username = (String) JOptionPane.showInputDialog(rootPane, username, "Enter your username: ", 0, who, selectionValues, DISPOSE_ON_CLOSE);
             
-            hangman.setUsername(username);
-            smallMT.setUsername(username);
-            largMT.setUsername(username);
-            //tiktak gets the username when the form is opened. (it's in a seperate thread, so we can't access it here.)
-            
-            loggedInAsLabel.setText("Logged In As: " + username);
+            if (username.length() < MAX_STRING_LENGTH && !username.equals("")){
+                loggedInAsLabel.setText("Logged In As: " + username);
+                loggedInAsLabel.setForeground(Color.BLACK);
 
-            //if username is null, say not logged in, and keep "invalid username" message up for a few seconds, revert back.  end of thread.
-            //else, make an account.
-            if(username == null || username.equals("")){
-                loggedInAsLabel.setText("INVALID USERNAME");
-            }
-            else{
                 //handles account creation
                 database.addNewAccount(username);
+
+                /* Give everyone the user's name so they can all post properly */
+                hangman.setUsername(username);
+                smallMT.setUsername(username);
+                largMT.setUsername(username);
+                //tiktak gets the username when the form is opened. (it's in a seperate thread, so we can't access it here.)
+            }
+            else{
+            loggedInAsLabel.setText("username cannot be Null.");
+            loggedInAsLabel.setForeground(Color.red);
             }
         }
-        catch(SQLException | HeadlessException | NullPointerException e){
-            System.out.println(e.getMessage());
+        catch(NullPointerException npe){
+            System.out.println(npe.getMessage());
+            loggedInAsLabel.setText("username cannot be Null.");
+            loggedInAsLabel.setForeground(Color.red);
+        }
+        catch (SQLException sqle){
+            System.out.println(sqle.getMessage());
         }
     }//GEN-LAST:event_continueAsButtonActionPerformed
 
@@ -384,9 +393,10 @@ public class MainMenuForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     /* GLOBALS */
-    String username = "";   //Global Username
-    boolean win;            //For tik-Tak
-    boolean tie;            //for Tik-Tak
+    String username = "";               //Global Username
+    boolean win;                        //For tik-Tak
+    boolean tie;                        //for Tik-Tak
+    final int MAX_STRING_LENGTH = 15;   //this is the max size the username can be.  test this constraint before talking to DB.  otherwise throw exception.
     ImageIcon who = new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/main-menu/loginIcon.png")); //<-- Not using.
     
     /* Games */
