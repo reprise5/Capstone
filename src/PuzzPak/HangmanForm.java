@@ -7,8 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author reprise
+ * @author Dani Marcoullier (reprise)
+ * 2016
  */
 public class HangmanForm extends javax.swing.JFrame {
 
@@ -1543,47 +1543,36 @@ public class HangmanForm extends javax.swing.JFrame {
                 letterTile1.setText(letter.toUpperCase());
                 break;
             case 1:
-                //flip tile 2 to the letter sent, at this index.
                 letterTile2.setText(letter.toUpperCase());
                 break;
             case 2:
-                //flip tile 3 to the letter sent, at this index.
                 letterTile3.setText(letter.toUpperCase());
                 break;
             case 3:
-                //flip tile 4 to the letter sent, at this index.
                 letterTile4.setText(letter.toUpperCase());
                 break;
             case 4:
-                //flip tile 5 to the letter sent, at this index.
                 letterTile5.setText(letter.toUpperCase());
                 break;
             case 5:
-                //flip tile 6 to the letter sent, at this index.
                 letterTile6.setText(letter.toUpperCase());
                 break;
             case 6:
-                //flip tile 7 to the letter sent, at this index.
                 letterTile7.setText(letter.toUpperCase());
                 break;
             case 7:
-                //flip tile 8 to the letter sent, at this index.
                 letterTile8.setText(letter.toUpperCase());
                 break;
             case 8:
-                //flip tile 9 to the letter sent, at this index.
                 letterTile9.setText(letter.toUpperCase());
                 break;
             case 9:
-                //flip tile 10 to the letter sent, at this index.
                 letterTile10.setText(letter.toUpperCase());
                 break;
             case 10:
-                //flip tile 11 to the letter sent, at this index.
                 letterTile11.setText(letter.toUpperCase());
                 break;
             case 11:
-                //flip tile 12 to the letter sent, at this index.
                 letterTile12.setText(letter.toUpperCase());
                 break;
         }

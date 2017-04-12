@@ -12,13 +12,10 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * @author reprise
+ * @author Dani Marcoullier (reprise)
+ * 2017
  */
 public class AdminForm extends javax.swing.JFrame {
-
-    /**
-     * Creates new form AdminForm
-     */
     public AdminForm() {
         initComponents();
     }
@@ -69,9 +66,10 @@ public class AdminForm extends javax.swing.JFrame {
         passwordLabel = new javax.swing.JLabel();
         saveDBconfigButton = new javax.swing.JButton();
         refreshTableButton = new javax.swing.JButton();
-        rootLoginButton = new javax.swing.JButton();
+        adminLoginButton = new javax.swing.JButton();
         rootLoginLabel = new javax.swing.JLabel();
-        rootPasswordField = new javax.swing.JPasswordField();
+        adminPasswordField = new javax.swing.JPasswordField();
+        loginStatusLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Admin's Corner - PuzzPak Administrative Panel");
@@ -364,7 +362,7 @@ public class AdminForm extends javax.swing.JFrame {
         debugmodePanelLayout.setVerticalGroup(
             debugmodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(debugmodePanelLayout.createSequentialGroup()
-                .addContainerGap(165, Short.MAX_VALUE)
+                .addContainerGap(158, Short.MAX_VALUE)
                 .addGroup(debugmodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hostTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hostLabel))
@@ -392,14 +390,20 @@ public class AdminForm extends javax.swing.JFrame {
             }
         });
 
-        rootLoginButton.setText("Log-In");
-        rootLoginButton.addActionListener(new java.awt.event.ActionListener() {
+        adminLoginButton.setText("Log-In");
+        adminLoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rootLoginButtonActionPerformed(evt);
+                adminLoginButtonActionPerformed(evt);
             }
         });
 
         rootLoginLabel.setText("Admin Login");
+
+        adminPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminPasswordFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -411,12 +415,13 @@ public class AdminForm extends javax.swing.JFrame {
                     .addComponent(refreshTableButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(adminTabbedPane)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(loginStatusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(rootLoginLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rootPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(adminPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rootLoginButton)
+                        .addComponent(adminLoginButton)
                         .addGap(16, 16, 16)))
                 .addContainerGap())
         );
@@ -425,12 +430,13 @@ public class AdminForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(refreshTableButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(adminTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 434, Short.MAX_VALUE)
+                .addComponent(adminTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rootLoginButton)
-                    .addComponent(rootPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rootLoginLabel))
+                    .addComponent(adminLoginButton)
+                    .addComponent(adminPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rootLoginLabel)
+                    .addComponent(loginStatusLabel))
                 .addContainerGap())
         );
 
@@ -702,10 +708,24 @@ public class AdminForm extends javax.swing.JFrame {
     }//GEN-LAST:event_executefreeHandActionPerformed
 
     //Login to do administrative tasks that other users aren't allowed to do.
-    private void rootLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rootLoginButtonActionPerformed
-        enteredPass = rootPasswordField.getText();
-        rootPasswordField.setText("");
-    }//GEN-LAST:event_rootLoginButtonActionPerformed
+    private void adminLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminLoginButtonActionPerformed
+        enteredPass = adminPasswordField.getText();
+        
+        //this logic is only to change the label to show if the passphrase was correct.  that's it.
+        //blank string is a log out.
+        if (enteredPass.equals("")){
+            loginStatusLabel.setText("");
+        }
+        //Log in
+        else if (enteredPass.equals(passphrase)){
+            loginStatusLabel.setText("Logged in");
+        }
+        //failed attempt
+        else{
+            loginStatusLabel.setText("Incorrect passphrase.");
+        }     
+        adminPasswordField.setText("");
+    }//GEN-LAST:event_adminLoginButtonActionPerformed
 
     //Executing a INSERT into the database
     private void executeInsertIntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeInsertIntoActionPerformed
@@ -727,6 +747,11 @@ public class AdminForm extends javax.swing.JFrame {
         );
     }//GEN-LAST:event_saveDBconfigButtonActionPerformed
 
+    //when user presses enter key in the login text field.  will invoke button press.
+    private void adminPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminPasswordFieldActionPerformed
+        adminLoginButtonActionPerformed(evt);
+    }//GEN-LAST:event_adminPasswordFieldActionPerformed
+
     private void showPermissionDeniedDiag(){
         JOptionPane.showMessageDialog(rootPane,
                 "Admin privelages required to perform that action.\n"
@@ -739,6 +764,8 @@ public class AdminForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DumpTIktakButton;
     private javax.swing.JTextField adminConsole;
+    private javax.swing.JButton adminLoginButton;
+    private javax.swing.JPasswordField adminPasswordField;
     private javax.swing.JTabbedPane adminTabbedPane;
     private javax.swing.JComboBox<String> atributeCombobox;
     private javax.swing.JTextField attributeTextField;
@@ -763,14 +790,13 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JTextField hostTextField;
     private javax.swing.JLabel insertintoLabel;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel loginStatusLabel;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JTextField passwordTextField;
     private javax.swing.JPanel queriesPanel;
     private javax.swing.JScrollPane recordListingScrollPane;
     private javax.swing.JButton refreshTableButton;
-    private javax.swing.JButton rootLoginButton;
     private javax.swing.JLabel rootLoginLabel;
-    private javax.swing.JPasswordField rootPasswordField;
     private javax.swing.JButton saveDBconfigButton;
     private javax.swing.JLabel scoreLabel;
     private javax.swing.JTextField scoreTextfield;

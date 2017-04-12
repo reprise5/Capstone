@@ -1,8 +1,15 @@
+/**
+ * This class is responsible for initializing a new game of Memory Tiles 
+ * (4x4 & 6x6).  It randomizes then sets the ID's behind each shape, as well
+ * as keeping track of which locations the shapes are to appear.
+ */
+
 package PuzzPak;
 import java.util.*;
 
 /**
- * @author reprise
+ * @author Dani Marcoullier (reprise)
+ * 2017
  */
 public class TileControl {
     //GLOBALS 

@@ -1,7 +1,11 @@
-/*
+/**
  * This is the computer player to Tic-Tac-Toe.  it acts as player 2
- * Who plays Naughts.  There will be a 20% chance the COM will not move 
- * to block player 1.
+ * Who plays Naughts.  It prioritizes winning, then blocking. if all else fails,
+ * it will guess to make a move.  It does not know how to detect or perform
+ * forking (two possibilities for winning).
+ * 
+ * The labels for the move types like "LEFT COL" for example are visually represented
+ * in a separate document.  It includes indeces and ID's.
  */
 
 package PuzzPak;
@@ -11,7 +15,8 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * @author reprise
+ * @author Dani Marcoullier (reprise)
+ * 2017
  */
 public class ComputerPlayer {
     //GLOBALS

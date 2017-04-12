@@ -1,3 +1,11 @@
+/**
+ * This class is the bridge between a game (or anything else) and the database.
+ * It has many functions, including adding users, testing connection, setting 
+ * parameters for a new connection, updating, adding, and deleting records in 
+ * batch or stand-alone.
+ */
+
+
 package PuzzPak;
 
 import java.sql.Connection;
@@ -8,7 +16,8 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 
 /**
- * @author reprise
+ * @author Dani Marcoullier (reprise)
+ * 2017
  */
 public class DatabaseControl {
     String host = "jdbc:derby://localhost:1527/dbname"; 
@@ -144,8 +153,13 @@ public class DatabaseControl {
             Connection con = DriverManager.getConnection(host, userID, password );
             Statement stmt = con.createStatement();
             
-            stmt.executeUpdate("INSERT INTO PLAYER (USERNAME, HANGMAN, TIKTAK, MT4x4, MT6x6) VALUES ('" + username + "', 0.0 ,0.0 ,0.0 ,0.0 )");
-            System.out.println("INSERT INTO PLAYER (USERNAME, HANGMAN, TIKTAK, MT4x4, MT6x6) VALUES ('" + username + "', 0.0 ,0.0 ,0.0 ,0.0 )");
+            /* BUG :
+             * if it is initialized with 0's, and this new user posted a new score, it would overwrite adjacent tuples 
+             * though it doesn't match the "where" conditional in the query
+             * if it is initialized with 1's, this somehow doesn't happen. 
+             */
+            stmt.executeUpdate("INSERT INTO PLAYER (USERNAME, HANGMAN, TIKTAK, MT4x4, MT6x6) VALUES ('" + username + "', 1.0 ,1.0 ,1.0 ,1.0 )");
+            System.out.println("INSERT INTO PLAYER (USERNAME, HANGMAN, TIKTAK, MT4x4, MT6x6) VALUES ('" + username + "', 1.0 ,1.0 ,1.0 ,1.0 )");
             
             success = true;
         }

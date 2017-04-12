@@ -1,7 +1,8 @@
 package PuzzPak;
 
 /**
- * @author reprise
+ * @author Dani Marcoullier (reprise)
+ * 2017
  */
 public class Main {
 

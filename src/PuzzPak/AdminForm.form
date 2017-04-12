@@ -33,12 +33,13 @@
                   <Component id="refreshTableButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="adminTabbedPane" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="loginStatusLabel" min="-2" pref="298" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="rootLoginLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="rootPasswordField" min="-2" pref="123" max="-2" attributes="0"/>
+                      <Component id="adminPasswordField" min="-2" pref="123" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="rootLoginButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="adminLoginButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -51,12 +52,13 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="refreshTableButton" min="-2" pref="48" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="adminTabbedPane" pref="434" max="32767" attributes="0"/>
+              <Component id="adminTabbedPane" pref="452" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="rootLoginButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="rootPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="adminLoginButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="adminPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="rootLoginLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="loginStatusLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -553,7 +555,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="165" max="32767" attributes="0"/>
+                      <EmptySpace pref="158" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="hostTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="hostLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -632,12 +634,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshTableButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="rootLoginButton">
+    <Component class="javax.swing.JButton" name="adminLoginButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Log-In"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rootLoginButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adminLoginButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="rootLoginLabel">
@@ -645,7 +647,12 @@
         <Property name="text" type="java.lang.String" value="Admin Login"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="rootPasswordField">
+    <Component class="javax.swing.JPasswordField" name="adminPasswordField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adminPasswordFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="loginStatusLabel">
     </Component>
   </SubComponents>
 </Form>

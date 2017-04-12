@@ -9,11 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- * @author reprise
+ * @author Dani Marcoullier (reprise)
+ * 2016
  */
 public class Memorytiles1 extends javax.swing.JFrame {
-
-    //constructor!!
     public Memorytiles1() {
         initComponents();
     }
@@ -232,6 +231,7 @@ public class Memorytiles1 extends javax.swing.JFrame {
 
         FileMenu.setText("File");
 
+        QuitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         QuitMenuItem.setText("Quit");
         QuitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

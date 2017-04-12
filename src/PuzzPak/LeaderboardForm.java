@@ -11,7 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * @author reprise
+ * @author Dani Marcoullier (reprise)
+ * 2017
  */
 public class LeaderboardForm extends javax.swing.JFrame {
 
@@ -26,6 +27,7 @@ public class LeaderboardForm extends javax.swing.JFrame {
             Statement stmt = con.createStatement();
             
 //            PRINT OUT HANGMANALLTIME RESULTSET TO CONSOLE.
+
 //            ResultSet rs = stmt.executeQuery("SELECT * FROM HANGMANALLTIME");
 //            rsmd = rs.getMetaData();
 //            columnsNumber = rsmd.getColumnCount();

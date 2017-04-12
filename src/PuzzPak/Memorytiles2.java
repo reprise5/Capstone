@@ -8,12 +8,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/*
- * @author reprise
+/**
+ * @author Dani Marcoullier (reprise)
+ * 2016
  */
 public class Memorytiles2 extends javax.swing.JFrame {
-    
-    //Constructor!!
     public Memorytiles2() {
         initComponents();
     }
@@ -520,6 +519,7 @@ public class Memorytiles2 extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
+        QuitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         QuitMenuItem.setText("Quit");
         QuitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

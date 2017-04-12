@@ -13,7 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- * @author reprise
+ * @author Dani Marcoullier (reprise)
+ * 2017
  */
 public class MainMenuForm extends javax.swing.JFrame {
     public MainMenuForm() {
@@ -41,17 +42,17 @@ public class MainMenuForm extends javax.swing.JFrame {
         leaderboardsButton = new javax.swing.JButton();
         continueAsButton = new javax.swing.JButton();
         loggedInAsLabel = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        mainMenuBar = new javax.swing.JMenuBar();
+        fileMenu = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        HangmanMenuItem = new javax.swing.JMenuItem();
-        TiktakMenuItem = new javax.swing.JMenuItem();
-        Memorytiles4x4MenuItem = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        gamesMenu = new javax.swing.JMenu();
+        hangmanMenuItem = new javax.swing.JMenuItem();
+        tiktakMenuItem = new javax.swing.JMenuItem();
+        memorytiles4x4MenuItem = new javax.swing.JMenuItem();
+        memorytiles6x6MenuItem = new javax.swing.JMenuItem();
+        leaderboardMenu = new javax.swing.JMenu();
         viewLeaderboardMenuItem = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        helpMenu = new javax.swing.JMenu();
         adminCornerMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
@@ -114,42 +115,67 @@ public class MainMenuForm extends javax.swing.JFrame {
         loggedInAsLabel.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         loggedInAsLabel.setText("Not logged in");
 
-        jMenu1.setText("File");
+        fileMenu.setText("File");
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         jMenuItem2.setText("Quit");
-        jMenu1.add(jMenuItem2);
+        fileMenu.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu1);
+        mainMenuBar.add(fileMenu);
 
-        jMenu3.setText("Games");
+        gamesMenu.setText("Games");
 
-        HangmanMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, 0));
-        HangmanMenuItem.setText("Hangman");
-        jMenu3.add(HangmanMenuItem);
+        hangmanMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, 0));
+        hangmanMenuItem.setText("Hangman");
+        hangmanMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hangmanMenuItemActionPerformed(evt);
+            }
+        });
+        gamesMenu.add(hangmanMenuItem);
 
-        TiktakMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, 0));
-        TiktakMenuItem.setText("Tik-Tak");
-        jMenu3.add(TiktakMenuItem);
+        tiktakMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, 0));
+        tiktakMenuItem.setText("Tik-Tak");
+        tiktakMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tiktakMenuItemActionPerformed(evt);
+            }
+        });
+        gamesMenu.add(tiktakMenuItem);
 
-        Memorytiles4x4MenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, 0));
-        Memorytiles4x4MenuItem.setText("MemoryTiles (easy)");
-        jMenu3.add(Memorytiles4x4MenuItem);
+        memorytiles4x4MenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, 0));
+        memorytiles4x4MenuItem.setText("MemoryTiles (easy)");
+        memorytiles4x4MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                memorytiles4x4MenuItemActionPerformed(evt);
+            }
+        });
+        gamesMenu.add(memorytiles4x4MenuItem);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, 0));
-        jMenuItem1.setText("MemoryTiles (hard)");
-        jMenu3.add(jMenuItem1);
+        memorytiles6x6MenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, 0));
+        memorytiles6x6MenuItem.setText("MemoryTiles (hard)");
+        memorytiles6x6MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                memorytiles6x6MenuItemActionPerformed(evt);
+            }
+        });
+        gamesMenu.add(memorytiles6x6MenuItem);
 
-        jMenuBar1.add(jMenu3);
+        mainMenuBar.add(gamesMenu);
 
-        jMenu4.setText("Leaderboards");
+        leaderboardMenu.setText("Leaderboards");
 
         viewLeaderboardMenuItem.setText("View Leaderboards");
-        jMenu4.add(viewLeaderboardMenuItem);
+        viewLeaderboardMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewLeaderboardMenuItemActionPerformed(evt);
+            }
+        });
+        leaderboardMenu.add(viewLeaderboardMenuItem);
 
-        jMenuBar1.add(jMenu4);
+        mainMenuBar.add(leaderboardMenu);
 
-        jMenu2.setText("Help");
+        helpMenu.setText("Help");
 
         adminCornerMenuItem.setText("Settings");
         adminCornerMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +183,7 @@ public class MainMenuForm extends javax.swing.JFrame {
                 adminCornerMenuItemActionPerformed(evt);
             }
         });
-        jMenu2.add(adminCornerMenuItem);
+        helpMenu.add(adminCornerMenuItem);
 
         aboutMenuItem.setText("About...");
         aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -165,11 +191,11 @@ public class MainMenuForm extends javax.swing.JFrame {
                 aboutMenuItemActionPerformed(evt);
             }
         });
-        jMenu2.add(aboutMenuItem);
+        helpMenu.add(aboutMenuItem);
 
-        jMenuBar1.add(jMenu2);
+        mainMenuBar.add(helpMenu);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(mainMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -298,11 +324,13 @@ public class MainMenuForm extends javax.swing.JFrame {
     public void createAccount(String username){
         
     }
+    
     //Launch ADMINFORM after typing in a passphrase.
     private void adminCornerMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminCornerMenuItemActionPerformed
         admin.setVisible(true);
     }//GEN-LAST:event_adminCornerMenuItemActionPerformed
 
+    //Log-In button.  A profile is created if the username is not in the DB.  if it is, simply save under their profile.
     private void continueAsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueAsButtonActionPerformed
         try{
             Connection con = DriverManager.getConnection(database.getDBhost(), database.getDBusername(), database.getDBpassword());
@@ -352,6 +380,31 @@ public class MainMenuForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
+    //Start Hangman Game through the menuBar
+    private void hangmanMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hangmanMenuItemActionPerformed
+        hangmanButtonActionPerformed(evt);
+    }//GEN-LAST:event_hangmanMenuItemActionPerformed
+    
+    //Start Tik-Tak Game through the menuBar
+    private void tiktakMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiktakMenuItemActionPerformed
+        tikTakButtonActionPerformed(evt);
+    }//GEN-LAST:event_tiktakMenuItemActionPerformed
+
+    //Start Memory Tiles 4x4 Game through the menuBar
+    private void memorytiles4x4MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memorytiles4x4MenuItemActionPerformed
+        memoryTiles4x4ButtonActionPerformed(evt);
+    }//GEN-LAST:event_memorytiles4x4MenuItemActionPerformed
+
+    //Start Memory Tiles 4x4 Game through the menuBar
+    private void memorytiles6x6MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memorytiles6x6MenuItemActionPerformed
+        MemoryTiles6x6ButtonActionPerformed(evt);
+    }//GEN-LAST:event_memorytiles6x6MenuItemActionPerformed
+
+    //open the leaderboard through the menuBar
+    private void viewLeaderboardMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewLeaderboardMenuItemActionPerformed
+        leaderboardsButtonActionPerformed(evt);
+    }//GEN-LAST:event_viewLeaderboardMenuItemActionPerformed
+
     //WindowClosing will pass a 1 to signify it's closing, to end do-while loop.
     //this probably doesn't work as intended.
     public static int windowClosingSwitch(int num){
@@ -369,26 +422,26 @@ public class MainMenuForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem HangmanMenuItem;
     private javax.swing.JButton MemoryTiles6x6Button;
-    private javax.swing.JMenuItem Memorytiles4x4MenuItem;
-    private javax.swing.JMenuItem TiktakMenuItem;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem adminCornerMenuItem;
     private javax.swing.JButton continueAsButton;
+    private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenu gamesMenu;
     private javax.swing.JButton hangmanButton;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem hangmanMenuItem;
+    private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenu leaderboardMenu;
     private javax.swing.JButton leaderboardsButton;
     private javax.swing.JLabel loggedInAsLabel;
+    private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JButton memoryTiles4x4Button;
+    private javax.swing.JMenuItem memorytiles4x4MenuItem;
+    private javax.swing.JMenuItem memorytiles6x6MenuItem;
     private javax.swing.JLabel splashLabel;
     private javax.swing.JButton tikTakButton;
+    private javax.swing.JMenuItem tiktakMenuItem;
     private javax.swing.JMenuItem viewLeaderboardMenuItem;
     // End of variables declaration//GEN-END:variables
 
