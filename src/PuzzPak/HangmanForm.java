@@ -12,8 +12,6 @@ import javax.swing.JOptionPane;
  */
 public class HangmanForm extends javax.swing.JFrame {
 
-
-    //init
     public HangmanForm(){
         initComponents();
     }
@@ -73,7 +71,7 @@ public class HangmanForm extends javax.swing.JFrame {
         LossesScreen = new javax.swing.JTextField();
         WinsScreen = new javax.swing.JTextField();
         WinsLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lossLabel = new javax.swing.JLabel();
         postScoreButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         FileMenu = new javax.swing.JMenu();
@@ -478,7 +476,7 @@ public class HangmanForm extends javax.swing.JFrame {
 
         WinsLabel.setText("WINS");
 
-        jLabel1.setText("LOSSES");
+        lossLabel.setText("LOSSES");
 
         postScoreButton.setBackground(new java.awt.Color(255, 51, 51));
         postScoreButton.setText("POST SCORE");
@@ -604,7 +602,7 @@ public class HangmanForm extends javax.swing.JFrame {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(WinsLabel)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jLabel1)))
+                                                .addComponent(lossLabel)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(DifficultyCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
@@ -698,7 +696,7 @@ public class HangmanForm extends javax.swing.JFrame {
                                 .addComponent(postScoreButton))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
+                                    .addComponent(lossLabel)
                                     .addComponent(WinsLabel)
                                     .addComponent(triesLeftCountLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1763,7 +1761,6 @@ public class HangmanForm extends javax.swing.JFrame {
     private javax.swing.JButton Zbutton;
     private javax.swing.JLabel hangScreen;
     private javax.swing.JPanel hangScreenPanel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JSeparator jSeparator1;
@@ -1779,6 +1776,7 @@ public class HangmanForm extends javax.swing.JFrame {
     private javax.swing.JTextField letterTile7;
     private javax.swing.JTextField letterTile8;
     private javax.swing.JTextField letterTile9;
+    private javax.swing.JLabel lossLabel;
     private javax.swing.JButton postScoreButton;
     private javax.swing.JButton startGameButton;
     private javax.swing.JLabel triesLeftCountLabel;

@@ -924,7 +924,7 @@ public class Memorytiles2 extends javax.swing.JFrame {
     private void Tile21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tile21ActionPerformed
         int ID = 6;
         int type;
-                
+                 
         System.out.print("2,1 -- ");
         type = tileControl.get6x6TileType(ID);
         buttonPress(ID, type);

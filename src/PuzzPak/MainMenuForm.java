@@ -339,6 +339,7 @@ public class MainMenuForm extends javax.swing.JFrame {
             //username = JOptionPane.showInputDialog(rootPane, "Enter your username: ", "Who are you?", 3).toLowerCase();
             Object[] selectionValues = null;
             username = (String) JOptionPane.showInputDialog(rootPane, username, "Enter your username: ", 0, who, selectionValues, DISPOSE_ON_CLOSE);
+            username = username.toLowerCase();
             
             if (username.length() < MAX_STRING_LENGTH && !username.equals("")){
                 loggedInAsLabel.setText("Logged In As: " + username);

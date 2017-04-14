@@ -5,7 +5,6 @@
  * batch or stand-alone.
  */
 
-
 package PuzzPak;
 
 import java.sql.Connection;
@@ -25,7 +24,6 @@ public class DatabaseControl {
     String password = "pass";
     Date tempdate = new Date();
     String date = new SimpleDateFormat("yyyy-MM-dd").format(tempdate);
-    
     
     //Main Constructor
     public DatabaseControl(String userID, String password, String host){
@@ -72,7 +70,8 @@ public class DatabaseControl {
                     "    SELECT SCORE \n" +
                     "    FROM " + table + "\n" +
                     "    WHERE USERNAME = '" + user + "' AND SCORE < " + score + "\n" +
-                    ")");
+                    ")\n" + 
+                    "AND USERNAME = '" + user + "'");
                                 
                 stmt.executeUpdate("\nUPDATE " + table + "\n" +
                     "SET SCORE = " + score + ", DATE = '" + date + "'\n" +
@@ -80,17 +79,16 @@ public class DatabaseControl {
                     "    SELECT SCORE \n" +
                     "    FROM " + table + "\n" +
                     "    WHERE USERNAME = '" + user + "' AND SCORE < " + score + "\n" +
-                    ")");
+                    ")" + 
+                    "AND USERNAME = '" + user + "'");
                 
                 System.out.println("ADDSCORE: update query executed for " + user);
             }
             
-            //second catch.  the backup try failed.
+            //second catch.  the backup try failed.  
             catch (SQLException err2) {
                 System.out.println(err2.getMessage() + "\nADD_SCORE: databaseControl.addScore(); -err2");
             }
-            //print error from first catch
-            //System.out.println("ADD_SCORE:" + err1.getMessage());
         }
         return success;
     }
@@ -158,8 +156,8 @@ public class DatabaseControl {
              * though it doesn't match the "where" conditional in the query
              * if it is initialized with 1's, this somehow doesn't happen. 
              */
-            stmt.executeUpdate("INSERT INTO PLAYER (USERNAME, HANGMAN, TIKTAK, MT4x4, MT6x6) VALUES ('" + username + "', 1.0 ,1.0 ,1.0 ,1.0 )");
-            System.out.println("INSERT INTO PLAYER (USERNAME, HANGMAN, TIKTAK, MT4x4, MT6x6) VALUES ('" + username + "', 1.0 ,1.0 ,1.0 ,1.0 )");
+            stmt.executeUpdate("INSERT INTO PLAYER (USERNAME, HANGMAN, TIKTAK, MT4x4, MT6x6) VALUES ('" + username + "', 0.0 ,0.0 ,0.0 ,0.0 )");
+            System.out.println("INSERT INTO PLAYER (USERNAME, HANGMAN, TIKTAK, MT4x4, MT6x6) VALUES ('" + username + "', 0.0 ,0.0 ,0.0 ,0.0 )");
             
             success = true;
         }
@@ -171,7 +169,7 @@ public class DatabaseControl {
         return success;
     }
     
-    //will update player's score in the player's table for a gertain game.  Only saves the player's top score for a game.
+    //will update player's score in the player's table for a certain game.  Only saves the player's top score for a game.
     public boolean updatePlayerAccount(String player, double score, String game){
         boolean success = false;
         try {
@@ -186,13 +184,16 @@ public class DatabaseControl {
                             "    SELECT " + game + "\n" +
                             "    FROM PLAYER\n" +
                             "    WHERE USERNAME = '" + player + "' AND " + game + " < " + score + "\n" +
-                            ")");
+                            ")\n" + 
+                            "AND USERNAME = '" + player + "'");
             stmt.executeUpdate("UPDATE PLAYER " +
                             "SET " + game + " = " + score +
                             "WHERE " + game + " IN (" +
                             "    SELECT " + game +
                             "    FROM PLAYER" +
-                            "    WHERE USERNAME = '" + player + "' AND " + game + " < " + score + ")");
+                            "    WHERE USERNAME = '" + player + "' AND " + game + " < " + score + "\n" +
+                            ")\n" + 
+                            "AND USERNAME = '" + player + "'");
         }
         catch (SQLException err) {
             System.out.println("UPDATE_PLAYER: " + err.getMessage());

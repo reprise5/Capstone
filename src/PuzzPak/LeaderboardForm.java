@@ -288,23 +288,23 @@ public class LeaderboardForm extends javax.swing.JFrame {
     private void initComponents() {
 
         leaderboardTabbedPane = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        hangmanATScrollPane = new javax.swing.JScrollPane();
         hangmanAlltimeTable = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        tiktakATScrollPane = new javax.swing.JScrollPane();
         tiktakAlltimeTable = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        mt4x4ATScrollPane = new javax.swing.JScrollPane();
         MT4x4AlltimeTable = new javax.swing.JTable();
-        jScrollPane4 = new javax.swing.JScrollPane();
+        mt6x6ATScrollPane = new javax.swing.JScrollPane();
         MT6x6AlltimeTable = new javax.swing.JTable();
-        jScrollPane5 = new javax.swing.JScrollPane();
+        hangman10ScrollPane = new javax.swing.JScrollPane();
         hangmanTop10Table = new javax.swing.JTable();
-        jScrollPane6 = new javax.swing.JScrollPane();
+        tiktak10ScrollPane = new javax.swing.JScrollPane();
         tiktakTop10Table = new javax.swing.JTable();
-        jScrollPane7 = new javax.swing.JScrollPane();
+        mt4x410ScrollPane = new javax.swing.JScrollPane();
         MT4x4Top10Table = new javax.swing.JTable();
-        jScrollPane8 = new javax.swing.JScrollPane();
+        mt6x610ScrollPane = new javax.swing.JScrollPane();
         MT6x6Top10Table = new javax.swing.JTable();
-        jScrollPane9 = new javax.swing.JScrollPane();
+        playersScrollPane = new javax.swing.JScrollPane();
         playersTable = new javax.swing.JTable();
         LeaderboardsBannerLabel = new javax.swing.JLabel();
 
@@ -330,9 +330,9 @@ public class LeaderboardForm extends javax.swing.JFrame {
             }
         });
         hangmanAlltimeTable.setSelectionBackground(new java.awt.Color(0, 204, 255));
-        jScrollPane1.setViewportView(hangmanAlltimeTable);
+        hangmanATScrollPane.setViewportView(hangmanAlltimeTable);
 
-        leaderboardTabbedPane.addTab("Hangman (All-Time)", jScrollPane1);
+        leaderboardTabbedPane.addTab("Hangman (All-Time)", hangmanATScrollPane);
 
         tiktakAlltimeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -350,9 +350,9 @@ public class LeaderboardForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tiktakAlltimeTable);
+        tiktakATScrollPane.setViewportView(tiktakAlltimeTable);
 
-        leaderboardTabbedPane.addTab("Tik-Tak (All-Time)", jScrollPane2);
+        leaderboardTabbedPane.addTab("Tik-Tak (All-Time)", tiktakATScrollPane);
 
         MT4x4AlltimeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -370,9 +370,9 @@ public class LeaderboardForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(MT4x4AlltimeTable);
+        mt4x4ATScrollPane.setViewportView(MT4x4AlltimeTable);
 
-        leaderboardTabbedPane.addTab("MemoryTiles 4x4 (All-Time)", jScrollPane3);
+        leaderboardTabbedPane.addTab("MemoryTiles 4x4 (All-Time)", mt4x4ATScrollPane);
 
         MT6x6AlltimeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -390,9 +390,9 @@ public class LeaderboardForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(MT6x6AlltimeTable);
+        mt6x6ATScrollPane.setViewportView(MT6x6AlltimeTable);
 
-        leaderboardTabbedPane.addTab("MemoryTIles 6x6 (All-Time)", jScrollPane4);
+        leaderboardTabbedPane.addTab("MemoryTIles 6x6 (All-Time)", mt6x6ATScrollPane);
 
         hangmanTop10Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -402,9 +402,9 @@ public class LeaderboardForm extends javax.swing.JFrame {
                 "Username", "Score", "Date", "Game"
             }
         ));
-        jScrollPane5.setViewportView(hangmanTop10Table);
+        hangman10ScrollPane.setViewportView(hangmanTop10Table);
 
-        leaderboardTabbedPane.addTab("Hangman (Top-10)", jScrollPane5);
+        leaderboardTabbedPane.addTab("Hangman (Top-10)", hangman10ScrollPane);
 
         tiktakTop10Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -414,9 +414,9 @@ public class LeaderboardForm extends javax.swing.JFrame {
                 "Username", "Score", "Date", "Game"
             }
         ));
-        jScrollPane6.setViewportView(tiktakTop10Table);
+        tiktak10ScrollPane.setViewportView(tiktakTop10Table);
 
-        leaderboardTabbedPane.addTab("Tik-Tak (Top-10)", jScrollPane6);
+        leaderboardTabbedPane.addTab("Tik-Tak (Top-10)", tiktak10ScrollPane);
 
         MT4x4Top10Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -426,9 +426,9 @@ public class LeaderboardForm extends javax.swing.JFrame {
                 "Username", "Score", "Date", "Game"
             }
         ));
-        jScrollPane7.setViewportView(MT4x4Top10Table);
+        mt4x410ScrollPane.setViewportView(MT4x4Top10Table);
 
-        leaderboardTabbedPane.addTab("MemoryTiles 4x4 (Top-10)", jScrollPane7);
+        leaderboardTabbedPane.addTab("MemoryTiles 4x4 (Top-10)", mt4x410ScrollPane);
 
         MT6x6Top10Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -438,9 +438,9 @@ public class LeaderboardForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane8.setViewportView(MT6x6Top10Table);
+        mt6x610ScrollPane.setViewportView(MT6x6Top10Table);
 
-        leaderboardTabbedPane.addTab("MemoryTIles 6x6 (Top-10)", jScrollPane8);
+        leaderboardTabbedPane.addTab("MemoryTIles 6x6 (Top-10)", mt6x610ScrollPane);
 
         playersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -458,11 +458,16 @@ public class LeaderboardForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane9.setViewportView(playersTable);
+        playersScrollPane.setViewportView(playersTable);
 
-        leaderboardTabbedPane.addTab("Players", jScrollPane9);
+        leaderboardTabbedPane.addTab("Players", playersScrollPane);
 
         LeaderboardsBannerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PuzzPak/images/main-menu/leaderboardBanner.png"))); // NOI18N
+        LeaderboardsBannerLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                leaderboardBannermouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -488,25 +493,33 @@ public class LeaderboardForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //clicking the banner will refresh the leaderboards.
+    private void leaderboardBannermouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leaderboardBannermouseClicked
+        System.out.println("REFRESHED");
+        //Populate is designed to be run multiple times.  It will clear all tables and
+        //re-populate if called a second time.
+        populate();
+    }//GEN-LAST:event_leaderboardBannermouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LeaderboardsBannerLabel;
     private javax.swing.JTable MT4x4AlltimeTable;
     private javax.swing.JTable MT4x4Top10Table;
     private javax.swing.JTable MT6x6AlltimeTable;
     private javax.swing.JTable MT6x6Top10Table;
+    private javax.swing.JScrollPane hangman10ScrollPane;
+    private javax.swing.JScrollPane hangmanATScrollPane;
     private javax.swing.JTable hangmanAlltimeTable;
     private javax.swing.JTable hangmanTop10Table;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane leaderboardTabbedPane;
+    private javax.swing.JScrollPane mt4x410ScrollPane;
+    private javax.swing.JScrollPane mt4x4ATScrollPane;
+    private javax.swing.JScrollPane mt6x610ScrollPane;
+    private javax.swing.JScrollPane mt6x6ATScrollPane;
+    private javax.swing.JScrollPane playersScrollPane;
     private javax.swing.JTable playersTable;
+    private javax.swing.JScrollPane tiktak10ScrollPane;
+    private javax.swing.JScrollPane tiktakATScrollPane;
     private javax.swing.JTable tiktakAlltimeTable;
     private javax.swing.JTable tiktakTop10Table;
     // End of variables declaration//GEN-END:variables

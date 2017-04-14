@@ -1,4 +1,6 @@
--- AUTHOR: Dani Marcoullier (reprise), 2017.
+----------------------------------------------
+-- AUTHOR: Dani Marcoullier (reprise), 2017.--
+----------------------------------------------
 
 -- Make a new user if they don't exist (username is primary key)
 -- 'ON DUPLICATE KEY' clause not valid on ANSI SQL.
@@ -24,6 +26,7 @@ WHERE HANGMAN IN (
     FROM PLAYER
     WHERE USERNAME = 'testuser123' AND HANGMAN < 25
 )
+AND USERNAME = 'testuser123'
 
 -- update a player's post in HangmanAlltime to the new score with new date if
 -- It's higher than their previous score.
@@ -34,3 +37,4 @@ SET SCORE = 80, DATE = '2017-01-01'
     FROM HANGMANALLTIME
     WHERE USERNAME = 'testuser123' AND SCORE < 80
 )
+AND USERNAME = 'testuser123'
