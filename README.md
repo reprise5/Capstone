@@ -2,7 +2,7 @@
 
 [![GitHub release](https://img.shields.io/github/release/reprise5/SeniorProject.svg)](https://github.com/reprise5/SeniorProject/releases)
 
-![alt tag](https://github.com/reprise5/SeniorProject/blob/master/src/PuzzPak/images/main-menu/PuzzPak%20Logo.png)
+![alt tag](https://github.com/reprise5/SeniorProject/blob/master/Documents/Document%20Images/PuzzPak%20Logo%202.png)
 
 Puzzpak Senior project, imcorporates Memorygame, TikTak, Hangman, and a Local Leaderboard Database.
 
